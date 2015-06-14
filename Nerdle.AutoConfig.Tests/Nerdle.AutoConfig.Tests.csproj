@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ED242B1A-EC9E-4865-A59B-11F1498D46A5}</ProjectGuid>
+    <ProjectGuid>{F7D2CE16-1D73-40CB-A3AA-A02070621EDA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nerdle.AutoConfig</RootNamespace>
-    <AssemblyName>Nerdle.AutoConfig</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Nerdle.AutoConfig.Tests</RootNamespace>
+    <AssemblyName>Nerdle.AutoConfig.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core">
+      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,12 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\AutoConfigTypeGenerationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeGeneration\Extensions\TypeBuilderExtensions.cs" />
-    <Compile Include="TypeGeneration\Extensions\TypeExtensions.cs" />
-    <Compile Include="TypeGeneration\TypeEmitter.cs" />
-    <Compile Include="TypeGeneration\TypeFactory.cs" />
+    <Compile Include="TypeGenerationTests\When_requesting_an_interface_from_the_factory.cs" />
+    <Compile Include="TypeGenerationTests\When_requesting_a_class_fron_the_factory.cs" />
+    <Compile Include="TypeGenerationTests\When_requesting_a_struct_fron_the_factory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nerdle.AutoConfig\Nerdle.AutoConfig.csproj">
+      <Project>{ED242B1A-EC9E-4865-A59B-11F1498D46A5}</Project>
+      <Name>Nerdle.AutoConfig</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

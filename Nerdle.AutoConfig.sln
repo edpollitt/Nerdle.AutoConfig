@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nerdle.AutoConfig", "Nerdle.AutoConfig\Nerdle.AutoConfig.csproj", "{ED242B1A-EC9E-4865-A59B-11F1498D46A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nerdle.AutoConfig.Tests", "Nerdle.AutoConfig.Tests\Nerdle.AutoConfig.Tests.csproj", "{F7D2CE16-1D73-40CB-A3AA-A02070621EDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ED242B1A-EC9E-4865-A59B-11F1498D46A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED242B1A-EC9E-4865-A59B-11F1498D46A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED242B1A-EC9E-4865-A59B-11F1498D46A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7D2CE16-1D73-40CB-A3AA-A02070621EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7D2CE16-1D73-40CB-A3AA-A02070621EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7D2CE16-1D73-40CB-A3AA-A02070621EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7D2CE16-1D73-40CB-A3AA-A02070621EDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
