@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Nerdle.AutoConfig.Exceptions;
 
-namespace Nerdle.AutoConfig.TypeGeneration.Extensions
+namespace Nerdle.AutoConfig.Extensions
 {
     static class TypeExtensions
     {
@@ -31,6 +34,11 @@ namespace Nerdle.AutoConfig.TypeGeneration.Extensions
             {
                 throw new AutoConfigTypeGenerationException(string.Format("An error occurred instantiating type {0}. See inner exception for details.", type.FullName), ex);
             }
+        }
+
+        public static IEnumerable<PropertyInfo> PublicSetters(this Type type)
+        {
+            return type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(p => p.CanWrite);
         }
     }
 }

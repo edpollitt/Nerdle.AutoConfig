@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Nerdle.AutoConfig.Exceptions
 {
     [Serializable]
-    public class AutoConfigTypeGenerationException : Exception
+    public class AutoConfigTypeGenerationException : AutoConfigException
     {
         public AutoConfigTypeGenerationException(string message) 
             : base(message)

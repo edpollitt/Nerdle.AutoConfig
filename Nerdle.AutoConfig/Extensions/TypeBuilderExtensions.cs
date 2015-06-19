@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Nerdle.AutoConfig.TypeGeneration.Extensions
+namespace Nerdle.AutoConfig.Extensions
 {
     static class TypeBuilderExtensions
     {

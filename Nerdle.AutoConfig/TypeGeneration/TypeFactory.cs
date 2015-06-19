@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.TypeGeneration.Extensions;
+using Nerdle.AutoConfig.Extensions;
 
 namespace Nerdle.AutoConfig.TypeGeneration
 {

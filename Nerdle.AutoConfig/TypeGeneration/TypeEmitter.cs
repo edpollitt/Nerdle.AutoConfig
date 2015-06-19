@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.TypeGeneration.Extensions;
+using Nerdle.AutoConfig.Extensions;
 
 namespace Nerdle.AutoConfig.TypeGeneration
 {

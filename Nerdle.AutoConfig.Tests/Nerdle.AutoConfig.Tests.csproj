@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyMappingTests\When_mapping_a_property.cs" />
     <Compile Include="TypeGenerationTests\When_requesting_an_interface_from_the_factory.cs" />
     <Compile Include="TypeGenerationTests\When_requesting_a_class_fron_the_factory.cs" />
     <Compile Include="TypeGenerationTests\When_requesting_a_struct_fron_the_factory.cs" />
