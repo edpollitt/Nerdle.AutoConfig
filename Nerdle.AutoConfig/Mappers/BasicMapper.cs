@@ -4,9 +4,9 @@ using System.Xml.Linq;
 
 namespace Nerdle.AutoConfig.Mappers
 {
-    public class BasicMapper<T> : IMapper<T>
+    class BasicMapper : IMapper
     {
-        public void Map(XElement element, PropertyInfo property, T instance)
+        public void Map(XElement element, PropertyInfo property, object instance)
         {
             var value = Convert.ChangeType(element.Value, property.PropertyType);
             property.SetValue(instance, value, null);

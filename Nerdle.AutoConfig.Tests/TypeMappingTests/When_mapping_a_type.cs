@@ -12,12 +12,12 @@ namespace Nerdle.AutoConfig.Tests.TypeMappingTests
     public class When_mapping_a_type
     {
         readonly XElement _xElement = new XElement("testClass");
-        readonly PropertyInfo _propertyInfo = typeof(TestClass).GetProperty("BoolProperty");
+        readonly PropertyInfo _propertyInfo = typeof(TestClass).GetProperty("Foo");
             
         [Test]
         public void All_the_property_mappers_are_invoked()
         {
-            var typeMapping = new TypeMapping<TestClass>();
+            var typeMapping = new TypeMapping();
 
             var mappers = new List<CountingMapper>();
 
@@ -25,7 +25,7 @@ namespace Nerdle.AutoConfig.Tests.TypeMappingTests
             {
                 var mapper = new CountingMapper();
                 mappers.Add(mapper);
-                typeMapping.Include(new PropertyMapping<TestClass>(_xElement, _propertyInfo, mapper));
+                typeMapping.Include(new PropertyMapping(_xElement, _propertyInfo, mapper));
             }
 
             typeMapping.Apply(new TestClass());
@@ -35,14 +35,14 @@ namespace Nerdle.AutoConfig.Tests.TypeMappingTests
 
         class TestClass
         {
-            public bool BoolProperty { get; set; }
+            public bool Foo { get; set; }
         }
 
-        class CountingMapper : IMapper<TestClass>
+        class CountingMapper : IMapper
         {
-            public int Invocations { get; set; }
+            public int Invocations { get; private set; }
 
-            public void Map(XElement element, PropertyInfo property, TestClass instance)
+            public void Map(XElement element, PropertyInfo property, object instance)
             {
                 Invocations++;
             }
