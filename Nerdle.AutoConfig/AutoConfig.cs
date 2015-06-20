@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Configuration;
 using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.Extensions;
 using Nerdle.AutoConfig.TypeGeneration;
@@ -17,6 +12,7 @@ namespace Nerdle.AutoConfig
             var sectionName = typeof(T).SectionName();
             var section = ConfigurationManager.GetSection(sectionName) as Section;
 
+            // TODO: instructions for overriding name and case, in the exception
             if (section == null)
                 throw new AutoConfigMappingException(
                     string.Format("Could not load section '{0}'. Make sure the section exists and is correctly cased.", sectionName));

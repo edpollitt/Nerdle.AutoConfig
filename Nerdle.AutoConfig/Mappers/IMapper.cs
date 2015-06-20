@@ -1,10 +1,15 @@
-using System.Reflection;
+using System;
 using System.Xml.Linq;
 
 namespace Nerdle.AutoConfig.Mappers
 {
-    interface IMapper
+    public interface IMapper
     {
-        void Map(XElement element, PropertyInfo property, object instance);
+        object Map(XElement element, Type type);
+    }
+
+    interface IQueryableMapper : IMapper
+    {
+        bool CanMap(Type type);
     }
 }

@@ -15,9 +15,9 @@ namespace Nerdle.AutoConfig.Tests.Unit.PropertyMappingTests
         readonly PropertyInfo _propertyInfo = typeof(TestClass).GetProperty("StringProperty");
 
         [Test]
-        public void The_mapper_is_called()
+        public void The_property_is_set_from_the_mapper_return_value()
         {
-            var mapper = new TestMapper(x => x.StringProperty = "set");
+            var mapper = new TestMapper(() => "set");
             var propertyMapping = new PropertyMapping(_xElement, _propertyInfo, mapper);
             var instance = new TestClass();
             propertyMapping.Apply(instance);
@@ -27,7 +27,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.PropertyMappingTests
         [Test]
         public void A_mapping_exception_is_thrown_if_the_mapper_throws()
         {
-            var mapper = new TestMapper(_ => { throw new FormatException(); });
+            var mapper = new TestMapper(() => { throw new FormatException(); });
             var propertyMapping = new PropertyMapping(_xElement, _propertyInfo, mapper);
             var instance = new TestClass();
             Action mapping = () => propertyMapping.Apply(instance);
@@ -46,16 +46,16 @@ namespace Nerdle.AutoConfig.Tests.Unit.PropertyMappingTests
 
     class TestMapper : IMapper
     {
-        readonly Action<TestClass> _action;
+        readonly Func<string> _func;
     
-        public TestMapper(Action<TestClass> action)
+        public TestMapper(Func<string> func)
         {
-            _action = action;
+            _func = func;
         }
 
-        public void Map(XElement element, PropertyInfo property, object instance)
+        public object Map(XElement element, Type type)
         {
-            _action((TestClass)instance);
+            return _func();
         }
     }
 }

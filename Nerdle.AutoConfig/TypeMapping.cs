@@ -28,7 +28,7 @@ namespace Nerdle.AutoConfig
         public static TypeMapping CreateFor(Type type, XElement sectionElement)
         {
             var typeMapping = new TypeMapping();
-            var elements = sectionElement.Descendants();
+            var elements = sectionElement.Elements();
             var properties = type.PublicSetters().ToList();
 
             foreach (var element in elements)
@@ -40,7 +40,8 @@ namespace Nerdle.AutoConfig
                         string.Format("Could not map type {0} from section '{1}'. No matching settable property for config element '{2}' was founnd.",
                             type, sectionElement.Name.LocalName, element.Name.LocalName));
 
-                var propertyMapping = new PropertyMapping(element, property, new BasicMapper());
+                var mapper = Mapper.For(property.PropertyType);
+                var propertyMapping = new PropertyMapping(element, property, mapper);
 
                 typeMapping.Include(propertyMapping);
                 properties.Remove(property);

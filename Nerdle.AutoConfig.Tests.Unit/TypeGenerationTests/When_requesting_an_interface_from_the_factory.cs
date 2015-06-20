@@ -15,26 +15,26 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
         [Test]
         public void A_concrete_implementation_is_generated()
         {
-            var instance = TypeFactory.Create<IHaveProperties>();
+            var instance = TypeFactory.Create<IHasProperties>();
             instance.GetType().Assembly.GetName().Name.Should().Be(TypeEmitter.AssemblyName);
         }
 
         [Test]
         public void An_instance_is_returned()
         {
-            var instance = TypeFactory.Create<IHaveProperties>();
+            var instance = TypeFactory.Create<IHasProperties>();
             instance.Should().NotBeNull();
         }
 
         [Test]
         public void Interface_methods_are_not_supported()
         {
-            Action creating = () => TypeFactory.Create<IHaveMethods>();
+            Action creating = () => TypeFactory.Create<IHasMethods>();
 
             var expectedMessage =
                 string.Format(
                     "Cannot generate an implementation of interface {0} because it contains method definitions.",
-                    typeof(IHaveMethods));
+                    typeof(IHasMethods));
 
             creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
                 .WithMessage(expectedMessage);
@@ -61,7 +61,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
 
             Parallel.For(1, 1000, i =>
             {
-                var instance = TypeFactory.Create<IHaveProperties>();
+                var instance = TypeFactory.Create<IHasProperties>();
                 typeStack.Push(instance.GetType());
             });
 
@@ -74,26 +74,26 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
             [Test]
             public void A_concrete_implementation_is_generated()
             {
-                var instance = TypeFactory.Create<IInheritProperties>();
+                var instance = TypeFactory.Create<IInheritsProperties>();
                 instance.GetType().Assembly.GetName().Name.Should().Be(TypeEmitter.AssemblyName);
             }
 
             [Test]
             public void An_instance_is_returned()
             {
-                var instance = TypeFactory.Create<IInheritProperties>();
+                var instance = TypeFactory.Create<IInheritsProperties>();
                 instance.Should().NotBeNull();
             }
 
             [Test]
             public void Interface_methods_are_not_supported()
             {
-                Action creating = () => TypeFactory.Create<IInheritMethods>();
+                Action creating = () => TypeFactory.Create<IInheritsMethods>();
 
                 var expectedMessage =
                     string.Format(
                         "Cannot generate an implementation of interface {0} because it contains method definitions.",
-                        typeof(IInheritMethods));
+                        typeof(IInheritsMethods));
 
                 creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
                     .WithMessage(expectedMessage);
@@ -101,24 +101,24 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
         }
     }
 
-    public interface IHaveProperties
+    public interface IHasProperties
     {
         int Foo { get; }
         string Bar { set; }
         object[] Baz { get; set; }
     }
 
-    public interface IInheritProperties : IHaveProperties
+    public interface IInheritsProperties : IHasProperties
     {
         int Qux { get; set; }
     }
 
-    public interface IHaveMethods
+    public interface IHasMethods
     {
         void Foo();
     }
 
-    public interface IInheritMethods : IHaveMethods
+    public interface IInheritsMethods : IHasMethods
     {
         int Bar { get; set; }
     }

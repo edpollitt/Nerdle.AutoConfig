@@ -23,7 +23,8 @@ namespace Nerdle.AutoConfig
         {
             try
             {
-                _mapper.Map(_element, _property, instance);
+                var value = _mapper.Map(_element, _property.PropertyType);
+                _property.SetValue(instance, value, null);
             }
             catch (Exception ex)
             {

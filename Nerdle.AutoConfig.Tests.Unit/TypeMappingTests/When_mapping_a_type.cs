@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -42,9 +43,10 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeMappingTests
         {
             public int Invocations { get; private set; }
 
-            public void Map(XElement element, PropertyInfo property, object instance)
+            public object Map(XElement element, Type type)
             {
                 Invocations++;
+                return null;
             }
         }
     }
