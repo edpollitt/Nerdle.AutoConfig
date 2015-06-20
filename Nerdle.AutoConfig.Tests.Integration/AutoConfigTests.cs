@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -32,6 +33,16 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Colors.Should().ContainInOrder(ConsoleColor.Red, ConsoleColor.Green);
             config.Unicorns.Should().BeEmpty();
         }
+
+        [Test]
+        public void Mapping_nested_collections()
+        {
+            var config = AutoConfig.Map<IHasNestedCollections>();
+            config.Should().NotBeNull();
+            config.Numbers.Should().HaveCount(2);
+            config.Numbers.First().Should().ContainInOrder(1, 3, 5);
+            config.Numbers.Last().Should().ContainInOrder(2, 4);
+        }
     }
 
     public interface IHasSimpleTypes
@@ -49,5 +60,10 @@ namespace Nerdle.AutoConfig.Tests.Integration
         IEnumerable<long> Primes { get; }
         IList<ConsoleColor> Colors { get; }
         ICollection<string> Unicorns { get; } 
+    }
+
+    public interface IHasNestedCollections
+    {
+        IEnumerable<IEnumerable<int>> Numbers { get; } 
     }
 }
