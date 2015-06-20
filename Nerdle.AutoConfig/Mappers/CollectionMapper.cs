@@ -21,11 +21,14 @@ namespace Nerdle.AutoConfig.Mappers
             var listType = typeof(List<>).MakeGenericType(genericType);
             var list = Activator.CreateInstance(listType) as IList;
 
+            var itemMapper = Mapper.For(genericType);
+
             foreach (var child in element.Elements())
             {
-                var item = new SimpletMapper().Map(child, genericType);
+                var item = itemMapper.Map(child, genericType);
                 list.Add(item);
             }
+
             return list;
         }
 

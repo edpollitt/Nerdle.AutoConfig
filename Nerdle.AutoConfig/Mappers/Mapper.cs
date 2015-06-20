@@ -14,7 +14,7 @@ namespace Nerdle.AutoConfig.Mappers
 
             if (mappers.Count == 0)
                 throw new AutoConfigMappingException(
-                    string.Format("No IMappers found to handle type '{0}'.", type));
+                    string.Format("No IMapper found to handle type '{0}'.", type));
 
             if (mappers.Count > 1)
                 throw new AutoConfigMappingException(

@@ -48,6 +48,6 @@ namespace Nerdle.AutoConfig.Tests.Integration
     {
         IEnumerable<long> Primes { get; }
         IList<ConsoleColor> Colors { get; }
-        ICollection<object> Unicorns { get; } 
+        ICollection<string> Unicorns { get; } 
     }
 }
