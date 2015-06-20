@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Nerdle.AutoConfig.Exceptions;
 
 namespace Nerdle.AutoConfig.Extensions
@@ -39,6 +40,16 @@ namespace Nerdle.AutoConfig.Extensions
         public static IEnumerable<PropertyInfo> PublicSetters(this Type type)
         {
             return type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(p => p.CanWrite);
+        }
+
+        public static string SectionName(this Type type)
+        {
+            var sectionName = type.Name;
+
+            if (type.IsInterface && Regex.IsMatch(sectionName, "^I\\p{Lu}\\p{Ll}"))
+                sectionName = sectionName.Substring(1);
+
+            return sectionName;
         }
     }
 }

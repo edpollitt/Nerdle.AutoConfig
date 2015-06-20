@@ -4,7 +4,7 @@ using FluentAssertions;
 using Nerdle.AutoConfig.Exceptions;
 using NUnit.Framework;
 
-namespace Nerdle.AutoConfig.Tests.TypeMappingTests
+namespace Nerdle.AutoConfig.Tests.Unit.TypeMappingTests
 {
     [TestFixture]
     public class When_creating_a_mapping

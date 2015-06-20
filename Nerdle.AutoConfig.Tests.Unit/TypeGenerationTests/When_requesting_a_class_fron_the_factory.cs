@@ -5,7 +5,7 @@ using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.TypeGeneration;
 using NUnit.Framework;
 
-namespace Nerdle.AutoConfig.Tests.TypeGenerationTests
+namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
 {
     [TestFixture]
     public class When_requesting_a_class_fron_the_factory

@@ -6,7 +6,7 @@ using FluentAssertions;
 using Nerdle.AutoConfig.Mappers;
 using NUnit.Framework;
 
-namespace Nerdle.AutoConfig.Tests.TypeMappingTests
+namespace Nerdle.AutoConfig.Tests.Unit.TypeMappingTests
 {
     [TestFixture]
     public class When_mapping_a_type

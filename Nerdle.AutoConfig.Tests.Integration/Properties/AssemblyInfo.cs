@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Nerdle.AutoConfig")]
+[assembly: AssemblyTitle("Nerdle.AutoConfig.Tests.Integration")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Nerdle.AutoConfig")]
+[assembly: AssemblyProduct("Nerdle.AutoConfig.Tests.Integration")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a98f42ab-c840-480a-a577-7332566fa7a5")]
+[assembly: Guid("86763678-35cf-4787-b11f-bf850a9356c4")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,4 +34,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: InternalsVisibleTo("Nerdle.AutoConfig.Tests.Unit")]

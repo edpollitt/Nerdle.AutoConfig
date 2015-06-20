@@ -6,7 +6,7 @@ using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.Mappers;
 using NUnit.Framework;
 
-namespace Nerdle.AutoConfig.Tests.PropertyMappingTests
+namespace Nerdle.AutoConfig.Tests.Unit.PropertyMappingTests
 {
     [TestFixture]
     public class When_mapping_a_property
