@@ -53,6 +53,8 @@
     <Compile Include="TypeGenerationTests\When_requesting_an_interface_from_the_factory.cs" />
     <Compile Include="TypeGenerationTests\When_requesting_a_class_fron_the_factory.cs" />
     <Compile Include="TypeGenerationTests\When_requesting_a_struct_fron_the_factory.cs" />
+    <Compile Include="TypeMappingTests\When_creating_a_mapping.cs" />
+    <Compile Include="TypeMappingTests\When_mapping_a_type.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

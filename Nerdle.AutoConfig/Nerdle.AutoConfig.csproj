@@ -51,6 +51,7 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="TypeGeneration\TypeEmitter.cs" />
     <Compile Include="TypeGeneration\TypeFactory.cs" />
+    <Compile Include="TypeMapping.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

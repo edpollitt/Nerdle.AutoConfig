@@ -8,7 +8,8 @@ namespace Nerdle.AutoConfig.Mappers
     {
         public void Map(XElement element, PropertyInfo property, T instance)
         {
-            throw new NotImplementedException();
+            var value = Convert.ChangeType(element.Value, property.PropertyType);
+            property.SetValue(instance, value, null);
         }
     }
 }
