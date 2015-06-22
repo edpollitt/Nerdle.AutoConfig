@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    public class AutoConfigTests
+    public class AutoConfigEndToEndTests
     {
         [Test]
         public void Mapping_simple_types()
@@ -64,6 +64,27 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Toppings.Should().HaveCount(3);
             config.Toppings.Should().ContainInOrder("Aubergine", "Spinach", "Artichoke");
         }
+
+        [Test]
+        public void Mapping_nested_complex_types()
+        {
+            var config = AutoConfig.Map<IHasNestedComplexTypes>();
+            
+            config.Should().NotBeNull();
+            config.Foo.Should().Be("foo");
+            config.Bar.Should().Be("bar");
+            config.Baz.Should().Be("baz");
+            
+            config.Lunch.Should().NotBeNull();
+            config.Lunch.Pizza.Should().Be("Vege Deluxe");
+            config.Lunch.Inches.Should().Be(12);
+            config.Lunch.Price.Should().Be(9.99M);
+            config.Lunch.Toppings.Should().HaveCount(3);
+            config.Lunch.Toppings.Should().ContainInOrder("Aubergine", "Spinach", "Artichoke");
+
+            config.LunchServices.Should().NotBeNull();
+            config.LunchServices.Should().HaveCount(2);
+        }
     }
 
     public interface IHasSimpleTypes
@@ -97,9 +118,19 @@ namespace Nerdle.AutoConfig.Tests.Integration
 
     public interface IMappedFromPropertiesAndAttributes
     {
-        string Pizza { get; set; }
-        int Inches { get; set; }
-        decimal Price { get; set; }
+        string Pizza { get; }
+        int Inches { get; }
+        decimal Price { get; }
         IEnumerable<string> Toppings { get; } 
+    }
+
+
+    public interface IHasNestedComplexTypes
+    {
+        string Foo { get; }
+        string Bar { get; }
+        string Baz { get; }
+        IMappedFromPropertiesAndAttributes Lunch { get; }
+        IEnumerable<MappedFromAttributes> LunchServices { get; }
     }
 }

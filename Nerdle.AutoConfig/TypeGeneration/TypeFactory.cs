@@ -14,7 +14,7 @@ namespace Nerdle.AutoConfig.TypeGeneration
             return (T)Create(typeof(T));
         }
 
-        static object Create(Type type)
+        public static object Create(Type type)
         {
             EnsureTypeSuitability(type);
 

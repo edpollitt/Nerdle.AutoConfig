@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using FluentAssertions;
-using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.Mappers;
 using NUnit.Framework;
 
@@ -34,7 +34,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [TestCase(typeof(ConsoleColor?))]
         [TestCase(typeof(DateTime?))]
         [TestCase(typeof(TimeSpan?))]
-        public void Simple_types_can_be_mapped_by_a_SimpleMapper(Type type)
+        public void Simple_types_can_be_mapped_by_the_ValueMapper(Type type)
         {
             Mapper.For(type).Should().BeOfType<ValueMapper>();
         }
@@ -46,7 +46,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [TestCase(typeof(IReadOnlyList<string>))]
         [TestCase(typeof(IReadOnlyCollection<DateTime>))]
         [TestCase(typeof(IList<IList<Exception>>))]
-        public void Geeric_collection_types_which_are_implemented_by_List_can_be_mapped_by_a_CollectionMapper(Type type)
+        public void Geeric_collection_types_which_are_implemented_by_List_can_be_mapped_by_the_CollectionMapper(Type type)
         {
             Mapper.For(type).Should().BeOfType<CollectionMapper>();
         }
@@ -54,15 +54,9 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [TestCase(typeof(int[]))]
         [TestCase(typeof(bool[]))]
         [TestCase(typeof(IDictionary<int, string>))]
-        [TestCase(typeof(StringComparer))]
-        [TestCase(typeof(IDisposable))]
-        [TestCase(typeof(object))]
-        public void An_exception_is_thrown_if_no_mapper_is_selected(Type type)
+        public void Types_which_cannot_be_mapped_by_any_other_mapper_should_attempt_to_use_the_ComplexMapper(Type type)
         {
-            Action selecting = () => Mapper.For(type);
-            selecting.ShouldThrowExactly<AutoConfigMappingException>()
-                .WithMessage(string.Format("No IMapper found to handle type '{0}'.", type));
-
+            Mapper.For(type).Should().BeOfType<ComplexMapper>();
         }
     }
 }

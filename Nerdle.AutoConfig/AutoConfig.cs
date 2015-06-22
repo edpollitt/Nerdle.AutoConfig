@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
+using System.Xml.Linq;
 using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.Extensions;
 using Nerdle.AutoConfig.Mappings;
@@ -18,14 +20,24 @@ namespace Nerdle.AutoConfig
                 throw new AutoConfigMappingException(
                     string.Format("Could not load section '{0}'. Make sure the section exists and is correctly cased.", sectionName));
 
-            var instance = TypeFactory.Create<T>();
-            
+            return Map<T>(section);
+        }
+
+        internal static T Map<T>(XElement element)
+        {
+            return (T)Map(typeof (T), element);
+        }
+
+        internal static object Map(Type type, XElement element)
+        {
+            var instance = TypeFactory.Create(type);
+
             // since T might be an interface, we need the actual type
             var concreteType = instance.GetType();
 
-            var mapping = TypeMapping.CreateFor(concreteType, section);
+            var mapping = TypeMapping.CreateFor(concreteType, element);
             mapping.Apply(instance);
-            
+
             return instance;
         }
     }
