@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using FluentAssertions;
 using Nerdle.AutoConfig.Mappers;
+using Nerdle.AutoConfig.Mappings;
 using NUnit.Framework;
 
 namespace Nerdle.AutoConfig.Tests.Unit.TypeMappingTests
@@ -26,7 +27,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeMappingTests
             {
                 var mapper = new CountingMapper();
                 mappers.Add(mapper);
-                typeMapping.Include(new PropertyMapping(_xElement, _propertyInfo, mapper));
+                typeMapping.Include(new ElementMapping(_xElement, _propertyInfo, mapper));
             }
 
             typeMapping.Apply(new TestClass());

@@ -35,11 +35,11 @@ namespace Nerdle.AutoConfig.TypeGeneration
         {
             if (type.IsValueType)
                 throw new AutoConfigTypeGenerationException(
-                    string.Format("Type {0} is a struct and is not supported. The requested configuration type should be an interface or class.", type.FullName));
+                    string.Format("Type '{0}' is a struct and is not supported. The requested configuration type should be an interface or class.", type.FullName));
 
             if (type.IsAbstract && !type.IsInterface)
                 throw new AutoConfigTypeGenerationException(
-                    string.Format("Cannot instantiate abstract class {0}.", type.FullName));
+                    string.Format("Cannot instantiate abstract class '{0}'.", type.FullName));
         }
     }
 }

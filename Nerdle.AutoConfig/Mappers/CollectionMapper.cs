@@ -15,7 +15,7 @@ namespace Nerdle.AutoConfig.Mappers
 
             if (enumerableType == null)
                 throw new InvalidOperationException(
-                    string.Format("Type {0} does not implement IEnumerable<>.", type));
+                    string.Format("Type '{0}' does not implement IEnumerable<>.", type));
 
             var genericType = enumerableType.GetGenericArguments().Single();
             var listType = typeof(List<>).MakeGenericType(genericType);

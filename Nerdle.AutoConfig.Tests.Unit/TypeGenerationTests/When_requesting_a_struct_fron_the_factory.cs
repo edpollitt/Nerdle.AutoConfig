@@ -15,7 +15,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
             Action creating = () => TypeFactory.Create<int>();
        
             creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
-                .WithMessage("Type System.Int32 is a struct and is not supported. The requested configuration type should be an interface or class.");
+                .WithMessage("Type 'System.Int32' is a struct and is not supported. The requested configuration type should be an interface or class.");
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [TestCase(typeof(TimeSpan?))]
         public void Simple_types_can_be_mapped_by_a_SimpleMapper(Type type)
         {
-            Mapper.For(type).Should().BeOfType<SimpletMapper>();
+            Mapper.For(type).Should().BeOfType<ValueMapper>();
         }
 
         [TestCase(typeof(List<int>))]

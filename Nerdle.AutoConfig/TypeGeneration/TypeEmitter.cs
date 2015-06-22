@@ -43,12 +43,12 @@ namespace Nerdle.AutoConfig.TypeGeneration
         {
             if (!type.IsVisible)
                 throw new AutoConfigTypeGenerationException(
-                    string.Format("Cannot generate an implementation of interface {0} because it is not externally accessible.", type));
+                    string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible.", type));
 
             if (type.GetMethods().Any(method => !method.IsSpecialName)
                 || type.GetInterfaces().SelectMany(i => i.GetMethods()).Any(method => !method.IsSpecialName))
                 throw new AutoConfigTypeGenerationException(
-                    string.Format("Cannot generate an implementation of interface {0} because it contains method definitions.", type));
+                    string.Format("Cannot generate an implementation of interface '{0}' because it contains method definitions.", type));
         }
     }
 }

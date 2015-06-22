@@ -22,10 +22,10 @@ namespace Nerdle.AutoConfig.Extensions
         public static object Instantiate(this Type type)
         {
             if (!type.IsInstantiable())
-                throw new AutoConfigTypeGenerationException(string.Format("Cannot instantiate type {0} because it is not instantiable.", type.FullName));
+                throw new AutoConfigTypeGenerationException(string.Format("Cannot instantiate type '{0}' because it is not instantiable.", type.FullName));
 
             if (!type.HasParameterlessConstructor())
-                throw new AutoConfigTypeGenerationException(string.Format("Cannot instantiate type {0} because no parameterless constructor was found.", type.FullName));
+                throw new AutoConfigTypeGenerationException(string.Format("Cannot instantiate type '{0}' because no parameterless constructor was found.", type.FullName));
 
             try
             {
@@ -33,7 +33,7 @@ namespace Nerdle.AutoConfig.Extensions
             }
             catch (Exception ex)
             {
-                throw new AutoConfigTypeGenerationException(string.Format("An error occurred instantiating type {0}. See inner exception for details.", type.FullName), ex);
+                throw new AutoConfigTypeGenerationException(string.Format("An error occurred instantiating type '{0}'. See inner exception for details.", type.FullName), ex);
             }
         }
 

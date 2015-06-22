@@ -9,7 +9,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
     [TestFixture]
     public class When_mapping_simple_types
     {
-        readonly IMapper _mapper = new SimpletMapper();
+        readonly IMapper _mapper = new ValueMapper();
 
         [Test]
         [TestCaseSource("Numbers")]

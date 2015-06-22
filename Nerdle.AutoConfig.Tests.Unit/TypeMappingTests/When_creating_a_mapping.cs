@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using FluentAssertions;
 using Nerdle.AutoConfig.Exceptions;
+using Nerdle.AutoConfig.Mappings;
 using NUnit.Framework;
 
 namespace Nerdle.AutoConfig.Tests.Unit.TypeMappingTests
@@ -23,7 +24,15 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeMappingTests
             var xElement = XElement.Parse("<Test><Foo>1</Foo></Test>");
             Action creatingTheMapping = () => TypeMapping.CreateFor(typeof(TestClass), xElement);
             creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
-                .WithMessage("Could not map property 'Bar' for type Nerdle.AutoConfig.Tests.Unit.TypeMappingTests.TestClass from section 'Test'. No matching config element was founnd.");
+                .WithMessage("Could not map property 'Bar' for type 'Nerdle.AutoConfig.Tests.Unit.TypeMappingTests.TestClass' from section 'Test'. No matching config element or attribute was found.");
+        }
+
+        [Test]
+        public void Properties_can_be_matched_from_attributes_or_elements()
+        {
+            var xElement = XElement.Parse("<Test Foo=\"1\"><Bar>1</Bar></Test>");
+            var mapping = TypeMapping.CreateFor(typeof(TestClass), xElement);
+            mapping.Should().NotBeNull();
         }
 
         [Test]
@@ -32,7 +41,16 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeMappingTests
             var xElement = XElement.Parse("<Test><Foo>1</Foo><Bar>1</Bar><Baz>1</Baz></Test>");
             Action creatingTheMapping = () => TypeMapping.CreateFor(typeof(TestClass), xElement);
             creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
-                .WithMessage("Could not map type Nerdle.AutoConfig.Tests.Unit.TypeMappingTests.TestClass from section 'Test'. No matching settable property for config element 'Baz' was founnd.");
+                .WithMessage("Could not map type 'Nerdle.AutoConfig.Tests.Unit.TypeMappingTests.TestClass' from section 'Test'. No matching settable property for config element 'Baz' was found.");
+        }
+
+        [Test]
+        public void An_exception_is_thrown_if_an_attribute_is_not_matched()
+        {
+            var xElement = XElement.Parse("<Test Foo=\"1\" Bar=\"1\" Baz=\"1\" />");
+            Action creatingTheMapping = () => TypeMapping.CreateFor(typeof(TestClass), xElement);
+            creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
+                .WithMessage("Could not map type 'Nerdle.AutoConfig.Tests.Unit.TypeMappingTests.TestClass' from section 'Test'. No matching settable property for config attribute 'Baz' was found.");
         }
     }
 

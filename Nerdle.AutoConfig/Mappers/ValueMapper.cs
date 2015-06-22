@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace Nerdle.AutoConfig.Mappers
 {
-    class SimpletMapper : IQueryableMapper
+    class ValueMapper : IQueryableMapper
     {
         public object Map(XElement element, Type type)
         {

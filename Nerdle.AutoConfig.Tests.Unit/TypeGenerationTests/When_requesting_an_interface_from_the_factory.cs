@@ -33,7 +33,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
 
             var expectedMessage =
                 string.Format(
-                    "Cannot generate an implementation of interface {0} because it contains method definitions.",
+                    "Cannot generate an implementation of interface '{0}' because it contains method definitions.",
                     typeof(IHasMethods));
 
             creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
@@ -47,7 +47,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
 
             var expectedMessage =
                 string.Format(
-                    "Cannot generate an implementation of interface {0} because it is not externally accessible.",
+                    "Cannot generate an implementation of interface '{0}' because it is not externally accessible.",
                     typeof(IAmInternal));
 
             creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
@@ -92,7 +92,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
 
                 var expectedMessage =
                     string.Format(
-                        "Cannot generate an implementation of interface {0} because it contains method definitions.",
+                        "Cannot generate an implementation of interface '{0}' because it contains method definitions.",
                         typeof(IInheritsMethods));
 
                 creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()

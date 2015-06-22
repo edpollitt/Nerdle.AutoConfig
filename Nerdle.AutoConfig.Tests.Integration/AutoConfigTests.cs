@@ -43,6 +43,27 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Numbers.First().Should().ContainInOrder(1, 3, 5);
             config.Numbers.Last().Should().ContainInOrder(2, 4);
         }
+
+        [Test]
+        public void Mapping_from_attributes()
+        {
+            var config = AutoConfig.Map<MappedFromAttributes>();
+            config.Should().NotBeNull();
+            config.Url.Should().Be("http://foo");
+            config.Port.Should().Be(80);
+        }
+
+        [Test]
+        public void Mapping_from_a_combination_of_properties_and_attributes()
+        {
+            var config = AutoConfig.Map<IMappedFromPropertiesAndAttributes>();
+            config.Should().NotBeNull();
+            config.Pizza.Should().Be("Vege Deluxe");
+            config.Inches.Should().Be(12);
+            config.Price.Should().Be(9.99M);
+            config.Toppings.Should().HaveCount(3);
+            config.Toppings.Should().ContainInOrder("Aubergine", "Spinach", "Artichoke");
+        }
     }
 
     public interface IHasSimpleTypes
@@ -65,5 +86,20 @@ namespace Nerdle.AutoConfig.Tests.Integration
     public interface IHasNestedCollections
     {
         IEnumerable<IEnumerable<int>> Numbers { get; } 
+    }
+
+
+    public class MappedFromAttributes
+    {
+        public string Url { get; set; }
+        public int Port { get; set; }
+    }
+
+    public interface IMappedFromPropertiesAndAttributes
+    {
+        string Pizza { get; set; }
+        int Inches { get; set; }
+        decimal Price { get; set; }
+        IEnumerable<string> Toppings { get; } 
     }
 }

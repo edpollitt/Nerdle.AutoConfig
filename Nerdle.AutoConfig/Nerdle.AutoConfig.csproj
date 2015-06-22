@@ -45,18 +45,20 @@
     <Compile Include="Mappers\Mapper.cs" />
     <Compile Include="Mappers\CollectionMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
-    <Compile Include="Mappers\SimpletMapper.cs" />
+    <Compile Include="Mappers\ValueMapper.cs" />
     <Compile Include="Exceptions\AutoConfigException.cs" />
     <Compile Include="Exceptions\AutoConfigMappingException.cs" />
     <Compile Include="Exceptions\AutoConfigTypeGenerationException.cs" />
-    <Compile Include="PropertyMapping.cs" />
+    <Compile Include="Mappings\AttributeMapping.cs" />
+    <Compile Include="Mappings\IPropertyMapping.cs" />
+    <Compile Include="Mappings\ElementMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TypeBuilderExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Section.cs" />
     <Compile Include="TypeGeneration\TypeEmitter.cs" />
     <Compile Include="TypeGeneration\TypeFactory.cs" />
-    <Compile Include="TypeMapping.cs" />
+    <Compile Include="Mappings\TypeMapping.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ namespace Nerdle.AutoConfig.Mappers
 {
     static class Mapper
     {
-        static readonly IQueryableMapper[] Mappers = { new SimpletMapper(), new CollectionMapper() };
+        static readonly IQueryableMapper[] Mappers = { new ValueMapper(), new CollectionMapper() };
             
         public static IMapper For(Type type)
         {

@@ -21,7 +21,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
         {
             Action creating = () => TypeFactory.Create<Stream>();
             creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
-                .WithMessage("Cannot instantiate abstract class System.IO.Stream.");
+                .WithMessage("Cannot instantiate abstract class 'System.IO.Stream'.");
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGenerationTests
         {
             Action creating = () => TypeFactory.Create<string>();
             creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
-               .WithMessage("Cannot instantiate type System.String because no parameterless constructor was found.");
+               .WithMessage("Cannot instantiate type 'System.String' because no parameterless constructor was found.");
         }
     }
 }
