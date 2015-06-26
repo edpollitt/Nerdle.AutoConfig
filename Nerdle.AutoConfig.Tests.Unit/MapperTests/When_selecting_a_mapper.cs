@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using FluentAssertions;
 using Nerdle.AutoConfig.Mappers;
 using NUnit.Framework;

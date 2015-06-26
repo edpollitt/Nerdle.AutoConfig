@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+  <configSections>
+    <section name="CollectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="NestedCollectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+  </configSections>
+  
+  <CollectionsConfiguration>
+    <Primes>
+      <Prime>2</Prime>
+      <Prime>3</Prime>
+      <Prime>5</Prime>
+      <Prime>7</Prime>
+    </Primes>
+    <Colors>
+      <Color>Red</Color>
+      <Color>Green</Color>
+    </Colors>
+    <Unicorns>
+    </Unicorns>
+  </CollectionsConfiguration>
+
+  <NestedCollectionsConfiguration>
+    <Numbers>
+      <Odds>
+        <Number>1</Number>
+        <Number>3</Number>
+        <Number>5</Number>
+      </Odds>
+      <Evens>
+        <Number>2</Number>
+        <Number>4</Number>
+      </Evens>
+    </Numbers>
+  </NestedCollectionsConfiguration>
+
+</configuration>

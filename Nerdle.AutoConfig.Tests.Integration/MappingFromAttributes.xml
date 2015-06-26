@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+  <configSections>
+    <section name="EndPointConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="PizzaConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+  </configSections>
+
+  <EndPointConfiguration Url="http://foo" Port="80" />
+
+  <PizzaConfiguration Name="Vege Deluxe" Price="9.99" Size="XLarge">
+    <Base>Stuffed Crust</Base>
+    <Toppings>
+      <Topping>Aubergine</Topping>
+      <Topping>Spinach</Topping>
+      <Topping>Artichoke</Topping>
+    </Toppings>
+  </PizzaConfiguration>
+
+</configuration>

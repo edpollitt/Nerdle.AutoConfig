@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+  <configSections>
+    <section name="ComplexConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+  </configSections>
+
+  <ComplexConfiguration Foo="foo" Bar="bar" Baz="baz">
+    
+    <SomeService Name="MyService" RequestTimeout ="20" Enabled="false" />
+    
+    <SomeOtherService Name="MyOtherService" RequestTimeout="1000" Enabled="true">
+      <Hosts>
+        <Host Name="HOST-01" Port="1700" />
+        <Host Name="HOST-02" Port="1700" />
+        <Host Name="HOST-03" Port="1700" />
+      </Hosts>
+    </SomeOtherService>
+    
+  </ComplexConfiguration>
+
+</configuration>
