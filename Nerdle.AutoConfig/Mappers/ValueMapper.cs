@@ -6,13 +6,13 @@ namespace Nerdle.AutoConfig.Mappers
 {
     class ValueMapper : IQueryableMapper
     {
-        public object Map(XElement element, Type type)
+        public virtual object Map(XElement element, Type type)
         {
             var converter = TypeDescriptor.GetConverter(type);
             return converter.ConvertFromString(element.Value);
         }
 
-        public bool CanMap(Type type)
+        public virtual bool CanMap(Type type)
         {
             var converter = TypeDescriptor.GetConverter(type);
             return converter.CanConvertFrom(typeof (string));

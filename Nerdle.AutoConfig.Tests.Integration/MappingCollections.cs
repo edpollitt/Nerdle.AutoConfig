@@ -30,6 +30,15 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Numbers.First().Should().ContainInOrder(1, 3, 5);
             config.Numbers.Last().Should().ContainInOrder(2, 4);
         }
+
+        [Test]
+        public void Mapping_arrays()
+        {
+            var config = AutoConfig.Map<IArrayConfiguration>();
+            config.Should().NotBeNull();
+            config.Eggs.Should().HaveCount(3);
+            config.Eggs.Should().ContainInOrder("fried", "scrambled", "poached");
+        }
     }
 
     public interface ICollectionsConfiguration
@@ -42,5 +51,10 @@ namespace Nerdle.AutoConfig.Tests.Integration
     public interface INestedCollectionsConfiguration
     {
         IEnumerable<ICollection<int>> Numbers { get; }
+    }
+
+    public interface IArrayConfiguration
+    {
+        string[] Eggs { get; }
     }
 }

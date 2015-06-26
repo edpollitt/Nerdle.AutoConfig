@@ -9,7 +9,8 @@ namespace Nerdle.AutoConfig.Mappers
         static readonly IQueryableMapper[] Mappers =
         {
             new ValueMapper(), 
-            new CollectionMapper() 
+            new CollectionMapper(),
+            new ArrayMapper(),
         };
             
         public static IMapper For(Type type)

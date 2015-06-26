@@ -5,7 +5,7 @@ namespace Nerdle.AutoConfig.Mappers
 {
     class ComplexMapper : IMapper
     {
-        public object Map(XElement element, Type type)
+        public virtual object Map(XElement element, Type type)
         {
             return AutoConfig.Map(type, element);
         }

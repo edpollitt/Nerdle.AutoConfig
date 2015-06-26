@@ -4,6 +4,7 @@
   <configSections>
     <section name="CollectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
     <section name="NestedCollectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="ArrayConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
   
   <CollectionsConfiguration>
@@ -34,5 +35,13 @@
       </Evens>
     </Numbers>
   </NestedCollectionsConfiguration>
+
+  <ArrayConfiguration>
+    <Eggs>
+      <Method>fried</Method>
+      <Method>scrambled</Method>
+      <Method>poached</Method>
+    </Eggs>    
+  </ArrayConfiguration>
 
 </configuration>

@@ -45,14 +45,22 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [TestCase(typeof(IReadOnlyList<string>))]
         [TestCase(typeof(IReadOnlyCollection<DateTime>))]
         [TestCase(typeof(IList<IList<Exception>>))]
-        public void Geeric_collection_types_which_are_implemented_by_List_can_be_mapped_by_the_CollectionMapper(Type type)
+        public void Generic_collection_types_which_are_implemented_by_List_can_be_mapped_by_the_CollectionMapper(Type type)
         {
             Mapper.For(type).Should().BeOfType<CollectionMapper>();
         }
 
         [TestCase(typeof(int[]))]
         [TestCase(typeof(bool[]))]
+        [TestCase(typeof(List<Exception>[]))]
+        public void Single_dimensional_array_types_can_be_mapped_by_the_ArrayMapper(Type type)
+        {
+            Mapper.For(type).Should().BeOfType<ArrayMapper>();
+        }
+
+        [TestCase(typeof(int[,]))]
         [TestCase(typeof(IDictionary<int, string>))]
+        [TestCase(typeof(Exception))]
         public void Types_which_cannot_be_mapped_by_any_other_mapper_should_attempt_to_use_the_ComplexMapper(Type type)
         {
             Mapper.For(type).Should().BeOfType<ComplexMapper>();
