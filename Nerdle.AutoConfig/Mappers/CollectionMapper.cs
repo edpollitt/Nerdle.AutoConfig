@@ -11,21 +11,19 @@ namespace Nerdle.AutoConfig.Mappers
     {
         public virtual object Map(XElement element, Type type)
         {
-            var enumerableType = type.GenericEnumerableType();
-
-            if (enumerableType == null)
+            if (!CanMap(type))
                 throw new InvalidOperationException(
-                    string.Format("Type '{0}' does not implement IEnumerable<>.", type));
-
-            var genericType = enumerableType.GetGenericArguments().Single();
-            var listType = typeof(List<>).MakeGenericType(genericType);
+                    string.Format("Type '{0}' cannot be mapped by {1} because it cannot be assigned from a List<>.", type, GetType()));
+            
+            var listType = ListTypeFor(type);
+            var genericArg = listType.GetGenericArguments().Single();
+            
             var list = Activator.CreateInstance(listType) as IList;
-
-            var itemMapper = Mapper.For(genericType);
+            var itemMapper = Mapper.For(genericArg);
 
             foreach (var child in element.Elements())
             {
-                var item = itemMapper.Map(child, genericType);
+                var item = itemMapper.Map(child, genericArg);
                 list.Add(item);
             }
 
@@ -34,15 +32,31 @@ namespace Nerdle.AutoConfig.Mappers
 
         public virtual bool CanMap(Type type)
         {
-            var enumerableType = type.GenericEnumerableType();
-   
+            var listType = ListTypeFor(type);
+            return listType != null && type.IsAssignableFrom(listType);
+        }
+
+        static Type ListTypeFor(Type type)
+        {
+            var enumerableType = IEnumerableTypeFor(type);
+
             if (enumerableType == null)
-                return false;
+                return null;
 
-            var genericType = enumerableType.GetGenericArguments().Single();
-            var listType = typeof(List<>).MakeGenericType(genericType);
+            var genericArg = enumerableType.GetGenericArguments().Single();
+            var listType = typeof(List<>).MakeGenericType(genericArg);
 
-            return type.IsAssignableFrom(listType);
+            return listType;
+        }
+
+        static Type IEnumerableTypeFor(Type type)
+        {
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                return type;
+
+            return type.GetInterfaces()
+                .Where(i => i.IsGenericType)
+                .SingleOrDefault(i => i.GetGenericTypeDefinition() == typeof(IEnumerable<>));
         }
     }
 }

@@ -51,15 +51,5 @@ namespace Nerdle.AutoConfig.Extensions
 
             return sectionName;
         }
-
-        public static Type GenericEnumerableType(this Type type)
-        {
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (IEnumerable<>))
-                return type;
-
-            return type.GetInterfaces()
-                .Where(i => i.IsGenericType)
-                .SingleOrDefault(i => i.GetGenericTypeDefinition() == typeof(IEnumerable<>));
-        }
     }
 }

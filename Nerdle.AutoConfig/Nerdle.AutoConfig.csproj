@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AutoConfig.cs" />
     <Compile Include="Mappers\ArrayMapper.cs" />
+    <Compile Include="Mappers\DictionaryMapper.cs" />
+    <Compile Include="Mappers\KeyValuePairMapper.cs" />
     <Compile Include="Mappers\Mapper.cs" />
     <Compile Include="Mappers\CollectionMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />

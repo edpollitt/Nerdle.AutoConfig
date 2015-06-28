@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+  <configSections>
+    <section name="DictionaryConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="ComplexDictionaryConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+  </configSections>
+
+  <DictionaryConfiguration>
+    <FrenchWords>
+      <Word Key="cat" Value="chat" />
+      <Word Key="dog" Value="chien" />
+      <Word Key="monkey" Value="singe" />
+    </FrenchWords>
+  </DictionaryConfiguration>
+
+  <ComplexDictionaryConfiguration>
+    <Endpoints>
+      <EndPoint>
+        <Key>Primary</Key>
+        <Value>
+          <EndpointConfiguration Name="Foo" Port="1" />
+          <EndpointConfiguration Name="Bar" Port="2" />
+        </Value>
+      </EndPoint>
+      <EndPoint>
+        <Key>Secondary</Key>
+        <Value>
+          <EndpointConfiguration Name="Baz" Port="3" />
+        </Value>
+      </EndPoint>
+    </Endpoints>
+  </ComplexDictionaryConfiguration>
+
+</configuration>

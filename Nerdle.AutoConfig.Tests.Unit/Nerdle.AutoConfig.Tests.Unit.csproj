@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapperTests\When_mapping_a_dictionary.cs" />
     <Compile Include="MapperTests\When_mapping_an_array.cs" />
     <Compile Include="MapperTests\When_mapping_a_complex_type.cs" />
     <Compile Include="MapperTests\When_mapping_a_collection.cs" />

@@ -11,14 +11,10 @@ namespace Nerdle.AutoConfig.Mappers
     {
         public override object Map(XElement element, Type type)
         {
-            if (!type.IsArray)
+            if (!CanMap(type))
                 throw new InvalidOperationException(
-                    string.Format("Type '{0}' does not implement Array.", type));
-
-            if (type.GetArrayRank() > 1)
-                throw new InvalidOperationException(
-                   string.Format("Multidimensional arrays are not yet supported.", type));
-
+                    string.Format("Type '{0}' cannot be mapped by {1} because it is not a single dimensional Array.", type, GetType()));
+            
             var arrayType = type.GetElementType();
             var toArray = typeof(Enumerable).GetMethod("ToArray").MakeGenericMethod(arrayType);
             var collection = base.Map(element, type);

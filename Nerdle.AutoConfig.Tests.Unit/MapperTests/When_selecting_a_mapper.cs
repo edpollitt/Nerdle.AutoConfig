@@ -58,8 +58,16 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
             Mapper.For(type).Should().BeOfType<ArrayMapper>();
         }
 
+        [TestCase(typeof(IDictionary<int, int>))]
+        [TestCase(typeof(IDictionary<float, string>))]
+        [TestCase(typeof(IDictionary<Type, Exception>))]
+        [TestCase(typeof(Dictionary<string, int[]>))]
+        public void Dicionary_types_can_be_mapped_by_the_DictionaryMapper(Type type)
+        {
+            Mapper.For(type).Should().BeOfType<DictionaryMapper>();
+        }
+
         [TestCase(typeof(int[,]))]
-        [TestCase(typeof(IDictionary<int, string>))]
         [TestCase(typeof(Exception))]
         public void Types_which_cannot_be_mapped_by_any_other_mapper_should_attempt_to_use_the_ComplexMapper(Type type)
         {

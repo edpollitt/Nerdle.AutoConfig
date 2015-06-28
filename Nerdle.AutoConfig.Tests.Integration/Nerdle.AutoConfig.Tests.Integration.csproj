@@ -56,6 +56,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConfigExamples.resx</DependentUpon>
     </Compile>
+    <Compile Include="MappingDictionaries.cs" />
     <Compile Include="MappingFromAttributes.cs" />
     <Compile Include="MappingNestedComplexTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +75,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MappingDictionaries.xml" />
     <Content Include="MappingFromAttributes.xml" />
     <Content Include="MappingNestedComplexTypes.xml" />
     <Content Include="MappingCollections.xml" />

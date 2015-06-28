@@ -38,9 +38,9 @@
 
   <ArrayConfiguration>
     <Eggs>
-      <Method>fried</Method>
-      <Method>scrambled</Method>
-      <Method>poached</Method>
+      <Style>fried</Style>
+      <Style>scrambled</Style>
+      <Style>poached</Style>
     </Eggs>    
   </ArrayConfiguration>
 
