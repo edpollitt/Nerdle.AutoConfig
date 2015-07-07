@@ -61,6 +61,7 @@
     <Compile Include="MappingNestedComplexTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MappingSimpleExamples.cs" />
+    <Compile Include="SpecifyingTheSectionName.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -79,6 +80,7 @@
     <Content Include="MappingFromAttributes.xml" />
     <Content Include="MappingNestedComplexTypes.xml" />
     <Content Include="MappingCollections.xml" />
+    <Content Include="SpecifyingTheSectionName.xml" />
     <Content Include="MappingSimpleExamples.xml" />
   </ItemGroup>
   <ItemGroup>

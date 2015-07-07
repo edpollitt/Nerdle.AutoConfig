@@ -10,12 +10,11 @@ namespace Nerdle.AutoConfig
 {
     public static class AutoConfig
     {
-        public static T Map<T>()
+        public static T Map<T>(string sectionName = null)
         {
-            var sectionName = typeof(T).SectionName();
+            sectionName = sectionName ?? typeof(T).SectionName();
             var section = ConfigurationManager.GetSection(sectionName) as Section;
 
-            // TODO: instructions for overriding name and case, in the exception
             if (section == null)
                 throw new AutoConfigMappingException(
                     string.Format("Could not load section '{0}'. Make sure the section exists and is correctly cased.", sectionName));
