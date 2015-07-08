@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoConfig.cs" />
+    <Compile Include="CaseConverters\CamelCaseConverter.cs" />
+    <Compile Include="CaseConverters\MatchingCaseConverter.cs" />
     <Compile Include="Configuration\IConfigureMapping.cs" />
     <Compile Include="Mappers\ArrayMapper.cs" />
     <Compile Include="Mappers\DictionaryMapper.cs" />
