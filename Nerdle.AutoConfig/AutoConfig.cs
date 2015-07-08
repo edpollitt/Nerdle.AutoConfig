@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Xml.Linq;
+using Nerdle.AutoConfig.Configuration;
 using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.Extensions;
 using Nerdle.AutoConfig.Mappings;
@@ -19,12 +20,7 @@ namespace Nerdle.AutoConfig
                 throw new AutoConfigMappingException(
                     string.Format("Could not load section '{0}'. Make sure the section exists and is correctly cased.", sectionName));
 
-            return Map<T>(section);
-        }
-
-        internal static T Map<T>(XElement element)
-        {
-            return (T)Map(typeof (T), element);
+            return (T)Map(typeof(T), section);
         }
 
         internal static object Map(Type type, XElement element)
@@ -38,6 +34,11 @@ namespace Nerdle.AutoConfig
             mapping.Apply(instance);
 
             return instance;
+        }
+
+        public static void WhenMapping<T>(Action<IConfigureMapping> configureMapping)
+        {
+            MappingConfigs.AddConfiguration<T>(configureMapping);
         }
     }
 }
