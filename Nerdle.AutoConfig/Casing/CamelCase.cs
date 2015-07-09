@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Nerdle.AutoConfig.CaseConverters
+namespace Nerdle.AutoConfig.Casing
 {
-    class CamelCaseConverter : ICaseConverter
+    class CamelCase : ICase
     {
         public string Convert(string s)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Nerdle.AutoConfig.Configuration;
 using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.Extensions;
 using Nerdle.AutoConfig.Mappers;
@@ -24,12 +25,14 @@ namespace Nerdle.AutoConfig.Mappings
 
         public static TypeMapping CreateFor(Type type, XElement sectionElement)
         {
+            var mappingConfig = MappingConfigs.GetFor(type);
+
             var typeMapping = new TypeMapping();
             var properties = type.PublicSetters().ToList();
             
             foreach (var element in sectionElement.Elements())
             {
-                var property = properties.FirstOrDefault(p => p.Name == element.Name.LocalName);
+                var property = properties.FirstOrDefault(p => mappingConfig.Case.Convert(p.Name) == element.Name.LocalName);
 
                 if (property == null)
                     throw new AutoConfigMappingException(
@@ -45,7 +48,7 @@ namespace Nerdle.AutoConfig.Mappings
 
             foreach (var attribute in sectionElement.Attributes())
             {
-                var property = properties.FirstOrDefault(p => p.Name == attribute.Name.LocalName);
+                var property = properties.FirstOrDefault(p => mappingConfig.Case.Convert(p.Name) == attribute.Name.LocalName);
 
                 if (property == null)
                     throw new AutoConfigMappingException(

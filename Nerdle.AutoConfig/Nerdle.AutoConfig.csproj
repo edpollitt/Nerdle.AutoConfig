@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoConfig.cs" />
-    <Compile Include="CaseConverters\CamelCaseConverter.cs" />
-    <Compile Include="CaseConverters\MatchingCaseConverter.cs" />
+    <Compile Include="Casing\CamelCase.cs" />
+    <Compile Include="Casing\MatchingCase.cs" />
     <Compile Include="Configuration\IConfigureMapping.cs" />
     <Compile Include="Mappers\ArrayMapper.cs" />
     <Compile Include="Mappers\DictionaryMapper.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="Mappings\AttributeMapping.cs" />
     <Compile Include="Mappings\IPropertyMapping.cs" />
     <Compile Include="Mappings\ElementMapping.cs" />
-    <Compile Include="CaseConverters\ICaseConverter.cs" />
+    <Compile Include="Casing\ICase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TypeBuilderExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />

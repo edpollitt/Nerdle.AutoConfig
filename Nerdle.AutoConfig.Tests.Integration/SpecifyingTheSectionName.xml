@@ -9,19 +9,19 @@
   </configSections>
 
   <foo>
-    <Name>foo</Name>
+    <name>foo</name>
   </foo>
 
   <bar>
-    <Name>bar</Name>
+    <name>bar</name>
   </bar>
 
   <baz>
-    <Name>baz</Name>
+    <name>baz</name>
   </baz>
 
   <BAZ>
-    <Name>BAZ</Name>
+    <name>BAZ</name>
   </BAZ>
 
 </configuration>

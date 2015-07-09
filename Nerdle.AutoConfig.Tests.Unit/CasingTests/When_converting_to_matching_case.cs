@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
-using Nerdle.AutoConfig.CaseConverters;
+using Nerdle.AutoConfig.Casing;
 using NUnit.Framework;
 
-namespace Nerdle.AutoConfig.Tests.Unit.CaseConverterTests
+namespace Nerdle.AutoConfig.Tests.Unit.CasingTests
 {
     [TestFixture]
     class When_converting_to_matching_case
     {
-        readonly MatchingCaseConverter _sut = new MatchingCaseConverter();
+        readonly MatchingCase _sut = new MatchingCase();
 
         [TestCase("hello")]
         [TestCase("hELlo")]

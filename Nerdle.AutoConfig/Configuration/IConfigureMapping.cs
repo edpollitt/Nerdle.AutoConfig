@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using Nerdle.AutoConfig.CaseConverters;
+using Nerdle.AutoConfig.Casing;
 
 namespace Nerdle.AutoConfig.Configuration
 {
@@ -19,7 +19,7 @@ namespace Nerdle.AutoConfig.Configuration
 
     internal class MappingConfigBuilder : IConfigureMapping
     {
-        ICaseConverter _caseConverter;
+        ICase _case;
 
         public MappingConfigBuilder()
         {
@@ -28,34 +28,29 @@ namespace Nerdle.AutoConfig.Configuration
 
         public void UseCamelCase()
         {
-            _caseConverter = new CamelCaseConverter();
+            _case = new CamelCase();
         }
 
         public void UseMatchingCase()
         {
-            _caseConverter = new MatchingCaseConverter();
+            _case = new MatchingCase();
         }
 
         public MappingConfig Build()
         {
-            return new MappingConfig(_caseConverter);
+            return new MappingConfig(_case);
         }
     }
 
     internal class MappingConfig
     {
-        readonly ICaseConverter _caseConverter;
+        public ICase Case { get; private set; }
 
-        public MappingConfig(ICaseConverter caseConverter)
+        public MappingConfig(ICase @case)
         {
-            _caseConverter = caseConverter;
+            Case = @case;
         }
-
-        public string ConvertCase(string s)
-        {
-            return _caseConverter.Convert(s);
-        }
-    }
+   }
 
     internal static class MappingConfigs
     {
@@ -74,12 +69,12 @@ namespace Nerdle.AutoConfig.Configuration
             //    (type, strategy) => UpdateStrategy(strategyUpdate, strategy));
         }
 
-        public static MappingConfig Get<T>()
+        public static MappingConfig GetFor<T>()
         {
-            return Get(typeof(T));
+            return GetFor(typeof(T));
         }
 
-        public static MappingConfig Get(Type type)
+        public static MappingConfig GetFor(Type type)
         {
             return ConfigDictionary.GetOrAdd(type, DefaultConfig());
         }

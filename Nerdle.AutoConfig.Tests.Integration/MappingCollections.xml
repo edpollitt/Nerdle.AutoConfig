@@ -2,46 +2,46 @@
 <configuration>
 
   <configSections>
-    <section name="CollectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
-    <section name="NestedCollectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
-    <section name="ArrayConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="collectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="nestedCollectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="arrayConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
   
-  <CollectionsConfiguration>
-    <Primes>
-      <Prime>2</Prime>
+  <collectionsConfiguration>
+    <primes>
+      <prime>2</prime>
       <Prime>3</Prime>
       <Prime>5</Prime>
       <Prime>7</Prime>
-    </Primes>
-    <Colors>
-      <Color>Red</Color>
-      <Color>Green</Color>
-    </Colors>
-    <Unicorns>
-    </Unicorns>
-  </CollectionsConfiguration>
+    </primes>
+    <colors>
+      <color>Red</color>
+      <color>Green</color>
+    </colors>
+    <unicorns>
+    </unicorns>
+  </collectionsConfiguration>
 
-  <NestedCollectionsConfiguration>
-    <Numbers>
-      <Odds>
-        <Number>1</Number>
-        <Number>3</Number>
-        <Number>5</Number>
-      </Odds>
-      <Evens>
-        <Number>2</Number>
-        <Number>4</Number>
-      </Evens>
-    </Numbers>
-  </NestedCollectionsConfiguration>
+  <nestedCollectionsConfiguration>
+    <numbers>
+      <odds>
+        <number>1</number>
+        <number>3</number>
+        <number>5</number>
+      </odds>
+      <evens>
+        <number>2</number>
+        <number>4</number>
+      </evens>
+    </numbers>
+  </nestedCollectionsConfiguration>
 
-  <ArrayConfiguration>
-    <Eggs>
-      <Style>fried</Style>
-      <Style>scrambled</Style>
-      <Style>poached</Style>
-    </Eggs>    
-  </ArrayConfiguration>
+  <arrayConfiguration>
+    <eggs>
+      <style>fried</style>
+      <style>scrambled</style>
+      <style>poached</style>
+    </eggs>    
+  </arrayConfiguration>
 
 </configuration>

@@ -14,7 +14,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [Test]
         public void The_instance_is_created()
         {
-            var xElement = XElement.Parse("<Foo Bar=\"test\"><Baz>42</Baz></Foo>");
+            var xElement = XElement.Parse("<foo bar=\"test\"><baz>42</baz></foo>");
             var result = _mapper.Map(xElement, typeof (IFoo)) as IFoo;
             result.Should().NotBeNull();
         }
@@ -22,7 +22,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [Test]
         public void The_properties_are_populated()
         {
-            var xElement = XElement.Parse("<Foo Bar=\"test\"><Baz>42</Baz></Foo>");
+            var xElement = XElement.Parse("<foo bar=\"test\"><baz>42</baz></foo>");
             var result = _mapper.Map(xElement, typeof(IFoo)) as IFoo;
             result.Bar.Should().Be("test");
             result.Baz.Should().Be(42);

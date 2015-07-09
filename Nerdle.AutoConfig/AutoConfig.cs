@@ -13,7 +13,9 @@ namespace Nerdle.AutoConfig
     {
         public static T Map<T>(string sectionName = null)
         {
-            sectionName = sectionName ?? typeof(T).SectionName();
+            var mappingConfig = MappingConfigs.GetFor<T>();
+
+            sectionName = sectionName ?? mappingConfig.Case.Convert(typeof(T).SectionName());
             var section = ConfigurationManager.GetSection(sectionName) as Section;
 
             if (section == null)
@@ -27,7 +29,7 @@ namespace Nerdle.AutoConfig
         {
             var instance = TypeFactory.Create(type);
 
-            // since T might be an interface, we need the actual type
+            // since type param might be an interface, we need the actual type
             var concreteType = instance.GetType();
 
             var mapping = TypeMapping.CreateFor(concreteType, element);

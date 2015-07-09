@@ -2,19 +2,19 @@
 <configuration>
 
   <configSections>
-    <section name="EndPointConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
-    <section name="PizzaConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="endPointConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="pizzaConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
 
-  <EndPointConfiguration Url="http://foo" Port="80" />
+  <endPointConfiguration url="http://foo" port="80" />
 
-  <PizzaConfiguration Name="Vege Deluxe" Price="9.99" Size="XLarge">
-    <Base>Stuffed Crust</Base>
-    <Toppings>
-      <Topping>Aubergine</Topping>
-      <Topping>Spinach</Topping>
-      <Topping>Artichoke</Topping>
-    </Toppings>
-  </PizzaConfiguration>
+  <pizzaConfiguration name="Vege Deluxe" price="9.99" size="XLarge">
+    <base>Stuffed Crust</base>
+    <toppings>
+      <topping>Aubergine</topping>
+      <topping>Spinach</topping>
+      <topping>Artichoke</topping>
+    </toppings>
+  </pizzaConfiguration>
 
 </configuration>

@@ -2,16 +2,16 @@
 <configuration>
 
   <configSections>
-    <section name="SimpleConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="simpleConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
 
-  <SimpleConfiguration>
-    <MyString>hello</MyString>
-    <MyInt>42</MyInt>
-    <MyNullable>23</MyNullable>
-    <MyEmptyNullable></MyEmptyNullable>
-    <MyBool>true</MyBool>
-    <MyDate>21 July 1969</MyDate>
-  </SimpleConfiguration>
+  <simpleConfiguration>
+    <myString>hello</myString>
+    <myInt>42</myInt>
+    <myNullable>23</myNullable>
+    <myEmptyNullable></myEmptyNullable>
+    <myBool>true</myBool>
+    <myDate>21 July 1969</myDate>
+  </simpleConfiguration>
 
 </configuration>

@@ -30,7 +30,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [Test]
         public void The_dictionary_items_are_added()
         {
-            var xElement = XElement.Parse("<myDictionary><item Key=\"1\" Value=\"one\"/></myDictionary>");
+            var xElement = XElement.Parse("<myDictionary><item key=\"1\" value=\"one\"/></myDictionary>");
             var result = _mapper.Map(xElement, typeof(Dictionary<int, string>)) as Dictionary<int, string>;
             result.Should().HaveCount(1);
             result[1].Should().Be("one");
@@ -39,7 +39,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MapperTests
         [Test]
         public void Dictionary_items_can_be_added_using_elements()
         {
-            var xElement = XElement.Parse("<myDictionary><Item><Key>1</Key><Value>one</Value></Item></myDictionary>");
+            var xElement = XElement.Parse("<myDictionary><item><key>1</key><value>one</value></item></myDictionary>");
             var result = _mapper.Map(xElement, typeof(Dictionary<int, string>)) as Dictionary<int, string>;
             result.Should().HaveCount(1);
             result[1].Should().Be("one");

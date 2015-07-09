@@ -1,6 +1,6 @@
-﻿namespace Nerdle.AutoConfig.CaseConverters
+﻿namespace Nerdle.AutoConfig.Casing
 {
-    class MatchingCaseConverter : ICaseConverter
+    class MatchingCase : ICase
     {
         public string Convert(string s)
         {

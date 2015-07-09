@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
-using Nerdle.AutoConfig.CaseConverters;
+using Nerdle.AutoConfig.Casing;
 using NUnit.Framework;
 
-namespace Nerdle.AutoConfig.Tests.Unit.CaseConverterTests
+namespace Nerdle.AutoConfig.Tests.Unit.CasingTests
 {
     [TestFixture]
     class When_converting_to_camel_case
     {
-        readonly CamelCaseConverter _sut = new CamelCaseConverter();
+        readonly CamelCase _sut = new CamelCase();
 
         [TestCase("lower", "lower")]
         [TestCase("helloWorld", "helloWorld")]
