@@ -38,9 +38,9 @@ namespace Nerdle.AutoConfig
             return instance;
         }
 
-        public static void WhenMapping<T>(Action<IConfigureMapping> configureMapping)
+        public static void WhenMapping<T>(Action<IConfigureMapping<T>> configureMapping)
         {
-            MappingConfigs.AddConfiguration<T>(configureMapping);
+            MappingConfigs.Apply(configureMapping);
         }
     }
 }

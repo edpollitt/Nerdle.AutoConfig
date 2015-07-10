@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="CasingTests\When_converting_to_camel_case.cs" />
     <Compile Include="CasingTests\When_converting_to_matching_case.cs" />
-    <Compile Include="ConfigurationTests\When_configuring_a_mapping.cs" />
+    <Compile Include="ConfigurationTests\When_configuring_the_mapping_for_a_type.cs" />
     <Compile Include="MapperTests\When_mapping_a_dictionary.cs" />
     <Compile Include="MapperTests\When_mapping_an_array.cs" />
     <Compile Include="MapperTests\When_mapping_a_complex_type.cs" />
