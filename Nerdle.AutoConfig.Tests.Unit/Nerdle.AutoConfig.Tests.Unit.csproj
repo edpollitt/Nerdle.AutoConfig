@@ -36,11 +36,16 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,22 +53,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CasingTests\When_converting_to_camel_case.cs" />
-    <Compile Include="CasingTests\When_converting_to_matching_case.cs" />
-    <Compile Include="ConfigurationTests\When_configuring_the_mapping_for_a_type.cs" />
-    <Compile Include="MapperTests\When_mapping_a_dictionary.cs" />
-    <Compile Include="MapperTests\When_mapping_an_array.cs" />
-    <Compile Include="MapperTests\When_mapping_a_complex_type.cs" />
-    <Compile Include="MapperTests\When_mapping_a_collection.cs" />
-    <Compile Include="MapperTests\When_mapping_simple_types.cs" />
-    <Compile Include="MapperTests\When_selecting_a_mapper.cs" />
+    <Compile Include="Casing\CamelCaseConverterTests\When_converting_to_camel_case.cs" />
+    <Compile Include="Casing\MatchingCaseConverterTests\When_converting_to_matching_case.cs" />
+    <Compile Include="Mappers\KeyValuePairMapperTests\When_mapping_a_key_value_pair.cs" />
+    <Compile Include="TypeGeneration\TypeEmitterTests\When_generating_an_implementation_of_an_interface.cs" />
+    <Compile Include="_Old\ConfigurationTests\When_configuring_the_mapping_for_a_type.cs" />
+    <Compile Include="Mappers\DictionaryMapperTests\When_mapping_a_dictionary.cs" />
+    <Compile Include="Mappers\ArrayMapperTests\When_mapping_an_array.cs" />
+    <Compile Include="Mappers\RecursingMapperTests\When_mapping_a_complex_type.cs" />
+    <Compile Include="Mappers\CollectionMapperTests\When_mapping_a_collection.cs" />
+    <Compile Include="Mappers\ValueMapperTests\When_mapping_simple_types.cs" />
+    <Compile Include="Mappers\MapperSelectorTests\When_selecting_a_mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyMappingTests\When_mapping_a_property.cs" />
-    <Compile Include="TypeGenerationTests\When_requesting_an_interface_from_the_factory.cs" />
-    <Compile Include="TypeGenerationTests\When_requesting_a_class_fron_the_factory.cs" />
-    <Compile Include="TypeGenerationTests\When_requesting_a_struct_fron_the_factory.cs" />
-    <Compile Include="TypeMappingTests\When_creating_a_mapping.cs" />
-    <Compile Include="TypeMappingTests\When_mapping_a_type.cs" />
+    <Compile Include="_Old\PropertyMappingTests\When_mapping_a_property.cs" />
+    <Compile Include="TypeGeneration\TypeFactoryTests\When_requesting_an_interface_from_the_factory.cs" />
+    <Compile Include="TypeGeneration\TypeFactoryTests\When_requesting_a_class_from_the_factory.cs" />
+    <Compile Include="TypeGeneration\TypeFactoryTests\When_requesting_a_value_type_from_the_factory.cs" />
+    <Compile Include="_Old\TypeMappingTests\When_creating_a_mapping.cs" />
+    <Compile Include="_Old\TypeMappingTests\When_mapping_a_type.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -77,6 +84,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

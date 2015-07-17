@@ -42,32 +42,46 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoConfig.cs" />
-    <Compile Include="Casing\CamelCase.cs" />
-    <Compile Include="Casing\MatchingCase.cs" />
-    <Compile Include="Configuration\IConfigureMapping.cs" />
+    <Compile Include="Casing\CamelCaseConverter.cs" />
+    <Compile Include="Casing\MatchingCaseConverter.cs" />
+    <Compile Include="Mapping\MappingFactory.cs" />
+    <Compile Include="Strategy\IMappingStrategy.cs" />
+    <Compile Include="Mapping\MappingStrategy.cs" />
+    <Compile Include="Strategy\ConfigureMappingStrategy.cs" />
+    <Compile Include="Strategy\IConfigureStrategy.cs" />
+    <Compile Include="Strategy\IConfigurePropertyStrategy.cs" />
+    <Compile Include="Strategy\MappingStrategyProvider.cs" />
+    <Compile Include="Strategy\PropertyStrategy.cs" />
+    <Compile Include="Mapping\IMappingFactory.cs" />
+    <Compile Include="ISectionProvider.cs" />
+    <Compile Include="Strategy\IMappingStrategyProvider.cs" />
+    <Compile Include="TypeGeneration\ITypeEmitter.cs" />
+    <Compile Include="TypeGeneration\ITypeFactory.cs" />
     <Compile Include="Mappers\ArrayMapper.cs" />
     <Compile Include="Mappers\DictionaryMapper.cs" />
     <Compile Include="Mappers\KeyValuePairMapper.cs" />
-    <Compile Include="Mappers\Mapper.cs" />
+    <Compile Include="Mappers\MapperSelector.cs" />
     <Compile Include="Mappers\CollectionMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
-    <Compile Include="Mappers\ComplexMapper.cs" />
+    <Compile Include="Mappers\RecursingMapper.cs" />
     <Compile Include="Mappers\ValueMapper.cs" />
     <Compile Include="Exceptions\AutoConfigException.cs" />
     <Compile Include="Exceptions\AutoConfigMappingException.cs" />
     <Compile Include="Exceptions\AutoConfigTypeGenerationException.cs" />
-    <Compile Include="Mappings\AttributeMapping.cs" />
-    <Compile Include="Mappings\IPropertyMapping.cs" />
-    <Compile Include="Mappings\ElementMapping.cs" />
-    <Compile Include="Casing\ICase.cs" />
+    <Compile Include="MappingEngine.cs" />
+    <Compile Include="Mapping\MappingFromAttribute.cs" />
+    <Compile Include="Mapping\IPropertyMapping.cs" />
+    <Compile Include="Mapping\MappingFromElement.cs" />
+    <Compile Include="Casing\ICaseConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\TypeBuilderExtensions.cs" />
+    <Compile Include="TypeGeneration\TypeBuilderExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Section.cs" />
     <Compile Include="TypeGeneration\TypeEmitter.cs" />
     <Compile Include="TypeGeneration\TypeFactory.cs" />
-    <Compile Include="Mappings\TypeMapping.cs" />
+    <Compile Include="Mapping\TypeMapping.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

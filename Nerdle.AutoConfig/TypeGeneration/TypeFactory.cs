@@ -5,25 +5,31 @@ using Nerdle.AutoConfig.Extensions;
 
 namespace Nerdle.AutoConfig.TypeGeneration
 {
-    static class TypeFactory
+    class TypeFactory : ITypeFactory
     {
-        static readonly ConcurrentDictionary<Type, Lazy<Type>> TypeDictionary = new ConcurrentDictionary<Type, Lazy<Type>>();
+        readonly ConcurrentDictionary<Type, Lazy<Type>> _typeDictionary = new ConcurrentDictionary<Type, Lazy<Type>>();
+        readonly ITypeEmitter _emitter;
 
-        public static T Create<T>()
+        public TypeFactory(ITypeEmitter emitter)
         {
-            return (T)Create(typeof(T));
+            _emitter = emitter;
         }
 
-        public static object Create(Type type)
+        public T InstanceOf<T>()
         {
-            EnsureTypeSuitability(type);
+            return (T)InstanceOf(typeof(T));
+        }
+
+        public object InstanceOf(Type type)
+        {
+            EnsureSuitabilityOfType(type);
 
             if (type.IsInterface)
             {
                 // GetOrAdd is not synchronised, using Lazy ensures the valueFactory is only ever called once.
                 // See https://msdn.microsoft.com/en-us/library/dd997369.aspx
-                var lazy = TypeDictionary.GetOrAdd(type,
-                    new Lazy<Type>(() => TypeEmitter.GenerateInterfaceImplementation(type)));
+                var lazy = _typeDictionary.GetOrAdd(type,
+                    new Lazy<Type>(() => _emitter.GenerateInterfaceImplementation(type)));
 
                 return lazy.Value.Instantiate();
             }
@@ -31,7 +37,7 @@ namespace Nerdle.AutoConfig.TypeGeneration
             return type.Instantiate();
         }
 
-        static void EnsureTypeSuitability(Type type)
+        static void EnsureSuitabilityOfType(Type type)
         {
             if (type.IsValueType)
                 throw new AutoConfigTypeGenerationException(

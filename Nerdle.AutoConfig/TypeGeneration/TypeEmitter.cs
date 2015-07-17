@@ -3,20 +3,19 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.Extensions;
 
 namespace Nerdle.AutoConfig.TypeGeneration
 {
-    class TypeEmitter
+    class TypeEmitter : ITypeEmitter
     {
         public const string AssemblyName = "AutoConfig.DynamicTypes";
 
-        public static Type GenerateInterfaceImplementation<TInterface>()
-        {
-            return GenerateInterfaceImplementation(typeof(TInterface));
-        }
+        //public Type GenerateInterfaceImplementation<TInterface>()
+        //{
+        //    return GenerateInterfaceImplementation(typeof(TInterface));
+        //}
 
-        public static Type GenerateInterfaceImplementation(Type interfaceType)
+        public Type GenerateInterfaceImplementation(Type interfaceType)
         {
             EnsureTypeSuitability(interfaceType);
 

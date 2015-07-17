@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace Nerdle.AutoConfig.Mappers
 {
-    class KeyValuePairMapper : IQueryableMapper
+    class KeyValuePairMapper : ISelectableMapper
     {
         public object Map(XElement element, Type type)
         {
@@ -29,8 +27,8 @@ namespace Nerdle.AutoConfig.Mappers
         // Helper class because KeyValuePair is immutable so we can't create it using property mapping
         class KeyValuePairBuilder<TKey, TValue>
         {
-            public TKey Key { private get; set; }
-            public TValue Value { private get; set; }
+            public TKey Key { get; set; }
+            public TValue Value { get; set; }
 
             public KeyValuePair<TKey, TValue> Build()
             {

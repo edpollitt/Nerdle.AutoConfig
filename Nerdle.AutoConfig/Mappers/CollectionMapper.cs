@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Nerdle.AutoConfig.Extensions;
 
 namespace Nerdle.AutoConfig.Mappers
 {
-    class CollectionMapper : IQueryableMapper
+    class CollectionMapper : ISelectableMapper
     {
         public virtual object Map(XElement element, Type type)
         {
@@ -18,8 +17,8 @@ namespace Nerdle.AutoConfig.Mappers
             var listType = ListTypeFor(type);
             var genericArg = listType.GetGenericArguments().Single();
             
-            var list = Activator.CreateInstance(listType) as IList;
-            var itemMapper = Mapper.For(genericArg);
+            var list = (IList)Activator.CreateInstance(listType);
+            var itemMapper = MapperSelector.GetFor(genericArg);
 
             foreach (var child in element.Elements())
             {
@@ -38,7 +37,7 @@ namespace Nerdle.AutoConfig.Mappers
 
         static Type ListTypeFor(Type type)
         {
-            var enumerableType = IEnumerableTypeFor(type);
+            var enumerableType = EnumerableTypeFor(type);
 
             if (enumerableType == null)
                 return null;
@@ -49,7 +48,7 @@ namespace Nerdle.AutoConfig.Mappers
             return listType;
         }
 
-        static Type IEnumerableTypeFor(Type type)
+        static Type EnumerableTypeFor(Type type)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 return type;

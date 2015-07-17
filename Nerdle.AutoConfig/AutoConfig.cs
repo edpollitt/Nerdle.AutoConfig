@@ -1,46 +1,31 @@
 ﻿using System;
-using System.Configuration;
 using System.Xml.Linq;
-using Nerdle.AutoConfig.Configuration;
-using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.Extensions;
-using Nerdle.AutoConfig.Mappings;
-using Nerdle.AutoConfig.TypeGeneration;
+using Nerdle.AutoConfig.Strategy;
 
 namespace Nerdle.AutoConfig
 {
     public static class AutoConfig
     {
+        static readonly MappingEngine Engine;
+
+        static AutoConfig()
+        {
+            Engine = new MappingEngine(null, null, null, null);
+        }
+
         public static T Map<T>(string sectionName = null)
         {
-            var mappingConfig = MappingConfigs.GetFor<T>();
-
-            sectionName = sectionName ?? mappingConfig.Case.Convert(typeof(T).SectionName());
-            var section = ConfigurationManager.GetSection(sectionName) as Section;
-
-            if (section == null)
-                throw new AutoConfigMappingException(
-                    string.Format("Could not load section '{0}'. Make sure the section exists and is correctly cased.", sectionName));
-
-            return (T)Map(typeof(T), section);
+            return Engine.Map<T>(sectionName);
         }
 
         internal static object Map(Type type, XElement element)
         {
-            var instance = TypeFactory.Create(type);
-
-            // since type param might be an interface, we need the actual type
-            var concreteType = instance.GetType();
-
-            var mapping = TypeMapping.CreateFor(concreteType, element);
-            mapping.Apply(instance);
-
-            return instance;
+           return Engine.Map(type, element);
         }
 
-        public static void WhenMapping<T>(Action<IConfigureMapping<T>> configureMapping)
+        public static void WhenMapping<T>(Action<IConfigureMappingStrategy<T>> configureMapping)
         {
-            MappingConfigs.Apply(configureMapping);
+            Engine.WhenMapping(configureMapping);
         }
     }
 }

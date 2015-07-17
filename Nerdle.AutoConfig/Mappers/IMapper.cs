@@ -8,7 +8,7 @@ namespace Nerdle.AutoConfig.Mappers
         object Map(XElement element, Type type);
     }
 
-    interface IQueryableMapper : IMapper
+    interface ISelectableMapper : IMapper
     {
         bool CanMap(Type type);
     }
