@@ -39,7 +39,8 @@ namespace Nerdle.AutoConfig.Extensions
 
         public static IEnumerable<PropertyInfo> PublicSetters(this Type type)
         {
-            return type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(p => p.CanWrite);
+            return type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Where(p => p.CanWrite && p.GetSetMethod(true).IsPublic);
         }
 
         public static string SectionName(this Type type)

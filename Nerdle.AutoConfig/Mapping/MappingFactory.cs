@@ -8,16 +8,16 @@ using Nerdle.AutoConfig.Strategy;
 
 namespace Nerdle.AutoConfig.Mapping
 {
-    class MappingFactory : IMappingFactory
+    class  MappingFactory : IMappingFactory
     {
-        public TypeMapping CreateFor(Type type, XElement sectionElement, IMappingStrategy mappingStrategy)
+        public TypeMapping CreateMapping(Type type, XElement sectionElement, IMappingStrategy mappingStrategy)
         {
             var typeMapping = new TypeMapping();
             var properties = type.PublicSetters().ToList();
 
             foreach (var element in sectionElement.Elements())
             {
-                var property = properties.FirstOrDefault(p => mappingStrategy.ConvertCase(p.Name) == element.Name.LocalName);
+                var property = properties.FirstOrDefault(p => mappingStrategy.NameFor(p) == element.Name.LocalName);
 
                 if (property == null)
                     throw new AutoConfigMappingException(
@@ -33,7 +33,7 @@ namespace Nerdle.AutoConfig.Mapping
 
             foreach (var attribute in sectionElement.Attributes())
             {
-                var property = properties.FirstOrDefault(p => mappingStrategy.ConvertCase(p.Name) == attribute.Name.LocalName);
+                var property = properties.FirstOrDefault(p => mappingStrategy.NameFor(p) == attribute.Name.LocalName);
 
                 if (property == null)
                     throw new AutoConfigMappingException(

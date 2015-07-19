@@ -42,7 +42,7 @@ namespace Nerdle.AutoConfig
             var instance = _typeFactory.InstanceOf(type);
             // since the type param might be an interface, we need the actual type
             var concreteType = instance.GetType();
-            var mapping = _mappingFactory.CreateFor(concreteType, element, strategy);
+            var mapping = _mappingFactory.CreateMapping(concreteType, element, strategy);
             mapping.Apply(instance);
             return instance;
         }

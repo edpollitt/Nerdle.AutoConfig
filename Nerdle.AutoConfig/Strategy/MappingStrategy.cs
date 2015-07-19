@@ -1,8 +1,10 @@
 ﻿using System.Collections.Concurrent;
 using Nerdle.AutoConfig.Casing;
 using Nerdle.AutoConfig.Strategy;
+using System.Reflection;
+using System;
 
-namespace Nerdle.AutoConfig.Mapping
+namespace Nerdle.AutoConfig.Strategy
 {
     class MappingStrategy : IMappingStrategy
     {
@@ -19,6 +21,11 @@ namespace Nerdle.AutoConfig.Mapping
         public string ConvertCase(string s)
         {
             return CaseConverter.Convert(s);
+        }
+
+        public string NameFor(PropertyInfo property)
+        {
+            throw new NotImplementedException();
         }
     }
 }

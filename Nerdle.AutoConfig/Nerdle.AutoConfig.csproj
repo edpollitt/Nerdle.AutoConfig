@@ -46,7 +46,7 @@
     <Compile Include="Casing\MatchingCaseConverter.cs" />
     <Compile Include="Mapping\MappingFactory.cs" />
     <Compile Include="Strategy\IMappingStrategy.cs" />
-    <Compile Include="Mapping\MappingStrategy.cs" />
+    <Compile Include="Strategy\MappingStrategy.cs" />
     <Compile Include="Strategy\ConfigureMappingStrategy.cs" />
     <Compile Include="Strategy\IConfigureStrategy.cs" />
     <Compile Include="Strategy\IConfigurePropertyStrategy.cs" />
