@@ -76,12 +76,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MappingDictionaries.xml" />
-    <Content Include="MappingFromAttributes.xml" />
-    <Content Include="MappingNestedComplexTypes.xml" />
-    <Content Include="MappingCollections.xml" />
-    <Content Include="SpecifyingTheSectionName.xml" />
-    <Content Include="MappingSimpleExamples.xml" />
+    <Content Include="MappingDictionaries.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MappingFromAttributes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MappingNestedComplexTypes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MappingCollections.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SpecifyingTheSectionName.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MappingSimpleExamples.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ConfigExamples.resx">
