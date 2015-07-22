@@ -65,14 +65,14 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;CollectionsConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;NestedCollectionsConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;ArrayConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;collectionsConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;nestedCollectionsConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;arrayConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///  
-        ///  &lt;CollectionsConfiguration&gt;
-        ///    &lt;Primes&gt;
-        ///      &lt;Prime&gt;2&lt;/Prime&gt;
+        ///  &lt;collectionsConfiguration&gt;
+        ///    &lt;primes&gt;
+        ///      &lt;prime&gt;2&lt;/prime&gt;
         ///      &lt;Prime&gt;3&lt;/Prime&gt;
         ///      &lt;Prime [rest of string was truncated]&quot;;.
         /// </summary>
@@ -87,17 +87,17 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;DictionaryConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;ComplexDictionaryConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;dictionaryConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;complexDictionaryConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///
-        ///  &lt;DictionaryConfiguration&gt;
-        ///    &lt;FrenchWords&gt;
-        ///      &lt;Word Key=&quot;cat&quot; Value=&quot;chat&quot; /&gt;
-        ///      &lt;Word Key=&quot;dog&quot; Value=&quot;chien&quot; /&gt;
-        ///      &lt;Word Key=&quot;monkey&quot; Value=&quot;singe&quot; /&gt;
-        ///    &lt;/FrenchWords&gt;
-        ///  &lt;/Dictiona [rest of string was truncated]&quot;;.
+        ///  &lt;dictionaryConfiguration&gt;
+        ///    &lt;frenchWords&gt;
+        ///      &lt;word key=&quot;cat&quot; value=&quot;chat&quot; /&gt;
+        ///      &lt;word key=&quot;dog&quot; value=&quot;chien&quot; /&gt;
+        ///      &lt;word key=&quot;monkey&quot; value=&quot;singe&quot; /&gt;
+        ///    &lt;/frenchWords&gt;
+        ///  &lt;/dictiona [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MappingDictionaries {
             get {
@@ -110,16 +110,16 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;EndPointConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;PizzaConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;endPointConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;pizzaConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///
-        ///  &lt;EndPointConfiguration Url=&quot;http://foo&quot; Port=&quot;80&quot; /&gt;
+        ///  &lt;endPointConfiguration url=&quot;http://foo&quot; port=&quot;80&quot; /&gt;
         ///
-        ///  &lt;PizzaConfiguration Name=&quot;Vege Deluxe&quot; Price=&quot;9.99&quot; Size=&quot;XLarge&quot;&gt;
-        ///    &lt;Base&gt;Stuffed Crust&lt;/Base&gt;
-        ///    &lt;Toppings&gt;
-        ///      &lt;Topping&gt;Aubergine&lt;/Topping&gt;
+        ///  &lt;pizzaConfiguration name=&quot;Vege Deluxe&quot; price=&quot;9.99&quot; size=&quot;XLarge&quot;&gt;
+        ///    &lt;base&gt;Stuffed Crust&lt;/base&gt;
+        ///    &lt;toppings&gt;
+        ///      &lt;topping&gt;Aubergine&lt;/topping&gt;
         ///     [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MappingFromAttributes {
@@ -133,17 +133,15 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;ComplexConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;complexConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///
-        ///  &lt;ComplexConfiguration Foo=&quot;foo&quot; Bar=&quot;bar&quot; Baz=&quot;baz&quot;&gt;
-        ///    
-        ///    &lt;SomeService Name=&quot;MyService&quot; RequestTimeout =&quot;20&quot; Enabled=&quot;false&quot; /&gt;
-        ///    
-        ///    &lt;SomeOtherService Name=&quot;MyOtherService&quot; RequestTimeout=&quot;1000&quot; Enabled=&quot;true&quot;&gt;
-        ///      &lt;Hosts&gt;
-        ///        &lt;Host Name=&quot;HOST-01&quot; Port=&quot;1700&quot; /&gt;
-        ///        &lt;Host Name=&quot;HOST-0 [rest of string was truncated]&quot;;.
+        ///  &lt;complexConfiguration foo=&quot;foo&quot; bar=&quot;bar&quot; baz=&quot;baz&quot;&gt;
+        ///    &lt;someService name=&quot;MyService&quot; requestTimeout =&quot;20&quot; enabled=&quot;false&quot; /&gt;
+        ///    &lt;someOtherService name=&quot;MyOtherService&quot; requestTimeout=&quot;1000&quot; enabled=&quot;true&quot;&gt;
+        ///      &lt;hosts&gt;
+        ///        &lt;host name=&quot;HOST-01&quot; port=&quot;1700&quot; /&gt;
+        ///        &lt;host name=&quot;HOST-02&quot; port=&quot;170 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MappingNestedComplexTypes {
             get {
@@ -156,17 +154,17 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;SimpleConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;simpleConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///
-        ///  &lt;SimpleConfiguration&gt;
-        ///    &lt;MyString&gt;hello&lt;/MyString&gt;
-        ///    &lt;MyInt&gt;42&lt;/MyInt&gt;
-        ///    &lt;MyNullable&gt;23&lt;/MyNullable&gt;
-        ///    &lt;MyEmptyNullable&gt;&lt;/MyEmptyNullable&gt;
-        ///    &lt;MyBool&gt;true&lt;/MyBool&gt;
-        ///    &lt;MyDate&gt;21 July 1969&lt;/MyDate&gt;
-        ///  &lt;/SimpleConfiguration&gt;
+        ///  &lt;simpleConfiguration&gt;
+        ///    &lt;myString&gt;hello&lt;/myString&gt;
+        ///    &lt;myInt&gt;42&lt;/myInt&gt;
+        ///    &lt;myNullable&gt;23&lt;/myNullable&gt;
+        ///    &lt;myEmptyNullable&gt;&lt;/myEmptyNullable&gt;
+        ///    &lt;myBool&gt;true&lt;/myBool&gt;
+        ///    &lt;myDate&gt;21 July 1969&lt;/myDate&gt;
+        ///  &lt;/simpleConfiguration&gt;
         ///
         ///&lt;/configuration&gt;.
         /// </summary>
@@ -181,24 +179,21 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;Foo&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;Bar&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;Baz&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;foo&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;bar&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;baz&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;BAZ&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///
-        ///  &lt;Foo&gt;
-        ///    &lt;Name&gt;foo&lt;/Name&gt;
-        ///  &lt;/Foo&gt;
+        ///  &lt;foo&gt;
+        ///    &lt;name&gt;foo&lt;/name&gt;
+        ///  &lt;/foo&gt;
         ///
-        ///  &lt;Bar&gt;
-        ///    &lt;Name&gt;bar&lt;/Name&gt;
-        ///  &lt;/Bar&gt;
+        ///  &lt;bar&gt;
+        ///    &lt;name&gt;bar&lt;/name&gt;
+        ///  &lt;/bar&gt;
         ///
-        ///  &lt;Baz&gt;
-        ///    &lt;Name&gt;baz&lt;/Name&gt;
-        ///  &lt;/Baz&gt;
-        ///
-        ///&lt;/configuration&gt;.
+        ///  &lt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SpecifyingTheSectionName {
             get {
