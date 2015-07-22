@@ -44,3 +44,4 @@ Done!
 
 :+1:
 
+###Check [the wiki](https://github.com/edpollitt/Nerdle.AutoConfig/wiki) for fun times
