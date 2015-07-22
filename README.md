@@ -40,8 +40,8 @@ Ask AutoConfig to map your object
 var config = AutoConfig.Map<IMyServiceConguration>();
 ```
 
-Done! 
+Done!! 
 
 :+1:
 
-###Check [the wiki](https://github.com/edpollitt/Nerdle.AutoConfig/wiki) for fun times
+####Check [the wiki](https://github.com/edpollitt/Nerdle.AutoConfig/wiki) for more fun times
