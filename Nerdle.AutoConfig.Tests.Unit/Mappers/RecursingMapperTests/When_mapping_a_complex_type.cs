@@ -28,7 +28,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.RecursingMapperTests
         }
     }
 
-    interface IFoo
+    public interface IFoo
     {
         string Bar { get; }
         int Baz { get; }

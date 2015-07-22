@@ -13,19 +13,19 @@ namespace Nerdle.AutoConfig
         readonly ISectionProvider _sectionProvider;
         readonly ITypeFactory _typeFactory;
         readonly IMappingFactory _mappingFactory;
-        readonly IMappingStrategyProvider _strategyProvider;
+        readonly IStrategyManager _strategyManager;
 
-        public MappingEngine(ISectionProvider sectionProvider, ITypeFactory typeFactory, IMappingFactory mappingFactory, IMappingStrategyProvider strategyProvider)
+        public MappingEngine(ISectionProvider sectionProvider, ITypeFactory typeFactory, IMappingFactory mappingFactory, IStrategyManager strategyManager)
         {
             _sectionProvider = sectionProvider;
             _typeFactory = typeFactory;
             _mappingFactory = mappingFactory;
-            _strategyProvider = strategyProvider;
+            _strategyManager = strategyManager;
         }
 
         public T Map<T>(string sectionName = null)
         {
-            sectionName = sectionName ?? _strategyProvider.GetFor<T>().ConvertCase(typeof(T).SectionName());
+            sectionName = sectionName ?? _strategyManager.GetStrategyFor<T>().ConvertCase(typeof(T).SectionName());
             
             var section = _sectionProvider.GetSection(sectionName);
 
@@ -38,7 +38,7 @@ namespace Nerdle.AutoConfig
 
         public object Map(Type type, XElement element)
         {
-            var strategy = _strategyProvider.GetFor(type);
+            var strategy = _strategyManager.GetStrategyFor(type);
             var instance = _typeFactory.InstanceOf(type);
             // since the type param might be an interface, we need the actual type
             var concreteType = instance.GetType();
@@ -49,7 +49,7 @@ namespace Nerdle.AutoConfig
 
         public void WhenMapping<T>(Action<IConfigureMappingStrategy<T>> configureMapping)
         {
-            //_strategyProvider.
+            //_strategyManager.
             throw new NotImplementedException();
         }
     }

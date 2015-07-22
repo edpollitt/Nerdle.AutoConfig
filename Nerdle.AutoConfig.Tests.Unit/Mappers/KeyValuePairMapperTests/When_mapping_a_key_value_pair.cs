@@ -31,7 +31,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.KeyValuePairMapperTests
         [Test]
         public void The_key_and_value_are_set()
         {
-            var xElement = XElement.Parse("<myKvp><item key=\"Christmas\" value=\"25 Dec 2000\"/></myKvp>");
+            var xElement = XElement.Parse("<myKvp key=\"Christmas\" value=\"25 Dec 2000\" />");
             var result = (KeyValuePair<string, DateTime>)_mapper.Map(xElement, typeof(KeyValuePair<string, DateTime>));
             result.Key.Should().Be("Christmas");
             result.Value.Should().Be(new DateTime(2000, 12, 25));

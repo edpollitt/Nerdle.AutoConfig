@@ -25,7 +25,7 @@ namespace Nerdle.AutoConfig.Strategy
 
         public string NameFor(PropertyInfo property)
         {
-            throw new NotImplementedException();
+            return ConvertCase(property.Name);
         }
     }
 }

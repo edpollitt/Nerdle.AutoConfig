@@ -1,41 +1,40 @@
 using System;
 using System.Collections.Concurrent;
-using Nerdle.AutoConfig.Mapping;
 
 namespace Nerdle.AutoConfig.Strategy
 {
-    class MappingStrategyProvider : IMappingStrategyProvider
+    class StrategyManager : IStrategyManager
     {
         static readonly ConcurrentDictionary<Type, IMappingStrategy> Strategies = new ConcurrentDictionary<Type, IMappingStrategy>();
 
-        public static readonly IMappingStrategy Default = new MappingStrategy();
+        public static readonly IMappingStrategy DefaultStrategy = new MappingStrategy();
 
-        public static void Apply<T>(Action<IConfigureMappingStrategy<T>> configureStrategy)
-        {
+        public void UpdateStrategy<T>(Action<IConfigureMappingStrategy<T>> strategyConfiguration)
+        { 
             Strategies.AddOrUpdate(typeof(T),
                 type =>
                 {
                     var strategy = new ConfigureMappingStrategy<T>();
-                    configureStrategy(strategy);
+                    strategyConfiguration(strategy);
                     return strategy;
                 },
                 (type, cfg) =>
                 {
                     var config = cfg as ConfigureMappingStrategy<T>;
-                    configureStrategy(config);
+                    strategyConfiguration(config);
                     return config;
                 });
         }
 
-        public IMappingStrategy GetFor<T>()
+        public IMappingStrategy GetStrategyFor<T>()
         {
-            return GetFor(typeof(T));
+            return GetStrategyFor(typeof(T));
         }
 
-        public IMappingStrategy GetFor(Type type)
+        public IMappingStrategy GetStrategyFor(Type type)
         {
             IMappingStrategy strategy;
-            return Strategies.TryGetValue(type, out strategy) ? strategy : Default;
+            return Strategies.TryGetValue(type, out strategy) ? strategy : DefaultStrategy;
         }
     }
 }

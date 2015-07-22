@@ -50,11 +50,10 @@
     <Compile Include="Strategy\ConfigureMappingStrategy.cs" />
     <Compile Include="Strategy\IConfigureStrategy.cs" />
     <Compile Include="Strategy\IConfigurePropertyStrategy.cs" />
-    <Compile Include="Strategy\MappingStrategyProvider.cs" />
+    <Compile Include="Strategy\StrategyManager.cs" />
     <Compile Include="Strategy\PropertyStrategy.cs" />
     <Compile Include="Mapping\IMappingFactory.cs" />
-    <Compile Include="ISectionProvider.cs" />
-    <Compile Include="Strategy\IMappingStrategyProvider.cs" />
+    <Compile Include="Strategy\IStrategyManager.cs" />
     <Compile Include="TypeGeneration\ITypeEmitter.cs" />
     <Compile Include="TypeGeneration\ITypeFactory.cs" />
     <Compile Include="Mappers\ArrayMapper.cs" />

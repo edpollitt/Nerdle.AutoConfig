@@ -64,7 +64,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.MapperSelectorTests
         [TestCase(typeof(KeyValuePair<PropertyInfo, ICollection<string>>))]
         public void Key_value_pairs_can_be_mapped_by_the_KeyValuePairMapper(Type type)
         {
-            MapperSelector.GetFor(type).Should().BeOfType<DictionaryMapper>();
+            MapperSelector.GetFor(type).Should().BeOfType<KeyValuePairMapper>();
         }
         
         [TestCase(typeof(IDictionary<int, int>))]

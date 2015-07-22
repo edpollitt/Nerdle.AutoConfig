@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Xml.Linq;
+using Nerdle.AutoConfig.Mapping;
 using Nerdle.AutoConfig.Strategy;
+using Nerdle.AutoConfig.TypeGeneration;
 
 namespace Nerdle.AutoConfig
 {
@@ -10,7 +12,11 @@ namespace Nerdle.AutoConfig
 
         static AutoConfig()
         {
-            Engine = new MappingEngine(null, null, null, null);
+            Engine = new MappingEngine(
+                new SectionProvider(), 
+                new TypeFactory(new TypeEmitter()), 
+                new MappingFactory(), 
+                new StrategyManager());
         }
 
         public static T Map<T>(string sectionName = null)

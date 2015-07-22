@@ -52,7 +52,6 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeFactoryTests
 
         [TestCase(typeof(string))]
         [TestCase(typeof(Action))]
-        [TestCase(typeof(Tuple<int, string>))]
         public void An_exception_is_thrown_if_the_class_has_no_parameterless_constructor(Type type)
         {
             Action instantiating = () => _sut.InstanceOf(type);

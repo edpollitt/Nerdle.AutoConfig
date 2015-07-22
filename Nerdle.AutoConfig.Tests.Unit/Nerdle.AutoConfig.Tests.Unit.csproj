@@ -57,8 +57,10 @@
     <Compile Include="Casing\MatchingCaseConverterTests\When_converting_to_matching_case.cs" />
     <Compile Include="Mappers\KeyValuePairMapperTests\When_mapping_a_key_value_pair.cs" />
     <Compile Include="Mapping\MappingFromElementTests\When_mapping_a_property.cs" />
+    <Compile Include="Strategy\ConfigureMappingStrategyTests\When_configuring_a_mapping_strategy.cs" />
+    <Compile Include="Strategy\MappingStrategyProviderTests\When_retrieving_a_strategy.cs" />
+    <Compile Include="Strategy\MappingStrategyProviderTests\When_creating_a_strategy.cs" />
     <Compile Include="TypeGeneration\TypeEmitterTests\When_generating_an_implementation_of_an_interface.cs" />
-    <Compile Include="_Old\ConfigurationTests\When_configuring_the_mapping_for_a_type.cs" />
     <Compile Include="Mappers\DictionaryMapperTests\When_mapping_a_dictionary.cs" />
     <Compile Include="Mappers\ArrayMapperTests\When_mapping_an_array.cs" />
     <Compile Include="Mappers\RecursingMapperTests\When_mapping_a_complex_type.cs" />
