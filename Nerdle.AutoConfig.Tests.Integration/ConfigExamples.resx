@@ -122,18 +122,18 @@
     <value>MappingCollections.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="MappingDictionaries" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>mappingdictionaries.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>MappingDictionaries.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="MappingFromAttributes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>mappingfromattributes.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>MappingFromAttributes.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="MappingNestedComplexTypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>mappingnestedcomplextypes.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>MappingNestedComplexTypes.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="MappingSimpleExamples" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>mappingsimpleexamples.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>MappingSimpleExamples.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="SpecifyingTheSectionName" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>specifyingthesectionname.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>SpecifyingTheSectionName.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>
