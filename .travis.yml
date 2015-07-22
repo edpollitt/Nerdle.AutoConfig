@@ -5,4 +5,4 @@ install:
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Nerdle.AutoConfig.sln
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Nerdle.AutoConfig.Tests.Unit/bin/Release/Nerdle.AutoConfig.Tests.Unit.dll ./Nerdle.AutoConfig.Tests.Integration/bin/Release/Nerdle.AutoConfig.Tests.Integration.dll
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Nerdle.AutoConfig.Tests.Integration/bin/Release/Nerdle.AutoConfig.Tests.Integration.dll ./Nerdle.AutoConfig.Tests.Unit/bin/Release/Nerdle.AutoConfig.Tests.Unit.dll
