@@ -40,7 +40,7 @@ Ask AutoConfig to map your object
 var config = AutoConfig.Map<IMyServiceConguration>();
 ```
 
-Done!! 
+You're done!
 
 :+1:
 
