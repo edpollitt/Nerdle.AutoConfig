@@ -1,10 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.Extensions;
-using Nerdle.AutoConfig.Mappers;
+﻿using System.Collections.Generic;
 
 namespace Nerdle.AutoConfig.Mapping
 {

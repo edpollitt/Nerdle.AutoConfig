@@ -60,6 +60,7 @@
     <Compile Include="Strategy\ConfigureMappingStrategyTests\When_configuring_a_mapping_strategy.cs" />
     <Compile Include="Strategy\MappingStrategyProviderTests\When_retrieving_a_strategy.cs" />
     <Compile Include="Strategy\MappingStrategyProviderTests\When_creating_a_strategy.cs" />
+    <Compile Include="Strategy\ConfigurePropertyStrategyTests\When_configuring_a_property_strategy.cs" />
     <Compile Include="TypeGeneration\TypeEmitterTests\When_generating_an_implementation_of_an_interface.cs" />
     <Compile Include="Mappers\DictionaryMapperTests\When_mapping_a_dictionary.cs" />
     <Compile Include="Mappers\ArrayMapperTests\When_mapping_an_array.cs" />

@@ -2,7 +2,6 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using Nerdle.AutoConfig.Casing;
-using Nerdle.AutoConfig.Mapping;
 
 namespace Nerdle.AutoConfig.Strategy
 {
@@ -20,12 +19,12 @@ namespace Nerdle.AutoConfig.Strategy
 
         public IConfigurePropertyStrategy<TProperty> Map<TProperty>(Expression<Func<T, TProperty>> property)
         {
-            var propertyName = GetPropertyName(property);
-            //return PropertyConfigs.GetOrAdd(propertyName, new ConfigurePropertyMapping<TProperty>()) as IConfigurePropertyStrategy<TProperty>;
-            return null;
+            var propertyName = PropertyName(property);
+            return PropertyStrategies.GetOrAdd(propertyName,
+                new ConfigurePropertyStrategy<TProperty>()) as IConfigurePropertyStrategy<TProperty>;
         }
 
-        static string GetPropertyName<TProperty>(Expression<Func<T, TProperty>> propertyExpression)
+        static string PropertyName<TProperty>(Expression<Func<T, TProperty>> propertyExpression)
         {
             MemberExpression me = null;
 

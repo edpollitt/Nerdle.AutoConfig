@@ -1,8 +1,5 @@
-﻿using System;
-using System.Xml.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Nerdle.AutoConfig.Casing;
-using Nerdle.AutoConfig.Mappers;
 using Nerdle.AutoConfig.Strategy;
 using NUnit.Framework;
 
@@ -11,32 +8,57 @@ namespace Nerdle.AutoConfig.Tests.Unit.Strategy.ConfigureMappingStrategyTests
     [TestFixture]
     class When_configuring_a_mapping_strategy
     {
+        ConfigureMappingStrategy<IFoo> _strategy;
+
+        [SetUp]
+        public void BeforeEach()
+        {
+            _strategy = new ConfigureMappingStrategy<IFoo>();
+        }
+
         [Test]
         public void Casing_can_be_set()
         {
-            var strategy = new ConfigureMappingStrategy<IFoo>();
-            strategy.UseMatchingCase();
-            strategy.CaseConverter.Should().BeOfType<MatchingCaseConverter>();
-            strategy.UseCamelCase();
-            strategy.CaseConverter.Should().BeOfType<CamelCaseConverter>();
+            _strategy.UseMatchingCase();
+            _strategy.CaseConverter.Should().BeOfType<MatchingCaseConverter>();
+            _strategy.UseCamelCase();
+            _strategy.CaseConverter.Should().BeOfType<CamelCaseConverter>();
         }
 
         [Test]
         public void The_default_casing_is_camelCase()
         {
-            var strategy = new ConfigureMappingStrategy<IFoo>();
-            strategy.CaseConverter.Should().BeOfType<CamelCaseConverter>();
+            _strategy.CaseConverter.Should().BeOfType<CamelCaseConverter>();
+        }
+
+        [Test]
+        public void A_strategy_can_be_configured_for_a_specific_property()
+        {
+            _strategy.Map(foo => foo.Bar).From("barbarbar");
+            var bar = typeof(IFoo).GetProperty("Bar");
+            _strategy.ForProperty(bar).Should().NotBeNull();
+            _strategy.ForProperty(bar).MapFrom.Should().Be("barbarbar");
+        }
+
+        [Test]
+        public void A_default_property_strategy_is_used_if_no_strategy_configured_for_the_specific_property()
+        {
+            var bar = typeof(IFoo).GetProperty("Bar");
+            _strategy.ForProperty(bar).Should().NotBeNull();
+            _strategy.ForProperty(bar).Should().Be(MappingStrategy.DefaultPropertyStrategy);
         }
 
 
         //[Test]
-        //public void Property_mappings_can_be_added()
+        //public void From_name_can_be_configured_for_a_property()
         //{
-        //    AutoConfig.WhenMapping<IList>(mapping => { mapping.Map(list => list.Count).From("itemCount"); });
-        //    var config = MappingConfigs.GetStrategyFor<IList>();
-        //    config.PropertyConfigs.Should().HaveCount(1);
-        //    config.PropertyConfigs.Keys.Should().Contain("Count");
-        //    config.PropertyConfigs["Count"].MapFrom.Should().Be("itemCount");
+        //    var strategy = new ConfigureMappingStrategy<IFoo>();
+        //    strategy.Map(foo => foo.Bar).From("barbarbar");
+
+        //    var bar = typeof(IFoo).GetProperty("Bar");
+        //    strategy.ForProperty(bar).Should().NotBeNull();
+        //    //strategy.NameFor(bar).Should().Be("barbarbar");
+        //    Assert.Fail();
         //}
 
         //public void Properties_can_be_optional()
@@ -81,16 +103,8 @@ namespace Nerdle.AutoConfig.Tests.Unit.Strategy.ConfigureMappingStrategyTests
         //}
     }
 
-    class CustomerMapper : IMapper
-    {
-        public object Map(XElement element, Type type)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     interface IFoo
     {
-            
+        string Bar { get; }
     }
 }

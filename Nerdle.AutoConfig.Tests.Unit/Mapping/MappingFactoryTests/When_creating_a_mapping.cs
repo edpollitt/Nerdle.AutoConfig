@@ -20,8 +20,8 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void BeforeEach()
         {
             _strategy = new Mock<IMappingStrategy>();
-            _strategy.Setup(s => s.NameFor(It.IsAny<PropertyInfo>()))
-                .Returns<PropertyInfo>(pi => pi.Name.ToLowerInvariant());
+            //_strategy.Setup(s => s.NameFor(It.IsAny<PropertyInfo>()))
+            //    .Returns<PropertyInfo>(pi => pi.Name.ToLowerInvariant());
         }
 
         [Test]
@@ -70,11 +70,12 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         [Test]
         public void Names_are_provided_by_the_strategy()
         {
-            var xElement = XElement.Parse("<foo DOG=\"1\"><CAT>1</CAT></foo>");
-            _strategy.Setup(s => s.NameFor(It.Is<PropertyInfo>(p => p.Name == "Bar"))).Returns("DOG");
-            _strategy.Setup(s => s.NameFor(It.Is<PropertyInfo>(p => p.Name == "Baz"))).Returns("CAT");
-            var mapping = _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
-            mapping.Should().NotBeNull();
+            //var xElement = XElement.Parse("<foo DOG=\"1\"><CAT>1</CAT></foo>");
+            //_strategy.Setup(s => s.NameFor(It.Is<PropertyInfo>(p => p.Name == "Bar"))).Returns("DOG");
+            //_strategy.Setup(s => s.NameFor(It.Is<PropertyInfo>(p => p.Name == "Baz"))).Returns("CAT");
+            //var mapping = _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
+            //mapping.Should().NotBeNull();
+            Assert.Fail();
         }
     }
 

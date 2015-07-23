@@ -45,10 +45,12 @@
     <Compile Include="Casing\CamelCaseConverter.cs" />
     <Compile Include="Casing\MatchingCaseConverter.cs" />
     <Compile Include="Mapping\MappingFactory.cs" />
+    <Compile Include="Mapping\MappingFromFixedValue.cs" />
+    <Compile Include="Strategy\ConfigurePropertyStrategy.cs" />
     <Compile Include="Strategy\IMappingStrategy.cs" />
     <Compile Include="Strategy\MappingStrategy.cs" />
     <Compile Include="Strategy\ConfigureMappingStrategy.cs" />
-    <Compile Include="Strategy\IConfigureStrategy.cs" />
+    <Compile Include="Strategy\IConfigureMappingStrategy.cs" />
     <Compile Include="Strategy\IConfigurePropertyStrategy.cs" />
     <Compile Include="Strategy\StrategyManager.cs" />
     <Compile Include="Strategy\PropertyStrategy.cs" />
