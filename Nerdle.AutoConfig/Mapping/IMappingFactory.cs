@@ -6,6 +6,6 @@ namespace Nerdle.AutoConfig.Mapping
 {
     interface IMappingFactory
     {
-        TypeMapping CreateMapping(Type type, XElement element, IMappingStrategy mappingStrategy);
+        ITypeMapping CreateMapping(Type type, XElement element, IMappingStrategy mappingStrategy);
     }
 }

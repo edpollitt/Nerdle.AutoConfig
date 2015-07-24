@@ -6,16 +6,16 @@ namespace Nerdle.AutoConfig
 {
     public class Section : ConfigurationSection
     {
-        XElement _xElement;
+        protected XElement XElement;
 
         protected override void DeserializeSection(XmlReader reader)
         {
-            _xElement = XElement.Load(reader);
+            XElement = XElement.Load(reader);
         }
 
         public static implicit operator XElement(Section section)
         {
-            return section._xElement;
+            return section.XElement;
         }
     }
 

@@ -47,10 +47,9 @@ namespace Nerdle.AutoConfig
             return instance;
         }
 
-        public void WhenMapping<T>(Action<IConfigureMappingStrategy<T>> configureMapping)
+        public void WhenMapping<T>(Action<IConfigureMappingStrategy<T>> configureMappingStrategy)
         {
-            //_strategyManager.
-            throw new NotImplementedException();
+            _strategyManager.UpdateStrategy(configureMappingStrategy);
         }
     }
 }

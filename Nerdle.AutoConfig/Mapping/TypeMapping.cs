@@ -2,7 +2,7 @@
 
 namespace Nerdle.AutoConfig.Mapping
 {
-    class TypeMapping
+    class TypeMapping : ITypeMapping
     {
         readonly List<IPropertyMapping> _propertyMappings = new List<IPropertyMapping>();
 

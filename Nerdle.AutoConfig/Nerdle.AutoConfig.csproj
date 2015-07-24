@@ -44,6 +44,7 @@
     <Compile Include="AutoConfig.cs" />
     <Compile Include="Casing\CamelCaseConverter.cs" />
     <Compile Include="Casing\MatchingCaseConverter.cs" />
+    <Compile Include="Mapping\ITypeMapping.cs" />
     <Compile Include="Mapping\MappingFactory.cs" />
     <Compile Include="Mapping\MappingFromFixedValue.cs" />
     <Compile Include="Strategy\ConfigurePropertyStrategy.cs" />

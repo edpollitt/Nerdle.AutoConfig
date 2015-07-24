@@ -12,7 +12,7 @@ namespace Nerdle.AutoConfig.Mapping
 {
     class  MappingFactory : IMappingFactory
     {
-        public TypeMapping CreateMapping(Type type, XElement sectionElement, IMappingStrategy mappingStrategy)
+        public ITypeMapping CreateMapping(Type type, XElement sectionElement, IMappingStrategy mappingStrategy)
         {
             var typeMapping = new TypeMapping();
 
@@ -55,7 +55,7 @@ namespace Nerdle.AutoConfig.Mapping
             return typeMapping;
         }
 
-        static bool TryAddPropertyFromElement(TypeMapping typeMapping, ICollection<XElement> elementList, PropertyInfo property, IPropertyStrategy propertyStrategy, string name)
+        static bool TryAddPropertyFromElement(ITypeMapping typeMapping, ICollection<XElement> elementList, PropertyInfo property, IPropertyStrategy propertyStrategy, string name)
         {
             var element = TakeElement(elementList, name);
             
@@ -68,7 +68,7 @@ namespace Nerdle.AutoConfig.Mapping
             return true;
         }
 
-        static bool TryAddPropertyFromAttribute(Type type, TypeMapping typeMapping, ICollection<XAttribute> attributeList, PropertyInfo property, IPropertyStrategy propertyStrategy, string name)
+        static bool TryAddPropertyFromAttribute(Type type, ITypeMapping typeMapping, ICollection<XAttribute> attributeList, PropertyInfo property, IPropertyStrategy propertyStrategy, string name)
         {
             var attribute = TakeAttribute(attributeList, name);
             

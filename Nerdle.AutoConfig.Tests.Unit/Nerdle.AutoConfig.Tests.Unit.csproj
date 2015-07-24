@@ -58,11 +58,12 @@
     <Compile Include="Extensions\When_deriving_a_concrete_name.cs" />
     <Compile Include="Extensions\When_getting_public_setters_for_a_type.cs" />
     <Compile Include="Mappers\KeyValuePairMapperTests\When_mapping_a_key_value_pair.cs" />
+    <Compile Include="MappingEngineTests\When_mapping_a_type.cs" />
     <Compile Include="Mapping\MappingFromElementTests\When_mapping_a_property.cs" />
     <Compile Include="Mapping\MappingFromFixedValueTests\When_mapping_a_property.cs" />
     <Compile Include="Strategy\ConfigureMappingStrategyTests\When_configuring_a_mapping_strategy.cs" />
-    <Compile Include="Strategy\MappingStrategyProviderTests\When_retrieving_a_strategy.cs" />
-    <Compile Include="Strategy\MappingStrategyProviderTests\When_creating_a_strategy.cs" />
+    <Compile Include="Strategy\StrategyManagerTests\When_retrieving_a_strategy.cs" />
+    <Compile Include="Strategy\StrategyManagerTests\When_creating_a_strategy.cs" />
     <Compile Include="Strategy\ConfigurePropertyStrategyTests\When_configuring_a_property_strategy.cs" />
     <Compile Include="TypeGeneration\TypeEmitterTests\When_generating_an_implementation_of_an_interface.cs" />
     <Compile Include="Mappers\DictionaryMapperTests\When_mapping_a_dictionary.cs" />
