@@ -22,7 +22,8 @@ Add a configuration section in app.config / web.config
 <configuration>
 
   <configSections>
-    <section name="myServiceConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="myServiceConfiguration" 
+             type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
 
   <myServiceConfiguration>
