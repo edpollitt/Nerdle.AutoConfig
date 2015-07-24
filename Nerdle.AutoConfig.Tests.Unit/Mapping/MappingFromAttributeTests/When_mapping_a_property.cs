@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Xml.Linq;
 using FluentAssertions;
 using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.Mappers;
 using Nerdle.AutoConfig.Mapping;
 using NUnit.Framework;
 

@@ -43,7 +43,7 @@ namespace Nerdle.AutoConfig.Extensions
                 .Where(p => p.CanWrite && p.GetSetMethod(true).IsPublic);
         }
 
-        public static string SectionName(this Type type)
+        public static string ConcreteName(this Type type)
         {
             var sectionName = type.Name;
 

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Xml.Linq;
-using FluentAssertions;
-using Nerdle.AutoConfig.Mappers;
+﻿using System.Collections.Generic;
+using Moq;
 using Nerdle.AutoConfig.Mapping;
 using NUnit.Framework;
-using Moq;
 
 namespace Nerdle.AutoConfig.Tests.Unit.Mapping.TypeMappingTests
 {

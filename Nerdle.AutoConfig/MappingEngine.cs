@@ -25,7 +25,7 @@ namespace Nerdle.AutoConfig
 
         public T Map<T>(string sectionName = null)
         {
-            sectionName = sectionName ?? _strategyManager.GetStrategyFor<T>().ConvertCase(typeof(T).SectionName());
+            sectionName = sectionName ?? _strategyManager.GetStrategyFor<T>().ConvertCase(typeof(T).ConcreteName());
             
             var section = _sectionProvider.GetSection(sectionName);
 
