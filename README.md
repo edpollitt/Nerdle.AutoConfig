@@ -17,7 +17,7 @@ public interface IMyServiceConfiguration
 }
 ```
 
-Add a custom configuration section in app.config / web.config (the section and element names should match your configuration object in camelCase)
+Add a custom configuration section in app.config / web.config
 ```xml
 <configuration>
 
@@ -34,10 +34,10 @@ Add a custom configuration section in app.config / web.config (the section and e
 </configuration>
 ```
 
-Ask AutoConfig to map your configuration
+Call AutoConfig
 
 ```csharp
-var config = AutoConfig.Map<IMyServiceConguration>();
+var serviceConfig = AutoConfig.Map<IMyServiceConguration>();
 ```
 
 You're done!
