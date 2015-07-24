@@ -17,7 +17,7 @@ public interface IMyServiceConfiguration
 }
 ```
 
-Add a custom configuration section in app.config / web.config
+Add a configuration section in app.config / web.config
 ```xml
 <configuration>
 
