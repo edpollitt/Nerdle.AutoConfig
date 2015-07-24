@@ -70,7 +70,7 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///
         ///  &lt;CustomConfiguration&gt;
         ///    &lt;foofoo&gt;fooooo&lt;/foofoo&gt;
-        ///    &lt;Quux&gt;quux&lt;/Quux&gt;
+        ///    &lt;Qux&gt;qux&lt;/Qux&gt;
         ///  &lt;/CustomConfiguration&gt;
         ///
         ///&lt;/configuration&gt;.
