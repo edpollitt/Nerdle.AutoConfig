@@ -6,6 +6,6 @@ namespace Nerdle.AutoConfig.Strategy
     {
         string ConvertCase(string s);
 
-        PropertyStrategy ForProperty(PropertyInfo property);
+        IPropertyStrategy ForProperty(PropertyInfo property);
     }
 }

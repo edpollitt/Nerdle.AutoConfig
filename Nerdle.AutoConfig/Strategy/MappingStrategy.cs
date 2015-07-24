@@ -23,7 +23,7 @@ namespace Nerdle.AutoConfig.Strategy
             return CaseConverter.Convert(s);
         }
 
-        public PropertyStrategy ForProperty(PropertyInfo property)
+        public IPropertyStrategy ForProperty(PropertyInfo property)
         {
             PropertyStrategy strategy;
             return PropertyStrategies.TryGetValue(KeyFor(property), out strategy)

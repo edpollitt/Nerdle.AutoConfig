@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Reflection;
 using System.Xml.Linq;
 using FluentAssertions;
-using Nerdle.AutoConfig.Exceptions;
-using NUnit.Framework;
-using Nerdle.AutoConfig.Mapping;
 using Moq;
+using Nerdle.AutoConfig.Exceptions;
+using Nerdle.AutoConfig.Mappers;
+using Nerdle.AutoConfig.Mapping;
 using Nerdle.AutoConfig.Strategy;
-using System.Reflection;
+using NUnit.Framework;
 
 namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
 {
@@ -15,47 +16,80 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
     {
         readonly MappingFactory _mappingFactory = new MappingFactory();
         Mock<IMappingStrategy> _strategy;
+        Foo _foo;
 
         [SetUp]
         public void BeforeEach()
         {
             _strategy = new Mock<IMappingStrategy>();
-            //_strategy.Setup(s => s.NameFor(It.IsAny<PropertyInfo>()))
-            //    .Returns<PropertyInfo>(pi => pi.Name.ToLowerInvariant());
+            _strategy.Setup(s => s.ConvertCase(It.IsAny<string>())).Returns<string>(s => s.ToLowerInvariant());
+            _strategy.Setup(s => s.ForProperty(It.IsAny<PropertyInfo>())).Returns(MappingStrategy.DefaultPropertyStrategy);
+            _foo = new Foo();
         }
 
         [Test]
-        public void A_mapping_is_created_if_settable_properties_exactly_match_xml()
+        public void A_mapping_is_created_if_properties_match_elements_and_attributes()
         {
-            var xElement = XElement.Parse("<foo><bar>1</bar><baz>1</baz></foo>");
+            var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
             var mapping = _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
+            
             mapping.Should().NotBeNull();
+        }
+
+        [Test]
+        public void Only_settable_public_properties_are_matched()
+        {
+            var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
+            var mapping = _mappingFactory.CreateMapping(typeof(FooWithSomeNonPublicStuff), xElement, _strategy.Object);
+            
+            mapping.Should().NotBeNull();
+        }
+
+        [Test]
+        public void The_mapping_includes_all_the_properties()
+        {
+            var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
+            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+
+            _foo.Bar.Should().Be(1);
+            _foo.Baz.Should().Be(2);
         }
 
         [Test]
         public void An_exception_is_thrown_if_a_property_is_not_matched()
         {
-            var xElement = XElement.Parse("<foo><bar>1</bar></foo>");
+            var xElement = XElement.Parse("<foo><bar>1</bar><qux>2</qux></foo>");
             Action creatingTheMapping = () => _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
             creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
-                .WithMessage(string.Format("Could not map property 'Baz' for type '{0}' from section 'foo'. No matching config element or attribute was found.", typeof(Foo)));
+                .Where(e => e.Message.Contains("Could not map property 'Baz'"));
+        }
+
+         [Test]
+        public void Matching_is_case_sensitive()
+        {
+            var xElement = XElement.Parse("<foo><bar>1</bar><BAZ>2</BAZ></foo>");
+            Action creatingTheMapping = () => _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
+            creatingTheMapping.ShouldThrowExactly<AutoConfigMappingException>()
+                .Where(e => e.Message.Contains("Could not map property 'Baz'"));
         }
 
         [Test]
         public void Properties_can_be_matched_from_either_attributes_or_elements()
         {
-            var xElement = XElement.Parse("<foo bar=\"1\"><baz>1</baz></foo>");
-            var mapping = _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
-            mapping.Should().NotBeNull();
+            var xElement = XElement.Parse("<foo bar=\"1\"><baz>2</baz></foo>");
+            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+
+            _foo.Bar.Should().Be(1);
+            _foo.Baz.Should().Be(2);
         }
 
         [Test]
         public void An_exception_is_thrown_if_an_element_is_not_matched()
         {
-            var xElement = XElement.Parse("<foo><bar>1</bar><baz>1</baz><qux>1</qux></foo>");
+            var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz><qux>1</qux></foo>");
             Action creatingTheMapping = () => _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
             creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
-                .WithMessage(string.Format("Could not map type '{0}' from section 'foo'. No matching settable property for config element 'qux' was found.", typeof(Foo)));
+                .Where(e => e.Message.Contains("No matching settable property for config element 'qux' was found."));
         }
 
         [Test]
@@ -64,18 +98,82 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
             var xElement = XElement.Parse("<foo bar=\"1\" baz=\"1\" qux=\"1\" />");
             Action creatingTheMapping = () => _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
             creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
-                .WithMessage(string.Format("Could not map type '{0}' from section 'foo'. No matching settable property for config attribute 'qux' was found.", typeof(Foo)));
+                .Where(e => e.Message.Contains("No matching settable property for config attribute 'qux' was found."));
         }
 
         [Test]
-        public void Names_are_provided_by_the_strategy()
+        public void The_casing_convention_is_provided_by_the_strategy()
         {
-            //var xElement = XElement.Parse("<foo DOG=\"1\"><CAT>1</CAT></foo>");
-            //_strategy.Setup(s => s.NameFor(It.Is<PropertyInfo>(p => p.Name == "Bar"))).Returns("DOG");
-            //_strategy.Setup(s => s.NameFor(It.Is<PropertyInfo>(p => p.Name == "Baz"))).Returns("CAT");
-            //var mapping = _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
-            //mapping.Should().NotBeNull();
-            Assert.Fail();
+            var xElement = XElement.Parse("<foo><BAR>1</BAR><BAZ>2</BAZ></foo>");
+            _strategy.Setup(s => s.ConvertCase(It.IsAny<string>())).Returns<string>(s => s.ToUpperInvariant());
+
+            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+
+            _foo.Bar.Should().Be(1);
+            _foo.Baz.Should().Be(2);
+        }
+
+        [Test]
+        public void A_property_name_can_be_overridden_by_the_strategy()
+        {
+            var propertyStrategy = new Mock<IPropertyStrategy>();
+            propertyStrategy.Setup(s => s.MapFrom).Returns("bazbazbaz");
+            _strategy.Setup(s => s.ForProperty(It.Is<PropertyInfo>(pi => pi.Name == "Baz"))).Returns(propertyStrategy.Object);
+
+            var xElement = XElement.Parse("<foo><bar>1</bar><bazbazbaz>2</bazbazbaz></foo>");
+
+            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+            
+            _foo.Bar.Should().Be(1);
+            _foo.Baz.Should().Be(2);
+        }
+
+        [Test]
+        public void A_property_can_be_set_as_optional_by_the_strategy()
+        {
+            var propertyStrategy = new Mock<IPropertyStrategy>();
+            propertyStrategy.Setup(s => s.IsOptional).Returns(true);
+            _strategy.Setup(s => s.ForProperty(It.Is<PropertyInfo>(pi => pi.Name == "Baz"))).Returns(propertyStrategy.Object);
+
+            var xElement = XElement.Parse("<foo><bar>1</bar></foo>");
+
+            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+
+            _foo.Bar.Should().Be(1);
+            _foo.Baz.Should().Be(0);
+        }
+
+        [Test]
+        public void A_property_can_be_assigned_a_default_value_by_the_strategy()
+        {
+            var propertyStrategy = new Mock<IPropertyStrategy>();
+            propertyStrategy.Setup(s => s.IsOptional).Returns(true);
+            propertyStrategy.Setup(s => s.DefaultValue).Returns(42);
+            _strategy.Setup(s => s.ForProperty(It.Is<PropertyInfo>(pi => pi.Name == "Baz"))).Returns(propertyStrategy.Object);
+
+            var xElement = XElement.Parse("<foo><bar>1</bar></foo>");
+
+            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+
+            _foo.Bar.Should().Be(1);
+            _foo.Baz.Should().Be(42);
+        }
+
+        [Test]
+        public void A_custom_mapper_can_be_specified_by_the_strategy()
+        {
+            var propertyStrategy = new Mock<IPropertyStrategy>();
+            var mapper = new Mock<IMapper>();
+            propertyStrategy.Setup(s => s.Mapper).Returns(mapper.Object);
+            mapper.Setup(m => m.Map(It.IsAny<XElement>(), It.IsAny<Type>())).Returns(123);
+            _strategy.Setup(s => s.ForProperty(It.Is<PropertyInfo>(pi => pi.Name == "Baz"))).Returns(propertyStrategy.Object);
+
+            var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
+
+            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+
+            _foo.Bar.Should().Be(1);
+            _foo.Baz.Should().Be(123);
         }
     }
 
@@ -83,8 +181,14 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
     {
         public int Bar { get; set; }
         public int Baz { get; set; }
-        
-        // should be ignored
-        public int NoPublicSetter { get; private set; }
+    }
+
+    class FooWithSomeNonPublicStuff : Foo
+    {
+        // should all be ignored
+        public int NoPublicSetter { get; protected set; }
+        public void AMethod() {}
+        internal int Internal { get; set; }
+        string Private { get; set; }
     }
 }

@@ -55,8 +55,7 @@ namespace Nerdle.AutoConfig.Mapping
             return typeMapping;
         }
 
-
-        static bool TryAddPropertyFromElement(TypeMapping typeMapping, ICollection<XElement> elementList, PropertyInfo property, PropertyStrategy propertyStrategy, string name)
+        static bool TryAddPropertyFromElement(TypeMapping typeMapping, ICollection<XElement> elementList, PropertyInfo property, IPropertyStrategy propertyStrategy, string name)
         {
             var element = TakeElement(elementList, name);
             
@@ -69,7 +68,7 @@ namespace Nerdle.AutoConfig.Mapping
             return true;
         }
 
-        static bool TryAddPropertyFromAttribute(Type type, TypeMapping typeMapping, ICollection<XAttribute> attributeList, PropertyInfo property, PropertyStrategy propertyStrategy, string name)
+        static bool TryAddPropertyFromAttribute(Type type, TypeMapping typeMapping, ICollection<XAttribute> attributeList, PropertyInfo property, IPropertyStrategy propertyStrategy, string name)
         {
             var attribute = TakeAttribute(attributeList, name);
             

@@ -2,7 +2,15 @@ using Nerdle.AutoConfig.Mappers;
 
 namespace Nerdle.AutoConfig.Strategy
 {
-    class PropertyStrategy
+    interface IPropertyStrategy
+    {
+        string MapFrom { get; }
+        bool IsOptional { get; }
+        object DefaultValue { get; }
+        IMapper Mapper { get; }
+    }
+
+    class PropertyStrategy : IPropertyStrategy
     {
         public string MapFrom { get; protected set; }
         public bool IsOptional { get; protected set; }
