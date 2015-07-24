@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfiguringTheMappingStrategy.cs" />
     <Compile Include="MappingCollections.cs" />
     <Compile Include="EndToEndTest.cs" />
     <Compile Include="ConfigExamples.Designer.cs">
@@ -86,6 +87,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="MappingCollections.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ConfiguringTheMappingStrategy.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SpecifyingTheSectionName.xml">

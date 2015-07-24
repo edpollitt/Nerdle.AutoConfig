@@ -65,6 +65,27 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
+        ///    &lt;section name=&quot;CustomConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///  &lt;/configSections&gt;
+        ///
+        ///  &lt;CustomConfiguration&gt;
+        ///    &lt;foofoo&gt;fooooo&lt;/foofoo&gt;
+        ///    &lt;Quux&gt;quux&lt;/Quux&gt;
+        ///  &lt;/CustomConfiguration&gt;
+        ///
+        ///&lt;/configuration&gt;.
+        /// </summary>
+        internal static string ConfiguringTheMappingStrategy {
+            get {
+                return ResourceManager.GetString("ConfiguringTheMappingStrategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;configuration&gt;
+        ///
+        ///  &lt;configSections&gt;
         ///    &lt;section name=&quot;collectionsConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///    &lt;section name=&quot;nestedCollectionsConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///    &lt;section name=&quot;arrayConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
