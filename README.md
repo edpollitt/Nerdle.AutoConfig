@@ -6,7 +6,7 @@
 
 ##Quickstart
 
-Define an interface for your configuration settings (no concrete class required!)
+Define an interface for your configuration settings (no concrete class is required)
 
 ```csharp
 public interface IMyServiceConfiguration
@@ -38,7 +38,7 @@ Add a configuration section in app.config / web.config
 Call AutoConfig
 
 ```csharp
-var serviceConfig = AutoConfig.Map<IMyServiceConguration>();
+var config = AutoConfig.Map<IMyServiceConguration>();
 ```
 
 You're done!
