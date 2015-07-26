@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+  <configSections>
+    <section name="customMapperExample" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+  </configSections>
+
+  <customMapperExample>
+    <foo>1,2,3,4,5</foo>
+    <bar>one,two,three</bar>
+    <baz>monday,tuesday</baz>
+  </customMapperExample>
+
+</configuration>

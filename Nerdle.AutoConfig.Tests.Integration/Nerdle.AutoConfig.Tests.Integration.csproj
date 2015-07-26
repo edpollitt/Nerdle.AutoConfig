@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UsingCustomMappers.cs" />
     <Compile Include="ConfiguringTheMappingStrategy.cs" />
     <Compile Include="MappingCollections.cs" />
     <Compile Include="EndToEndTest.cs" />
@@ -77,6 +78,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="UsingCustomMappers.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="MappingDictionaries.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

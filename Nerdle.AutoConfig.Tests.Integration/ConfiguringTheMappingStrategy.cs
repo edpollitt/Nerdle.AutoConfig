@@ -87,5 +87,4 @@ namespace Nerdle.AutoConfig.Tests.Integration
             return "From custom mapper";
         }
     }
-
 }
