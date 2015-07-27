@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -24,6 +25,8 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Should().NotBeNull();
             config.Endpoints.Should().HaveCount(2);
             config.Endpoints["Primary"].Should().HaveCount(2);
+            config.Endpoints["Primary"].First().Name.Should().Be("Foo");
+            config.Endpoints["Primary"].First().Port.Should().Be(1);
             config.Endpoints["Secondary"].Should().HaveCount(1);
         }
     }
