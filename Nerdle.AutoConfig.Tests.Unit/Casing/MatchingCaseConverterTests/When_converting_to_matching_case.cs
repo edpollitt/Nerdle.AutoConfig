@@ -2,7 +2,7 @@
 using Nerdle.AutoConfig.Casing;
 using NUnit.Framework;
 
-namespace Nerdle.AutoConfig.Tests.Unit.Casing.MatchingCaseTests
+namespace Nerdle.AutoConfig.Tests.Unit.Casing.MatchingCaseConverterTests
 {
     [TestFixture]
     class When_converting_to_matching_case

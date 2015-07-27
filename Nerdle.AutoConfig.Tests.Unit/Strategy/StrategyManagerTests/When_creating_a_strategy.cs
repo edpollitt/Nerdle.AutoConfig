@@ -4,7 +4,7 @@ using FluentAssertions;
 using Nerdle.AutoConfig.Strategy;
 using NUnit.Framework;
 
-namespace Nerdle.AutoConfig.Tests.Unit.Strategy.MappingStrategyProviderTests
+namespace Nerdle.AutoConfig.Tests.Unit.Strategy.StrategyManagerTests
 {
     [TestFixture]
     class When_creating_a_strategy

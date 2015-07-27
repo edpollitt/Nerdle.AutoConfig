@@ -28,13 +28,12 @@ namespace Nerdle.AutoConfig.Strategy
         {
             MemberExpression me = null;
 
-            // TODO this won't be needed unless we are boxing
-            /*if (propertyExpression.Body is UnaryExpression)
+            if (propertyExpression.Body is UnaryExpression) // required if boxing
             {
                 me = ((UnaryExpression)propertyExpression.Body).Operand as MemberExpression;
             }
 
-            else*/ if (propertyExpression.Body is MemberExpression)
+            else if (propertyExpression.Body is MemberExpression)
             {
                 me = (MemberExpression)propertyExpression.Body;
             }
