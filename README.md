@@ -6,6 +6,11 @@
 
 ##Quickstart
 
+Install via NuGet
+```csharp
+Install-Package Nerdle.AutoConfig
+```
+
 Define an interface for your configuration settings (no concrete class is required)
 
 ```csharp
