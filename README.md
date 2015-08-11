@@ -51,3 +51,7 @@ You're done!
 :+1:
 
 ####Check [the wiki](https://github.com/edpollitt/Nerdle.AutoConfig/wiki) for fun times
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/edpollitt/nerdle.autoconfig/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
