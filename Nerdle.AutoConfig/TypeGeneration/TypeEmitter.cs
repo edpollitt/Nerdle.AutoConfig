@@ -42,7 +42,7 @@ namespace Nerdle.AutoConfig.TypeGeneration
         {
             if (!type.IsVisible)
                 throw new AutoConfigTypeGenerationException(
-                    string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible.", type));
+                    string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible. Your interface access modifier should be set to 'public'.", type));
 
             if (type.GetMethods().Any(method => !method.IsSpecialName)
                 || type.GetInterfaces().SelectMany(i => i.GetMethods()).Any(method => !method.IsSpecialName))
