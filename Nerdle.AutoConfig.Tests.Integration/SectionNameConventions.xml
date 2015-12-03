@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+  <configSections>
+    <section name="foo" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="bar" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+  </configSections>
+
+  <foo>
+    <name>fooConfiguration</name>
+  </foo>
+
+  <bar>
+    <name>barConfig</name>
+  </bar>
+
+</configuration>

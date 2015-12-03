@@ -1,6 +1,8 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using Nerdle.AutoConfig.Casing;
 using System.Reflection;
+using Nerdle.AutoConfig.Extensions;
 
 namespace Nerdle.AutoConfig.Strategy
 {
@@ -21,6 +23,11 @@ namespace Nerdle.AutoConfig.Strategy
         public string ConvertCase(string s)
         {
             return CaseConverter.Convert(s);
+        }
+
+        public string SectionNameFor<T>()
+        {
+            return ConvertCase(typeof(T).ConcreteName());
         }
 
         public IPropertyStrategy ForProperty(PropertyInfo property)

@@ -18,17 +18,4 @@ namespace Nerdle.AutoConfig
             return section.XElement;
         }
     }
-
-    interface ISectionProvider
-    {
-        Section GetSection(string sectionName);
-    }
-
-    class SectionProvider : ISectionProvider
-    {
-        public Section GetSection(string sectionName)
-        {
-            return ConfigurationManager.GetSection(sectionName) as Section;
-        }
-    }
 }

@@ -48,59 +48,20 @@ namespace Nerdle.AutoConfig.Tests.Unit.Strategy.ConfigureMappingStrategyTests
             _strategy.ForProperty(bar).Should().Be(MappingStrategy.DefaultPropertyStrategy);
         }
 
-
-        //[Test]
-        //public void From_name_can_be_configured_for_a_property()
-        //{
-        //    var strategy = new ConfigureMappingStrategy<IFoo>();
-        //    strategy.Map(foo => foo.Bar).From("barbarbar");
-
-        //    var bar = typeof(IFoo).GetProperty("Bar");
-        //    strategy.ForProperty(bar).Should().NotBeNull();
-        //    //strategy.NameFor(bar).Should().Be("barbarbar");
-        //    Assert.Fail();
-        //}
-
-        //public void Properties_can_be_optional()
-        //{
-        //    AutoConfig.WhenMapping<IList>(mapping => { mapping.Map(list => list.Count).Optional(); });
-        //    var config = MappingConfigs.GetStrategyFor<IList>();
-        //    config.PropertyConfigs.Should().HaveCount(1);
-        //    config.PropertyConfigs["Count"].IsOptional.Should().BeTrue();
-        //}
-
-        //public void Properties_can_have_default_values()
-        //{
-        //    AutoConfig.WhenMapping<IList>(mapping => { mapping.Map(list => list.Count).OptionalWithDefault(42); });
-        //    var config = MappingConfigs.GetStrategyFor<IList>();
-        //    config.PropertyConfigs.Should().HaveCount(1);
-        //    config.PropertyConfigs["Count"].DefaultValue.Should().Be(42);
-        //}
-
-        //public void Properties_can_use_a_custom_mapper()
-        //{
-        //    AutoConfig.WhenMapping<IList>(mapping => { mapping.Map(list => list.Count).Using<CustomerMapper>(); });
-        //    var config = MappingConfigs.GetStrategyFor<IList>();
-        //    config.PropertyConfigs.Should().HaveCount(1);
-        //    config.PropertyConfigs["Count"].Mapper.Should().NotBeNull();
-        //    config.PropertyConfigs["Count"].Mapper.Should().BeOfType<CustomerMapper>();
-        //}
-
-        //[Test]
-        //public void Mappings_on_individual_properties_are_additive()
-        //{
-        //    AutoConfig.WhenMapping<ICollection>(mapping => { mapping.Map(c => c.Count).From("itemCount"); });
-        //    AutoConfig.WhenMapping<ICollection>(mapping => { mapping.Map(c => c.Count).OptionalWithDefault(1); });
-        //    AutoConfig.WhenMapping<ICollection>(mapping => { mapping.Map(c => c.Count).From("foo"); });
-        //    AutoConfig.WhenMapping<ICollection>(mapping => { mapping.Map(c => c.Count).From("bar"); });
-
-        //    var config = MappingConfigs.GetStrategyFor<ICollection>();
-        //    config.Should().NotBeNull();
-        //    config.PropertyConfigs.Should().HaveCount(1);
-        //    config.PropertyConfigs["Count"].MapFrom.Should().Be("bar");
-        //    config.PropertyConfigs["Count"].IsOptional.Should().BeTrue();
-        //    config.PropertyConfigs["Count"].DefaultValue.Should().Be(1);
-        //}
+        [Test]
+        public void Strategy_configuration_is_additive()
+        {
+            _strategy.Map(foo => foo.Bar).From("foo").OptionalWithDefault("one");
+            _strategy.Map(foo => foo.Bar).From("bar");
+            _strategy.Map(foo => foo.Bar).OptionalWithDefault("two");
+            _strategy.Map(foo => foo.Bar).From("baz").Optional();
+            
+            var bar = typeof(IFoo).GetProperty("Bar");
+            _strategy.ForProperty(bar).Should().NotBeNull();
+            _strategy.ForProperty(bar).MapFrom.Should().Be("baz");
+            _strategy.ForProperty(bar).DefaultValue.Should().Be("two");
+            _strategy.ForProperty(bar).IsOptional.Should().BeTrue();
+        }
     }
 
     interface IFoo

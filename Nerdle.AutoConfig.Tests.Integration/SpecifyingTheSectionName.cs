@@ -32,4 +32,14 @@ namespace Nerdle.AutoConfig.Tests.Integration
     {
         string Name { get; }
     }
+
+    public interface IFooConfiguration
+    {
+        string Name { get; }
+    }
+
+    public interface IBarConfig
+    {
+        string Name { get; }
+    }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
-using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.Extensions;
 using Nerdle.AutoConfig.Mapping;
+using Nerdle.AutoConfig.Sections;
 using Nerdle.AutoConfig.Strategy;
 using Nerdle.AutoConfig.TypeGeneration;
 
@@ -25,23 +24,18 @@ namespace Nerdle.AutoConfig
 
         public T Map<T>(string sectionName = null)
         {
-            sectionName = sectionName ?? _strategyManager.GetStrategyFor<T>().ConvertCase(typeof(T).ConcreteName());
-            
-            var section = _sectionProvider.GetSection(sectionName);
-
-            if (section == null)
-                throw new AutoConfigMappingException(
-                    string.Format("Could not load section '{0}'. Make sure the section exists and is correctly cased.", sectionName));
-
-            return (T)Map(typeof(T), section);
+            var strategy = _strategyManager.GetStrategyFor<T>();
+            var section = string.IsNullOrWhiteSpace(sectionName) 
+                ? _sectionProvider.GetSection<T>(strategy) : _sectionProvider.GetSection<T>(sectionName);
+            return (T)Map(typeof(T), section, strategy);
         }
 
-        public object Map(Type type, XElement element)
+        public object Map(Type type, XElement element, IMappingStrategy strategy = null)
         {
-            var strategy = _strategyManager.GetStrategyFor(type);
             var instance = _typeFactory.InstanceOf(type);
             // since the type param might be an interface, we need the actual type
             var concreteType = instance.GetType();
+            strategy = strategy ?? _strategyManager.GetStrategyFor(type); 
             var mapping = _mappingFactory.CreateMapping(concreteType, element, strategy);
             mapping.Apply(instance);
             return instance;

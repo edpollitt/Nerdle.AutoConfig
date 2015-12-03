@@ -41,24 +41,24 @@ namespace Nerdle.AutoConfig.Tests.Unit.Strategy.ConfigurePropertyStrategyTests
         }
 
         [Test]
-        public void A_customer_mapper_type_can_be_specified()
+        public void A_custom_mapper_type_can_be_specified()
         {
-            _strategy.Using<CustomerMapper>();
+            _strategy.Using<CustomMapper>();
             _strategy.Mapper.Should().NotBeNull();
-            _strategy.Mapper.Should().BeOfType<CustomerMapper>();
+            _strategy.Mapper.Should().BeOfType<CustomMapper>();
         }
 
         [Test]
-        public void A_customer_mapper_instance_can_be_supplied()
+        public void A_custom_mapper_instance_can_be_supplied()
         {
-            var customerMapper = new CustomerMapper();
+            var customerMapper = new CustomMapper();
             _strategy.Using(customerMapper);
             _strategy.Mapper.Should().NotBeNull();
             _strategy.Mapper.Should().Be(customerMapper);
         }
     }
 
-    class CustomerMapper : IMapper
+    class CustomMapper : IMapper
     {
         public object Map(XElement element, Type type)
         {

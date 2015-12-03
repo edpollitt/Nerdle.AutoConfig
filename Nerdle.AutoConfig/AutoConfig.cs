@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using Nerdle.AutoConfig.Mapping;
+using Nerdle.AutoConfig.Sections;
 using Nerdle.AutoConfig.Strategy;
 using Nerdle.AutoConfig.TypeGeneration;
 
@@ -13,7 +14,7 @@ namespace Nerdle.AutoConfig
         static AutoConfig()
         {
             Engine = new MappingEngine(
-                new SectionProvider(), 
+                new SectionProvider(new DefaultSectionNameConvention(), new ConfigurationSystem()), 
                 new TypeFactory(new TypeEmitter()), 
                 new MappingFactory(), 
                 new StrategyManager());

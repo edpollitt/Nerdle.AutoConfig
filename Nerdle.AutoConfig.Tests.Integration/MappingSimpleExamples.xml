@@ -12,6 +12,7 @@
     <myEmptyNullable></myEmptyNullable>
     <myBool>true</myBool>
     <myDate>21 July 1969</myDate>
+    <myTimeSpan>00:05:00</myTimeSpan>
   </simpleConfiguration>
 
 </configuration>
