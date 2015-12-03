@@ -25,18 +25,15 @@ public interface IMyServiceConfiguration
 Add a configuration section in app.config / web.config
 ```xml
 <configuration>
-
   <configSections>
     <section name="myServiceConfiguration" 
              type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
-
   <myServiceConfiguration>
     <endpoint>http://localhost</endpoint>
     <port>42</port>
     <enableCache>true</enableCache>
   </myServiceConfiguration>
-
 </configuration>
 ```
 
