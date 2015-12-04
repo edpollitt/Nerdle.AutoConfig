@@ -26,8 +26,7 @@ Add a configuration section in app.config / web.config
 ```xml
 <configuration>
   <configSections>
-    <section name="myServiceConfiguration" 
-             type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="myServiceConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
   <myServiceConfiguration>
     <endpoint>http://localhost</endpoint>
