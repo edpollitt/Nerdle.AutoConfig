@@ -37,6 +37,37 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         }
 
         [Test]
+        public void A_mapping_is_created_for_nullable_properties_when_no_element_is_present()
+        {
+            var xElement = XElement.Parse("<foo></foo>");
+            _strategy.Setup(s => s.ForProperty(It.IsAny<PropertyInfo>())).Returns(MappingStrategy.DefaultNullablePropertyStrategy);
+            var mapping = _mappingFactory.CreateMapping(typeof(FooWithNullableInt), xElement, _strategy.Object);
+
+            mapping.Should().NotBeNull();
+        }
+
+        [Test]
+        public void A_mapping_is_created_for_nullable_properties_when_element_is_present()
+        {
+            var xElement = XElement.Parse("<foo><bar>1</bar></foo>");
+            _strategy.Setup(s => s.ForProperty(It.IsAny<PropertyInfo>())).Returns(MappingStrategy.DefaultNullablePropertyStrategy);
+            var mapping = _mappingFactory.CreateMapping(typeof(FooWithNullableInt), xElement, _strategy.Object);
+
+            mapping.Should().NotBeNull();
+        }
+
+        [Test]
+        public void A_mapping_for_nullable_properties_has_the_value_set()
+        {
+            var nullableFoo = new FooWithNullableInt();
+            var xElement = XElement.Parse("<foo><bar>1</bar></foo>");
+            _strategy.Setup(s => s.ForProperty(It.IsAny<PropertyInfo>())).Returns(MappingStrategy.DefaultNullablePropertyStrategy);
+            _mappingFactory.CreateMapping(typeof(FooWithNullableInt), xElement, _strategy.Object).Apply(nullableFoo);
+
+            nullableFoo.Bar.Should().Be(1);
+        }
+
+        [Test]
         public void Only_settable_public_properties_are_matched()
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
@@ -181,6 +212,11 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
     {
         public int Bar { get; set; }
         public int Baz { get; set; }
+    }
+
+    class FooWithNullableInt
+    {
+        public int? Bar { get; set; }
     }
 
     class FooWithSomeNonPublicStuff : Foo

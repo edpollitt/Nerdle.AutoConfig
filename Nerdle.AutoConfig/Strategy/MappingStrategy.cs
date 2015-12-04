@@ -11,6 +11,7 @@ namespace Nerdle.AutoConfig.Strategy
         protected ConcurrentDictionary<string, PropertyStrategy> PropertyStrategies { get; private set; }
 
         public static readonly PropertyStrategy DefaultPropertyStrategy = new PropertyStrategy();
+        public static readonly PropertyStrategy DefaultNullablePropertyStrategy = new NullablePropertyStrategy();
 
         public ICaseConverter CaseConverter { get; protected set; }
 
@@ -34,7 +35,10 @@ namespace Nerdle.AutoConfig.Strategy
         {
             PropertyStrategy strategy;
             return PropertyStrategies.TryGetValue(KeyFor(property), out strategy)
-                ? strategy : DefaultPropertyStrategy;
+                ? strategy
+                : Nullable.GetUnderlyingType(property.PropertyType) != null
+                    ? DefaultNullablePropertyStrategy
+                    : DefaultPropertyStrategy;
         }
 
         static string KeyFor(PropertyInfo property)

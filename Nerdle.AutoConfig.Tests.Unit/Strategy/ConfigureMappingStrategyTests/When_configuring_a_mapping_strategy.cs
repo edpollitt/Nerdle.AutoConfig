@@ -49,6 +49,14 @@ namespace Nerdle.AutoConfig.Tests.Unit.Strategy.ConfigureMappingStrategyTests
         }
 
         [Test]
+        public void A_default_nullable_Property_strategy_is_used_if_no_strategy_configured_for_the_specific_property()
+        {
+            var bar = typeof(IFooWithNullableInt).GetProperty("Bar");
+            _strategy.ForProperty(bar).Should().NotBeNull();
+            _strategy.ForProperty(bar).Should().Be(MappingStrategy.DefaultNullablePropertyStrategy);
+        }
+
+        [Test]
         public void Strategy_configuration_is_additive()
         {
             _strategy.Map(foo => foo.Bar).From("foo").OptionalWithDefault("one");
@@ -67,5 +75,10 @@ namespace Nerdle.AutoConfig.Tests.Unit.Strategy.ConfigureMappingStrategyTests
     interface IFoo
     {
         string Bar { get; }
+    }
+
+    interface IFooWithNullableInt
+    {
+        int? Bar { get; }
     }
 }
