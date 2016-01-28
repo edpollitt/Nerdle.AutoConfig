@@ -52,13 +52,9 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeEmitterTests
         {
             Action generating = () => _sut.GenerateInterfaceImplementation(typeof(IAmInternal));
 
-            var expectedMessage =
-                string.Format(
-                    "Cannot generate an implementation of interface '{0}' because it is not externally accessible. Your interface access modifier should be set to 'public'.",
-                    typeof(IAmInternal));
-
-            generating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
-                .WithMessage(expectedMessage);
+            generating.ShouldThrowExactly<AutoConfigTypeGenerationException>().Which.Message.Contains(
+                string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible.",
+                    typeof(IAmInternal)));
         }
 
         [TestFixture]
