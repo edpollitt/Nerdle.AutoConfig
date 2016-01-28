@@ -21,7 +21,7 @@ namespace Nerdle.AutoConfig.Mapping
         {
             try
             {
-                var value = TypeDescriptor.GetConverter(_property.PropertyType).ConvertFromString(_attribute.Value);
+                var value = TypeDescriptor.GetConverter(_property.PropertyType).ConvertFromInvariantString(_attribute.Value);
                 _property.SetValue(instance, value, null);
             }
             catch (Exception ex)

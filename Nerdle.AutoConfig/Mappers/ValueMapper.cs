@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Xml.Linq;
 
 namespace Nerdle.AutoConfig.Mappers
@@ -9,7 +10,7 @@ namespace Nerdle.AutoConfig.Mappers
         public virtual object Map(XElement element, Type type)
         {
             var converter = TypeDescriptor.GetConverter(type);
-            return converter.ConvertFromString(element.Value);
+            return converter.ConvertFromInvariantString(element.Value);
         }
 
         public virtual bool CanMap(Type type)
