@@ -18,7 +18,7 @@ public interface IMyServiceConfiguration
 {
     string Endpoint { get; }
     int Port { get; }
-    bool EnableCache { get; }
+    bool UseSSL { get; }
 }
 ```
 
@@ -26,13 +26,13 @@ Add a configuration section in app.config / web.config
 ```xml
 <configuration>
   <configSections>
-    <section name="myServiceConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="myService" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
-  <myServiceConfiguration>
+  <myService>
     <endpoint>http://localhost</endpoint>
     <port>42</port>
-    <enableCache>true</enableCache>
-  </myServiceConfiguration>
+    <useSSL>true</useSSL>
+  </myService>
 </configuration>
 ```
 
