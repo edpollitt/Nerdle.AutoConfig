@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using Nerdle.AutoConfig.Exceptions;
 
 namespace Nerdle.AutoConfig.TypeGeneration
@@ -9,11 +10,6 @@ namespace Nerdle.AutoConfig.TypeGeneration
     class TypeEmitter : ITypeEmitter
     {
         public const string AssemblyName = "AutoConfig.DynamicTypes";
-
-        //public Type GenerateInterfaceImplementation<TInterface>()
-        //{
-        //    return GenerateInterfaceImplementation(typeof(TInterface));
-        //}
 
         public Type GenerateInterfaceImplementation(Type interfaceType)
         {
@@ -26,7 +22,7 @@ namespace Nerdle.AutoConfig.TypeGeneration
             var baseClass = typeof(object);
 
             var typeBuilder = moduleBuilder.DefineType(
-                "AutoConfig.DynamicTypes._Implementation_Of_" + interfaceType.FullName.Replace('.', '_'),
+                "AutoConfig.DynamicTypes.Implementation_Of_" + interfaceType.FullName.Replace('.', '_'),
                 TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Class,
                 baseClass,
                 new[] { interfaceType });
@@ -40,12 +36,26 @@ namespace Nerdle.AutoConfig.TypeGeneration
 
         static void EnsureTypeSuitability(Type type)
         {
-            if (!type.IsVisible)
-                throw new AutoConfigTypeGenerationException(
-                    string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible. Your interface access modifier should be set to 'public'.", type));
+            EnsureAccessible(type);
+            EnsureMethodless(type);
+        }
 
-            if (type.GetMethods().Any(method => !method.IsSpecialName)
-                || type.GetInterfaces().SelectMany(i => i.GetMethods()).Any(method => !method.IsSpecialName))
+        static void EnsureAccessible(Type type)
+        {
+            if (type.IsVisible)
+                return;
+
+            var friendAssembly = type.Assembly.GetCustomAttributes(typeof(InternalsVisibleToAttribute), false)
+                   .Cast<InternalsVisibleToAttribute>().Any(attr => attr.AssemblyName == AssemblyName);
+
+            if (!friendAssembly)
+                throw new AutoConfigTypeGenerationException(
+                    string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible. Change your interface access modifier to 'public' or add an 'InternalsVisibleTo(\"{1}\")' assembly attribute.", type, AssemblyName));
+        }
+
+        static void EnsureMethodless(Type type)
+        {
+            if (type.GetMethods().Any(method => !method.IsSpecialName) || type.GetInterfaces().SelectMany(i => i.GetMethods()).Any(method => !method.IsSpecialName))
                 throw new AutoConfigTypeGenerationException(
                     string.Format("Cannot generate an implementation of interface '{0}' because it contains method definitions.", type));
         }
