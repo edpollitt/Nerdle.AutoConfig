@@ -2,34 +2,32 @@
 <configuration>
 
   <configSections>
-    <section name="dictionaryConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
-    <section name="complexDictionaryConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="dictionary" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="complexDictionary" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
 
-  <dictionaryConfiguration>
+  <dictionary>
     <frenchWords>
       <word key="cat" value="chat" />
       <word key="dog" value="chien" />
       <word key="monkey" value="singe" />
     </frenchWords>
-  </dictionaryConfiguration>
+  </dictionary>
 
-  <complexDictionaryConfiguration>
+  <complexDictionary>
     <endpoints>
-      <endPoint>
-        <key>Primary</key>
+      <add key="Primary">
         <value>
-          <endpointConfiguration name="Foo" port="1" />
-          <endpointConfiguration name="Bar" port="2" />
+          <endpoint name="Foo" port="1" />
+          <endpoint name="Bar" port="2" />
         </value>
-      </endPoint>
-      <endPoint>
-        <key>Secondary</key>
+      </add>
+      <add key="Secondary">
         <value>
-          <dndpointConfiguration name="Baz" port="3" />
+          <endpoint name="Baz" port="3" />
         </value>
-      </endPoint>
+      </add>
     </endpoints>
-  </complexDictionaryConfiguration>
+  </complexDictionary>
 
 </configuration>

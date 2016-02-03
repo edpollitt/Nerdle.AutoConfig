@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    class UsingCustomMappers : EndToEndTest
+    public class UsingCustomMappers : EndToEndTest
     {
         [Test]
         public void Using_a_custom_mapper()
@@ -29,45 +29,44 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Bar.Should().Equal("one", "two", "three");
             config.Baz.Should().Equal(DayOfWeek.Monday, DayOfWeek.Tuesday);
         }
-    }
 
-    public interface ICustomMapperExample
-    {
-        IEnumerable<int> Foo { get; }
-        IEnumerable<string> Bar { get; }
-        IEnumerable<DayOfWeek> Baz { get; }
-    }
-
-    class CommaSeparatedListMapper : IMapper
-    {
-        public object Map(XElement element, Type type)
+        public interface ICustomMapperExample
         {
-            var isEnumerable = type.IsGenericType &&
-                    type.GetGenericTypeDefinition() == typeof(IEnumerable<>);
+            IEnumerable<int> Foo { get; }
+            IEnumerable<string> Bar { get; }
+            IEnumerable<DayOfWeek> Baz { get; }
+        }
 
-            if (!isEnumerable)
-                throw new InvalidOperationException("Expected an IEnumerable<> but got " + type);
-
-            var enumerableType = type.GetGenericArguments().First();
-
-            var converter = TypeDescriptor.GetConverter(enumerableType);
-
-            if (converter.CanConvertFrom(typeof(string)))
+        class CommaSeparatedListMapper : IMapper
+        {
+            public object Map(XElement element, Type type)
             {
-                var values = element.Value.Split(new[] { ',' },
-                            StringSplitOptions.RemoveEmptyEntries)
-                    .Select(value => converter.ConvertFromString(value))
-                    .ToList();
+                var isEnumerable = type.IsGenericType &&
+                        type.GetGenericTypeDefinition() == typeof(IEnumerable<>);
 
-                var list = Activator.CreateInstance(typeof(List<>).MakeGenericType(enumerableType));
-                var listAdd = list.GetType().GetMethod("Add");
+                if (!isEnumerable)
+                    throw new InvalidOperationException(string.Format("Expected an IEnumerable<> but got '{0}'.", type));
 
-                values.ForEach(value => listAdd.Invoke(list, new[] { value }));
+                var enumerableType = type.GetGenericArguments().First();
 
-                return list;
+                var converter = TypeDescriptor.GetConverter(enumerableType);
+
+                if (converter.CanConvertFrom(typeof(string)))
+                {
+                    var values = element.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(value => converter.ConvertFromString(value))
+                        .ToList();
+
+                    var list = Activator.CreateInstance(typeof(List<>).MakeGenericType(enumerableType));
+                    var listAdd = list.GetType().GetMethod("Add");
+
+                    values.ForEach(value => listAdd.Invoke(list, new[] { value }));
+
+                    return list;
+                }
+
+                throw new InvalidOperationException(string.Format("Cannot convert string to type '{0}'.", enumerableType));
             }
-
-            throw new InvalidOperationException("Cannot convert string to type " + enumerableType);
         }
     }
 }

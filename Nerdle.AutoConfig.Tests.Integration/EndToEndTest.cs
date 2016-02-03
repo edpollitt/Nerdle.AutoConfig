@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    abstract class EndToEndTest
+    public abstract class EndToEndTest
     {
         [TestFixtureSetUp]
         protected void InjectConfig()

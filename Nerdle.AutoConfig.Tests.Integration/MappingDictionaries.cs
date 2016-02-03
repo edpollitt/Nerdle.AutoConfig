@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    class MappingDictionaries : EndToEndTest
+    public class MappingDictionaries : EndToEndTest
     {
         [Test]
         public void Mapping_dictionaries()
@@ -29,21 +29,21 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Endpoints["Primary"].First().Port.Should().Be(1);
             config.Endpoints["Secondary"].Should().HaveCount(1);
         }
-    }
 
-    public interface IDictionaryConfiguration
-    {
-        IDictionary<string, string> FrenchWords { get; }
-    }
+        public interface IDictionaryConfiguration
+        {
+            IDictionary<string, string> FrenchWords { get; }
+        }
 
-    public interface IComplexDictionaryConfiguration
-    {
-        IDictionary<string, IEnumerable<IEndpointConfiguration>> Endpoints { get; }
-    }
+        public interface IComplexDictionaryConfiguration
+        {
+            IDictionary<string, IEnumerable<IEndpointConfiguration>> Endpoints { get; }
+        }
 
-    public interface IEndpointConfiguration
-    {
-        string Name { get; }
-        int Port { get; }
+        public interface IEndpointConfiguration
+        {
+            string Name { get; }
+            int Port { get; }
+        }
     }
 }

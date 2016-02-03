@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    class SpecifyingTheSectionName : EndToEndTest
+    public class SpecifyingTheSectionName : EndToEndTest
     {
         [Test]
         public void Mapping_from_specified_sections()
@@ -26,20 +26,10 @@ namespace Nerdle.AutoConfig.Tests.Integration
             bazUpper.Should().NotBeNull();
             bazUpper.Name.Should().Be("BAZ");
         }
-    }
 
-    public interface IFooBarBaz
-    {
-        string Name { get; }
-    }
-
-    public interface IFooConfiguration
-    {
-        string Name { get; }
-    }
-
-    public interface IBarConfig
-    {
-        string Name { get; }
+        public interface IFooBarBaz
+        {
+            string Name { get; }
+        }
     }
 }

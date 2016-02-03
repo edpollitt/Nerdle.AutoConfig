@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    class MappingCollections : EndToEndTest
+    public class MappingCollections : EndToEndTest
     {
         [Test]
         public void Mapping_collections()
@@ -39,22 +39,22 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Eggs.Should().HaveCount(3);
             config.Eggs.Should().ContainInOrder("fried", "scrambled", "poached");
         }
-    }
 
-    public interface ICollectionsConfiguration
-    {
-        IEnumerable<long> Primes { get; }
-        IList<ConsoleColor> Colors { get; }
-        ICollection<string> Unicorns { get; }
-    }
+        public interface ICollectionsConfiguration
+        {
+            IEnumerable<long> Primes { get; }
+            IList<ConsoleColor> Colors { get; }
+            ICollection<string> Unicorns { get; }
+        }
 
-    public interface INestedCollectionsConfiguration
-    {
-        IEnumerable<ICollection<int>> Numbers { get; }
-    }
+        public interface INestedCollectionsConfiguration
+        {
+            IEnumerable<ICollection<int>> Numbers { get; }
+        }
 
-    public interface IArrayConfiguration
-    {
-        string[] Eggs { get; }
+        public interface IArrayConfiguration
+        {
+            string[] Eggs { get; }
+        }
     }
 }

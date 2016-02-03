@@ -86,16 +86,19 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;collectionsConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;nestedCollectionsConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;arrayConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;collections&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;nestedCollections&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;array&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///  
-        ///  &lt;collectionsConfiguration&gt;
+        ///  &lt;collections&gt;
         ///    &lt;primes&gt;
         ///      &lt;prime&gt;2&lt;/prime&gt;
         ///      &lt;Prime&gt;3&lt;/Prime&gt;
-        ///      &lt;Prime [rest of string was truncated]&quot;;.
+        ///      &lt;Prime&gt;5&lt;/Prime&gt;
+        ///      &lt;Prime&gt;7&lt;/Prime&gt;
+        ///    &lt;/primes&gt;
+        ///  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MappingCollections {
             get {
@@ -108,17 +111,20 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;dictionaryConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;complexDictionaryConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;dictionary&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;complexDictionary&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///
-        ///  &lt;dictionaryConfiguration&gt;
+        ///  &lt;dictionary&gt;
         ///    &lt;frenchWords&gt;
         ///      &lt;word key=&quot;cat&quot; value=&quot;chat&quot; /&gt;
         ///      &lt;word key=&quot;dog&quot; value=&quot;chien&quot; /&gt;
         ///      &lt;word key=&quot;monkey&quot; value=&quot;singe&quot; /&gt;
         ///    &lt;/frenchWords&gt;
-        ///  &lt;/dictiona [rest of string was truncated]&quot;;.
+        ///  &lt;/dictionary&gt;
+        ///
+        ///  &lt;complexDictionary&gt;
+        ///    &lt;endp [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MappingDictionaries {
             get {
@@ -131,21 +137,41 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///&lt;configuration&gt;
         ///
         ///  &lt;configSections&gt;
-        ///    &lt;section name=&quot;endPointConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
-        ///    &lt;section name=&quot;pizzaConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;endPoint&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;pizza&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///
-        ///  &lt;endPointConfiguration url=&quot;http://foo&quot; port=&quot;80&quot; /&gt;
+        ///  &lt;endPoint url=&quot;http://foo&quot; port=&quot;80&quot; /&gt;
         ///
-        ///  &lt;pizzaConfiguration name=&quot;Vege Deluxe&quot; price=&quot;9.99&quot; size=&quot;XLarge&quot;&gt;
+        ///  &lt;pizza name=&quot;Vege Deluxe&quot; price=&quot;9.99&quot; size=&quot;XLarge&quot;&gt;
         ///    &lt;base&gt;Stuffed Crust&lt;/base&gt;
         ///    &lt;toppings&gt;
         ///      &lt;topping&gt;Aubergine&lt;/topping&gt;
-        ///     [rest of string was truncated]&quot;;.
+        ///      &lt;topping&gt;Spinach&lt;/topping&gt;
+        ///      &lt;topping&gt;Articho [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MappingFromAttributes {
             get {
                 return ResourceManager.GetString("MappingFromAttributes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;configuration&gt;
+        ///
+        ///  &lt;configSections&gt;
+        ///    &lt;section name=&quot;foo&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///  &lt;/configSections&gt;
+        ///
+        ///  &lt;foo foo=&quot;foo&quot; /&gt;
+        ///
+        ///&lt;/configuration&gt;
+        ///.
+        /// </summary>
+        internal static string MappingInternalTypes {
+            get {
+                return ResourceManager.GetString("MappingInternalTypes", resourceCulture);
             }
         }
         
@@ -185,7 +211,7 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///    &lt;myEmptyNullable&gt;&lt;/myEmptyNullable&gt;
         ///    &lt;myBool&gt;true&lt;/myBool&gt;
         ///    &lt;myDate&gt;21 July 1969&lt;/myDate&gt;
-        ///    &lt;myTimespan&gt;00:05:00&lt;/myTimespan&gt;
+        ///    &lt;myTimeSpan&gt;00:05:00&lt;/myTimeSpan&gt;
         ///  &lt;/simpleConfiguration&gt;
         ///
         ///&lt;/configuration&gt;.
@@ -203,17 +229,13 @@ namespace Nerdle.AutoConfig.Tests.Integration {
         ///  &lt;configSections&gt;
         ///    &lt;section name=&quot;foo&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///    &lt;section name=&quot;bar&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;bazConfig&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
+        ///    &lt;section name=&quot;quxConfiguration&quot; type=&quot;Nerdle.AutoConfig.Section, Nerdle.AutoConfig&quot; /&gt;
         ///  &lt;/configSections&gt;
         ///
-        ///  &lt;foo&gt;
-        ///    &lt;name&gt;fooConfiguration&lt;/name&gt;
-        ///  &lt;/foo&gt;
-        ///
-        ///  &lt;bar&gt;
-        ///    &lt;name&gt;barConfig&lt;/name&gt;
-        ///  &lt;/bar&gt;
-        ///
-        ///&lt;/configuration&gt;.
+        ///  &lt;foo name=&quot;foo&quot; /&gt;
+        ///  &lt;bar name=&quot;bar&quot; /&gt;
+        ///  &lt;bazConfig name=&quot;baz&quot; /&gt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SectionNameConventions {
             get {

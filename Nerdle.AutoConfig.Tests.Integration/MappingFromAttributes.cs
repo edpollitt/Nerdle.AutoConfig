@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    class MappingFromAttributes : EndToEndTest
+    public class MappingFromAttributes : EndToEndTest
     {
         [Test]
         public void Mapping_from_attributes()
@@ -28,26 +28,26 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Toppings.Should().HaveCount(3);
             config.Toppings.Should().ContainInOrder("Aubergine", "Spinach", "Artichoke");
         }
-    }
 
-    public class EndPointConfiguration
-    {
-        public string Url { get; set; }
-        public int Port { get; set; }
-    }
+        public class EndPointConfiguration
+        {
+            public string Url { get; set; }
+            public int Port { get; set; }
+        }
 
-    public interface IPizzaConfiguration
-    {
-        string Name { get; }
-        string Base { get; }
-        PizzaSize Size { get; }
-        decimal Price { get; }
-        IEnumerable<string> Toppings { get; }
-    }
+        public interface IPizzaConfiguration
+        {
+            string Name { get; }
+            string Base { get; }
+            PizzaSize Size { get; }
+            decimal Price { get; }
+            IEnumerable<string> Toppings { get; }
+        }
 
-    public enum PizzaSize
-    {
-        Large,
-        XLarge,
+        public enum PizzaSize
+        {
+            Large,
+            XLarge,
+        }
     }
 }

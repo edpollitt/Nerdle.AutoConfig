@@ -2,12 +2,12 @@
 <configuration>
 
   <configSections>
-    <section name="collectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
-    <section name="nestedCollectionsConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
-    <section name="arrayConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="collections" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="nestedCollections" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="array" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
   
-  <collectionsConfiguration>
+  <collections>
     <primes>
       <prime>2</prime>
       <Prime>3</Prime>
@@ -18,11 +18,10 @@
       <color>Red</color>
       <color>Green</color>
     </colors>
-    <unicorns>
-    </unicorns>
-  </collectionsConfiguration>
+    <unicorns />
+  </collections>
 
-  <nestedCollectionsConfiguration>
+  <nestedCollections>
     <numbers>
       <odds>
         <number>1</number>
@@ -34,14 +33,14 @@
         <number>4</number>
       </evens>
     </numbers>
-  </nestedCollectionsConfiguration>
+  </nestedCollections>
 
-  <arrayConfiguration>
+  <array>
     <eggs>
       <style>fried</style>
       <style>scrambled</style>
       <style>poached</style>
     </eggs>    
-  </arrayConfiguration>
+  </array>
   
 </configuration>

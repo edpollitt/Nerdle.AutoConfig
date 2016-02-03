@@ -4,14 +4,13 @@
   <configSections>
     <section name="foo" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
     <section name="bar" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="bazConfig" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="quxConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
 
-  <foo>
-    <name>fooConfiguration</name>
-  </foo>
-
-  <bar>
-    <name>barConfig</name>
-  </bar>
+  <foo name="foo" />
+  <bar name="bar" />
+  <bazConfig name="baz" />
+  <quxConfiguration name="qux" />
 
 </configuration>

@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    class MappingNestedComplexTypes : EndToEndTest
+    public class MappingNestedComplexTypes : EndToEndTest
     {
         [Test]
         public void Mapping_nested_complex_types()
@@ -33,32 +33,32 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.SomeOtherService.Hosts.Select(host => host.Name).Should().BeEquivalentTo("HOST-01", "HOST-02", "HOST-03");
             config.SomeOtherService.Hosts.Select(host => host.Port).All(port => port == 1700).Should().BeTrue();
         }
-    }
 
-    public interface IComplexConfiguration
-    {
-        string Foo { get; }
-        string Bar { get; }
-        string Baz { get; }
-        IServiceConfiguration SomeService { get; }
-        IExtendedServiceConfiguration SomeOtherService{ get; }
-    }
+        public interface IComplexConfiguration
+        {
+            string Foo { get; }
+            string Bar { get; }
+            string Baz { get; }
+            IServiceConfiguration SomeService { get; }
+            IExtendedServiceConfiguration SomeOtherService { get; }
+        }
 
-    public interface IServiceConfiguration
-    {
-        string Name { get; }
-        int RequestTimeout { get; }
-        bool Enabled { get; }
-    }
+        public interface IServiceConfiguration
+        {
+            string Name { get; }
+            int RequestTimeout { get; }
+            bool Enabled { get; }
+        }
 
-    public interface IExtendedServiceConfiguration : IServiceConfiguration
-    {
-        IEnumerable<IHost> Hosts { get; }
-    }
+        public interface IExtendedServiceConfiguration : IServiceConfiguration
+        {
+            IEnumerable<IHost> Hosts { get; }
+        }
 
-    public interface IHost
-    {
-        string Name { get; }
-        int Port { get; }
+        public interface IHost
+        {
+            string Name { get; }
+            int Port { get; }
+        }
     }
 }
