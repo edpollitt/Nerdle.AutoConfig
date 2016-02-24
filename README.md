@@ -39,7 +39,7 @@ Add a configuration section in app.config / web.config
 Call AutoConfig
 
 ```csharp
-var config = AutoConfig.Map<IMyServiceConguration>();
+var config = AutoConfig.Map<IMyServiceConfiguration>();
 ```
 
 You're done!
