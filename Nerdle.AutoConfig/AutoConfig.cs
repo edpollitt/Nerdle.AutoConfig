@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.Mapping;
 using Nerdle.AutoConfig.Sections;
 using Nerdle.AutoConfig.Strategy;
@@ -23,6 +24,18 @@ namespace Nerdle.AutoConfig
         public static T Map<T>(string sectionName = null)
         {
             return Engine.Map<T>(sectionName);
+        }
+
+        public static T MapWithDefault<T>(T defaultConfiguration, string sectionName = null)
+        {
+            try
+            {
+                return Map<T>(sectionName);
+            }
+            catch (AutoConfigMappingException)
+            {
+                return defaultConfiguration;
+            }
         }
 
         internal static object Map(Type type, XElement element)
