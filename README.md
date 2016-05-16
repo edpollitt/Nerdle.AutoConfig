@@ -45,4 +45,6 @@ You're done!
 
 :+1:
 
+AutoConfig is a fully customisable and extensible library that can map simple types, strings, enums, nullables, enumerables, collections, lists, arrays, dictionaries, and arbitrarily complex nested types by convention out of the box - no boilerplate required.
+
 ####Check [the wiki](https://github.com/edpollitt/Nerdle.AutoConfig/wiki) for fun times
