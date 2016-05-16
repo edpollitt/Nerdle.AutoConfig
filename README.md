@@ -25,14 +25,13 @@ public interface IMyServiceConfiguration
 Add a configuration section in app.config / web.config
 ```xml
 <configuration>
+  
   <configSections>
     <section name="myService" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
-  <myService>
-    <endpoint>http://localhost</endpoint>
-    <port>42</port>
-    <useSSL>true</useSSL>
-  </myService>
+  
+  <myService endpoint="http://localhost" port="42" useSSL="true" />
+
 </configuration>
 ```
 
