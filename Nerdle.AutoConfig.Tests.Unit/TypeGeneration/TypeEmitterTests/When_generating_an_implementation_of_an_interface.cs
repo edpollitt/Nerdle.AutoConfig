@@ -23,13 +23,13 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeEmitterTests
         public void The_generated_type_implements_the_interface()
         {
             var type = _sut.GenerateInterfaceImplementation(typeof(IHaveProperties));
-            type.GetInterfaces().Should().BeEquivalentTo(typeof(IHaveProperties));
+            type.GetInterfaces().Should().Equal(typeof(IHaveProperties));
         }
 
         [Test]
         public void The_implementation_is_emitted_into_the_assembly()
         {
-            var type = _sut.GenerateInterfaceImplementation(typeof(IHaveProperties));          
+            var type = _sut.GenerateInterfaceImplementation(typeof(IHaveProperties));   
             type.Assembly.GetName().Name.Should().Be(TypeEmitter.AssemblyName);
         }
 
@@ -52,9 +52,8 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeEmitterTests
         {
             Action generating = () => _sut.GenerateInterfaceImplementation(typeof(IAmInternal));
 
-            generating.ShouldThrowExactly<AutoConfigTypeGenerationException>().Which.Message.Contains(
-                string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible.",
-                    typeof(IAmInternal)));
+            generating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
+                .Where(ex => ex.Message.Contains(string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible.", typeof(IAmInternal))));
         }
 
         [TestFixture]

@@ -13,14 +13,14 @@ namespace Nerdle.AutoConfig.Tests.Unit.MappingEngineTests
     [TestFixture]
     class When_mapping_a_type
     {
-        MappingEngine _engine;
+        MappingEngine _sut;
         Mock<ISectionProvider> _sectionProvider;
         Mock<ITypeFactory> _typeFactory;
         Mock<IMappingFactory> _mappingFactory;
         Mock<IStrategyManager> _strategyManager;
         Mock<IMappingStrategy> _mappingStrategy;
         Mock<ITypeMapping> _typeMapping;
-        DummySection _section;
+        SectionStub _section;
         Foo _fooInstance;
         XElement _xElement;
         
@@ -35,7 +35,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MappingEngineTests
             _typeMapping = new Mock<ITypeMapping>();
 
             _xElement = new XElement("element");
-            _section = new DummySection(_xElement);
+            _section = new SectionStub(_xElement);
             _fooInstance = new Foo();
 
             _sectionProvider.Setup(sp => sp.GetSection<IFoo>(_mappingStrategy.Object)).Returns(_section);
@@ -44,34 +44,34 @@ namespace Nerdle.AutoConfig.Tests.Unit.MappingEngineTests
             _mappingFactory.Setup(mf => mf.CreateMapping(typeof(Foo), _xElement, _mappingStrategy.Object))
                 .Returns(_typeMapping.Object);
             
-            _engine = new MappingEngine(_sectionProvider.Object, _typeFactory.Object, _mappingFactory.Object, _strategyManager.Object);
+            _sut = new MappingEngine(_sectionProvider.Object, _typeFactory.Object, _mappingFactory.Object, _strategyManager.Object);
         }
 
         [Test]
         public void The_section_is_located()
         {
-            _engine.Map<IFoo>();
+            _sut.Map<IFoo>();
             _sectionProvider.Verify(sp => sp.GetSection<IFoo>(_mappingStrategy.Object), Times.Once);
         }
 
         [Test]
         public void A_mapping_is_created()
         {
-            _engine.Map<IFoo>();
+            _sut.Map<IFoo>();
             _mappingFactory.Verify(mf => mf.CreateMapping(typeof(Foo), _xElement, _mappingStrategy.Object), Times.Once);
         }
 
         [Test]
         public void An_instance_is_generated()
         {
-            _engine.Map<IFoo>();
+            _sut.Map<IFoo>();
             _typeFactory.Verify(tf => tf.InstanceOf(typeof(IFoo)), Times.Once);
         }
 
         [Test]
         public void The_mapping_is_applied_to_the_generated_instance()
         {
-            _engine.Map<IFoo>();
+            _sut.Map<IFoo>();
             _typeMapping.Verify(tm => tm.Apply(_fooInstance), Times.Once);
         }
 
@@ -79,7 +79,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MappingEngineTests
         public void The_section_can_be_located_by_a_specified_name()
         {
             _sectionProvider.Setup(sp => sp.GetSection<IFoo>("foobar")).Returns(_section);
-            _engine.Map<IFoo>("foobar");
+            _sut.Map<IFoo>("foobar");
             _sectionProvider.Verify(sp => sp.GetSection<IFoo>("foobar"), Times.Once);
         }
 
@@ -87,16 +87,16 @@ namespace Nerdle.AutoConfig.Tests.Unit.MappingEngineTests
         public void The_strategy_can_be_configured()
         {
             var action = new Action<IConfigureMappingStrategy<IFoo>>(foo => { });
-            _engine.WhenMapping(action);
+            _sut.WhenMapping(action);
             _strategyManager.Verify(sm => sm.UpdateStrategy(action), Times.Once);
         }
 
         interface IFoo { }
         class Foo : IFoo { }
 
-        class DummySection : Section
+        class SectionStub : Section
         {
-            public DummySection(XElement xElement)
+            public SectionStub(XElement xElement)
             {
                 XElement = xElement;
             }

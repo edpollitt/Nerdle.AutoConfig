@@ -14,7 +14,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
     [TestFixture]
     public class When_creating_a_mapping
     {
-        readonly MappingFactory _mappingFactory = new MappingFactory();
+        readonly MappingFactory _sut = new MappingFactory();
         Mock<IMappingStrategy> _strategy;
         Foo _foo;
 
@@ -31,7 +31,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void A_mapping_is_created_if_properties_match_elements_and_attributes()
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
-            var mapping = _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
+            var mapping = _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
             
             mapping.Should().NotBeNull();
         }
@@ -40,7 +40,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void Only_settable_public_properties_are_matched()
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
-            var mapping = _mappingFactory.CreateMapping(typeof(FooWithSomeNonPublicStuff), xElement, _strategy.Object);
+            var mapping = _sut.CreateMapping(typeof(FooWithSomeNonPublicStuff), xElement, _strategy.Object);
             
             mapping.Should().NotBeNull();
         }
@@ -49,7 +49,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void The_mapping_includes_all_the_properties()
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
-            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+            _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
 
             _foo.Bar.Should().Be(1);
             _foo.Baz.Should().Be(2);
@@ -59,7 +59,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void An_exception_is_thrown_if_a_property_is_not_matched()
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><qux>2</qux></foo>");
-            Action creatingTheMapping = () => _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
+            Action creatingTheMapping = () => _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
             creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains("Could not map property 'Baz'"));
         }
@@ -68,7 +68,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void Matching_is_case_sensitive()
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><BAZ>2</BAZ></foo>");
-            Action creatingTheMapping = () => _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
+            Action creatingTheMapping = () => _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
             creatingTheMapping.ShouldThrowExactly<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains("Could not map property 'Baz'"));
         }
@@ -77,7 +77,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void Properties_can_be_matched_from_either_attributes_or_elements()
         {
             var xElement = XElement.Parse("<foo bar=\"1\"><baz>2</baz></foo>");
-            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+            _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
 
             _foo.Bar.Should().Be(1);
             _foo.Baz.Should().Be(2);
@@ -87,7 +87,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void An_exception_is_thrown_if_an_element_is_not_matched()
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz><qux>1</qux></foo>");
-            Action creatingTheMapping = () => _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
+            Action creatingTheMapping = () => _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
             creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains("No matching settable property for config element 'qux' was found."));
         }
@@ -96,7 +96,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         public void An_exception_is_thrown_if_an_attribute_is_not_matched()
         {
             var xElement = XElement.Parse("<foo bar=\"1\" baz=\"1\" qux=\"1\" />");
-            Action creatingTheMapping = () => _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object);
+            Action creatingTheMapping = () => _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
             creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains("No matching settable property for config attribute 'qux' was found."));
         }
@@ -107,7 +107,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
             var xElement = XElement.Parse("<foo><BAR>1</BAR><BAZ>2</BAZ></foo>");
             _strategy.Setup(s => s.ConvertCase(It.IsAny<string>())).Returns<string>(s => s.ToUpperInvariant());
 
-            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+            _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
 
             _foo.Bar.Should().Be(1);
             _foo.Baz.Should().Be(2);
@@ -122,7 +122,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
 
             var xElement = XElement.Parse("<foo><bar>1</bar><bazbazbaz>2</bazbazbaz></foo>");
 
-            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+            _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
             
             _foo.Bar.Should().Be(1);
             _foo.Baz.Should().Be(2);
@@ -137,7 +137,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
 
             var xElement = XElement.Parse("<foo><bar>1</bar></foo>");
 
-            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+            _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
 
             _foo.Bar.Should().Be(1);
             _foo.Baz.Should().Be(0);
@@ -153,7 +153,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
 
             var xElement = XElement.Parse("<foo><bar>1</bar></foo>");
 
-            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+            _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
 
             _foo.Bar.Should().Be(1);
             _foo.Baz.Should().Be(42);
@@ -170,7 +170,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
 
             var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz></foo>");
 
-            _mappingFactory.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
+            _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object).Apply(_foo);
 
             _foo.Bar.Should().Be(1);
             _foo.Baz.Should().Be(123);

@@ -14,9 +14,9 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromFixedValueTests
         [TestCase(DayOfWeek.Monday)]
         public void The_value_is_applied(object value)
         {
-            var propertyMapping = new MappingFromFixedValue(typeof(Foo).GetProperty("Bar"), value);
+            var sut = new MappingFromFixedValue(typeof(Foo).GetProperty("Bar"), value);
             var instance = new Foo();
-            propertyMapping.Apply(instance);
+            sut.Apply(instance);
             instance.Bar.Should().Be(value);
         }
 

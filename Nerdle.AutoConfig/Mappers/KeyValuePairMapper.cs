@@ -13,9 +13,9 @@ namespace Nerdle.AutoConfig.Mappers
                     string.Format("Type '{0}' cannot be mapped by {1} because it is not a KeyValuePair<,>.", type, GetType()));
        
             var typeArgs = type.GetGenericArguments();
-            var keyValuePairBuilder = typeof(KeyValuePairBuilder<,>).MakeGenericType(typeArgs);
-            var instance = AutoConfig.Map(keyValuePairBuilder, element);
-            var keyValuePair = keyValuePairBuilder.GetMethod("Build").Invoke(instance, null);
+            var keyValuePairBuilderType = typeof(KeyValuePairBuilder<,>).MakeGenericType(typeArgs);
+            var keyValuePairBuilderInstance = AutoConfig.Map(keyValuePairBuilderType, element);
+            var keyValuePair = keyValuePairBuilderType.GetMethod("Build").Invoke(keyValuePairBuilderInstance, null);
             return keyValuePair;
         }
 

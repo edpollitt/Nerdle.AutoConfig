@@ -25,7 +25,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeFactoryTests
         [TestCase(typeof(DateTime))]
         [TestCase(typeof(Point))]
         [TestCase(typeof(GCCollectionMode))]
-        public void Value_types_are_not_yet_supported_because_we_will_need_to_deal_with_immutability_and_nullability(Type valueType)
+        public void Value_types_are_not_yet_supported_because_we_would_need_to_deal_with_immutability_and_nullability(Type valueType)
         {
             Action creating = () => _sut.InstanceOf(valueType);
        

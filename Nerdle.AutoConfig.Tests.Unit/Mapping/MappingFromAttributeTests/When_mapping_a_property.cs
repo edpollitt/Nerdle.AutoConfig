@@ -17,9 +17,9 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromAttributeTests
         public void The_property_is_set_using_an_internal_conversion()
         {
             var xAttribute = new XAttribute("whatever", "42");
-            var propertyMapping = new MappingFromAttribute(xAttribute, _propertyInfo);
+            var sut = new MappingFromAttribute(xAttribute, _propertyInfo);
             var instance = new Foo();
-            propertyMapping.Apply(instance);
+            sut.Apply(instance);
             instance.Bar.Should().Be(42);
         }
 
@@ -27,9 +27,9 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromAttributeTests
         public void A_mapping_exception_is_thrown_if_the_conversion_throws()
         {
             var xAttribute = new XAttribute("theAttributeName", "theInvalidValue");
-            var propertyMapping = new MappingFromAttribute(xAttribute, _propertyInfo);
+            var sut = new MappingFromAttribute(xAttribute, _propertyInfo);
             var instance = new Foo();
-            Action mapping = () => propertyMapping.Apply(instance);
+            Action mapping = () => sut.Apply(instance);
             mapping.ShouldThrowExactly<AutoConfigMappingException>()
                 .Where(m => m.Message.Contains("theAttributeName")
                             && m.Message.Contains("theInvalidValue")

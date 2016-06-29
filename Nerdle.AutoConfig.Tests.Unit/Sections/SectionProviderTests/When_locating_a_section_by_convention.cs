@@ -10,7 +10,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
 {
     class When_locating_a_section_by_convention
     {
-        SectionProvider _sectionProvider;
+        SectionProvider _sut;
         Mock<IMappingStrategy> _mappingStrategy;
         Mock<ISectionNameConvention> _nameConvention;
         Mock<IConfigurationSystem> _configurationSystem;
@@ -26,7 +26,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
             _nameConvention = new Mock<ISectionNameConvention>();
             _configurationSystem = new Mock<IConfigurationSystem>();
             _mappingStrategy.Setup(ms => ms.SectionNameFor<IFoo>()).Returns(SectionName);
-            _sectionProvider = new SectionProvider(_nameConvention.Object, _configurationSystem.Object);
+            _sut = new SectionProvider(_nameConvention.Object, _configurationSystem.Object);
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         {
             _configurationSystem.Setup(cs => cs.GetSection(SectionName)).Returns(_section);
             
-            _sectionProvider.GetSection<IFoo>(_mappingStrategy.Object);
+            _sut.GetSection<IFoo>(_mappingStrategy.Object);
 
             _configurationSystem.Verify(cs => cs.GetSection(SectionName), Times.Once);
         }
@@ -44,7 +44,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         {
             _configurationSystem.Setup(cs => cs.GetSection(SectionName)).Returns(_section);
 
-            var result = _sectionProvider.GetSection<IFoo>(_mappingStrategy.Object);
+            var result = _sut.GetSection<IFoo>(_mappingStrategy.Object);
             
             result.Should().Be(_section);
         }
@@ -52,18 +52,19 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         [Test]
         public void An_exception_is_thrown_if_the_section_is_not_found_and_no_alternative_names_are_available()
         {
-            Action locating = () => _sectionProvider.GetSection<IFoo>(_mappingStrategy.Object);
+            Action locating = () => _sut.GetSection<IFoo>(_mappingStrategy.Object);
 
             locating.ShouldThrowExactly<AutoConfigMappingException>()
                 .Where(ex => ex.Message.Contains("looked for a config section named 'f00' but didn't find one"));
         }
 
+        [Test]
         public void Alternative_names_are_checked_if_the_section_is_not_found()
         {
             _nameConvention.Setup(nc => nc.GetAlternativeNames(SectionName)).Returns(new[] { "dog", "cat" });
             _configurationSystem.Setup(cs => cs.GetSection("cat")).Returns(_section);
 
-            var result = _sectionProvider.GetSection<IFoo>(_mappingStrategy.Object);
+            var result = _sut.GetSection<IFoo>(_mappingStrategy.Object);
 
             _configurationSystem.Verify(cs => cs.GetSection(SectionName), Times.Once);
             _configurationSystem.Verify(cs => cs.GetSection("dog"), Times.Once);
@@ -77,7 +78,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         {
             _nameConvention.Setup(nc => nc.GetAlternativeNames(SectionName)).Returns(new[] { "dog", "cat" });
 
-            Action locating = () => _sectionProvider.GetSection<IFoo>(_mappingStrategy.Object);
+            Action locating = () => _sut.GetSection<IFoo>(_mappingStrategy.Object);
 
             locating.ShouldThrowExactly<AutoConfigMappingException>()
                 .Where(ex => ex.Message.Contains("looked for a config section named 'f00' or 'dog' or 'cat' but didn't find one"));

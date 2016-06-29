@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using FluentAssertions;
 using Nerdle.AutoConfig.Mappers;
 using NUnit.Framework;
@@ -71,13 +72,15 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.MapperSelectorTests
         [TestCase(typeof(IDictionary<float, string>))]
         [TestCase(typeof(IDictionary<Type, Exception>))]
         [TestCase(typeof(Dictionary<string, int[]>))]
-        public void Dicionary_types_can_be_mapped_by_the_DictionaryMapper(Type type)
+        public void Dictionary_types_can_be_mapped_by_the_DictionaryMapper(Type type)
         {
             MapperSelector.GetFor(type).Should().BeOfType<DictionaryMapper>();
         }
 
         [TestCase(typeof(int[,]))]
         [TestCase(typeof(Exception))]
+        [TestCase(typeof(SortedDictionary<int, int>))]
+        [TestCase(typeof(StringBuilder))]
         public void Types_which_cannot_be_mapped_by_any_other_mapper_should_attempt_to_use_the_RecursingMapper(Type type)
         {
             MapperSelector.GetFor(type).Should().BeOfType<RecursingMapper>();

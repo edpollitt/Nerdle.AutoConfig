@@ -7,7 +7,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.DefaultSectionNameConventionTest
     [TestFixture]
     class When_getting_alternative_names
     {
-        readonly DefaultSectionNameConvention _nameConvention = new DefaultSectionNameConvention();
+        readonly DefaultSectionNameConvention _sut = new DefaultSectionNameConvention();
 
         [TestCase("fooconfiguration", "foo")]
         [TestCase("fooConfiguration", "foo")]
@@ -18,7 +18,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.DefaultSectionNameConventionTest
         [TestCase("fooConfigConfiguration", "fooConfig")]
         public void Configuration_suffixes_are_removed(string name, string alternative)
         {
-            _nameConvention.GetAlternativeNames(name).Should().HaveCount(1).And.Contain(alternative);
+            _sut.GetAlternativeNames(name).Should().HaveCount(1).And.Contain(alternative);
         }
 
         [TestCase("fooConfigurationSettings")]
@@ -27,7 +27,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.DefaultSectionNameConventionTest
         [TestCase("configObj")]
         public void No_alternatives_are_returned_if_a_configuration_suffix_is_not_matched(string name)
         {
-            _nameConvention.GetAlternativeNames(name).Should().BeEmpty();
+            _sut.GetAlternativeNames(name).Should().BeEmpty();
         }
     }
 }

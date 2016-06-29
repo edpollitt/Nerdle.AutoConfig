@@ -17,21 +17,21 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromElementTests
         readonly XElement _xElement = new XElement("theElementName");
         Foo _instance;
         Mock<IMapper> _mapper;
-        MappingFromElement _propertyMapping;
+        MappingFromElement _sut;
 
         [SetUp]
         public void BeforeEach()
         {
             _instance = new Foo();
             _mapper = new Mock<IMapper>();
-            _propertyMapping = new MappingFromElement(_xElement, _propertyInfo, _mapper.Object);
+            _sut = new MappingFromElement(_xElement, _propertyInfo, _mapper.Object);
         }
 
         [Test]
         public void The_property_is_set_from_the_mapper_return_value()
         {
             _mapper.Setup(m => m.Map(_xElement, _propertyInfo.PropertyType)).Returns("apples");
-            _propertyMapping.Apply(_instance);
+            _sut.Apply(_instance);
             _instance.Bar.Should().Be("apples");
         }
 
@@ -39,7 +39,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromElementTests
         public void A_mapping_exception_is_thrown_if_the_mapper_throws()
         {
             _mapper.Setup(m => m.Map(_xElement, _propertyInfo.PropertyType)).Throws<FormatException>();
-            Action mapping = () => _propertyMapping.Apply(_instance);
+            Action mapping = () => _sut.Apply(_instance);
             mapping.ShouldThrowExactly<AutoConfigMappingException>()
                 .Where(m => m.Message.Contains("theElementName")
                             && m.Message.Contains("Bar")
