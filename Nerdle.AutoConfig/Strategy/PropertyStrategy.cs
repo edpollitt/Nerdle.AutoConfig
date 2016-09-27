@@ -17,4 +17,12 @@ namespace Nerdle.AutoConfig.Strategy
         public object DefaultValue { get; protected set; }
         public IMapper Mapper { get; protected set; }
     }
+
+    class NullablePropertyStrategy : PropertyStrategy
+    {
+        public NullablePropertyStrategy()
+        {
+            base.IsOptional = true;
+        }
+    }
 }
