@@ -20,8 +20,7 @@ namespace Nerdle.AutoConfig.Strategy
         public IConfigurePropertyStrategy<TProperty> Map<TProperty>(Expression<Func<T, TProperty>> property)
         {
             var propertyName = PropertyName(property);
-            return PropertyStrategies.GetOrAdd(propertyName,
-                new ConfigurePropertyStrategy<TProperty>()) as IConfigurePropertyStrategy<TProperty>;
+            return PropertyStrategies.GetOrAdd(propertyName, _ => new ConfigurePropertyStrategy<TProperty>()) as IConfigurePropertyStrategy<TProperty>;
         }
 
         static string PropertyName<TProperty>(Expression<Func<T, TProperty>> propertyExpression)
