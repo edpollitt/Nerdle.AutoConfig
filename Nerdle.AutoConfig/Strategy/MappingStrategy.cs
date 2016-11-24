@@ -10,7 +10,7 @@ namespace Nerdle.AutoConfig.Strategy
     {
         protected ConcurrentDictionary<string, PropertyStrategy> PropertyStrategies { get; private set; }
 
-        public static readonly PropertyStrategy DefaultPropertyStrategy = new PropertyStrategy();
+        public static readonly IPropertyStrategy DefaultPropertyStrategy = new PropertyStrategy();
 
         public ICaseConverter CaseConverter { get; protected set; }
 
