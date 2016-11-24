@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using FluentAssertions;
-using Nerdle.AutoConfig.Mappers;
+using Nerdle.AutoConfig.Mapping.Mappers;
 using NUnit.Framework;
 
 namespace Nerdle.AutoConfig.Tests.Unit.Mappers.CollectionMapperTests

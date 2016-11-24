@@ -1,10 +1,10 @@
-﻿using Nerdle.AutoConfig.Mappers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Xml.Linq;
 using FluentAssertions;
+using Nerdle.AutoConfig.Mapping.Mappers;
 using NUnit.Framework;
 
 namespace Nerdle.AutoConfig.Tests.Integration
@@ -51,21 +51,19 @@ namespace Nerdle.AutoConfig.Tests.Integration
 
                 var converter = TypeDescriptor.GetConverter(enumerableType);
 
-                if (converter.CanConvertFrom(typeof(string)))
-                {
-                    var values = element.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(value => converter.ConvertFromString(value))
-                        .ToList();
+                if (!converter.CanConvertFrom(typeof(string)))
+                    throw new InvalidOperationException(string.Format("Cannot convert string to type '{0}'.", enumerableType));
 
-                    var list = Activator.CreateInstance(typeof(List<>).MakeGenericType(enumerableType));
-                    var listAdd = list.GetType().GetMethod("Add");
+                var values = element.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(value => converter.ConvertFromString(value))
+                    .ToList();
 
-                    values.ForEach(value => listAdd.Invoke(list, new[] { value }));
+                var list = Activator.CreateInstance(typeof(List<>).MakeGenericType(enumerableType));
+                var listAdd = list.GetType().GetMethod("Add");
 
-                    return list;
-                }
+                values.ForEach(value => listAdd.Invoke(list, new[] { value }));
 
-                throw new InvalidOperationException(string.Format("Cannot convert string to type '{0}'.", enumerableType));
+                return list;
             }
         }
     }

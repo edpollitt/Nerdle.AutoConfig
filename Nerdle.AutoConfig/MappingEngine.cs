@@ -33,7 +33,7 @@ namespace Nerdle.AutoConfig
         public object Map(Type type, XElement element, IMappingStrategy strategy = null)
         {
             var instance = _typeFactory.InstanceOf(type);
-            // since the type param might be an interface, we need the actual type
+            // since the type param might be an interface, and we need the concrete type
             var concreteType = instance.GetType();
             strategy = strategy ?? _strategyManager.GetStrategyFor(type); 
             var mapping = _mappingFactory.CreateMapping(concreteType, element, strategy);

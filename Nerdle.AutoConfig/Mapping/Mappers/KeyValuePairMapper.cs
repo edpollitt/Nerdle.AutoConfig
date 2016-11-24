@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace Nerdle.AutoConfig.Mappers
+namespace Nerdle.AutoConfig.Mapping.Mappers
 {
     class KeyValuePairMapper : ISelectableMapper
     {

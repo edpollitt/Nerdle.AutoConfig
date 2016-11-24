@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Nerdle.AutoConfig.Mappers
+namespace Nerdle.AutoConfig.Mapping.Mappers
 {
     class ArrayMapper : CollectionMapper
     {

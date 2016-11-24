@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Linq;
 
-namespace Nerdle.AutoConfig.Mappers
+namespace Nerdle.AutoConfig.Mapping.Mappers
 {
     public interface IMapper
     {

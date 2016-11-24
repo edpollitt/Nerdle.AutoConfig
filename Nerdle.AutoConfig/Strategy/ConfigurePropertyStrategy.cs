@@ -1,4 +1,4 @@
-﻿using Nerdle.AutoConfig.Mappers;
+﻿using Nerdle.AutoConfig.Mapping.Mappers;
 
 namespace Nerdle.AutoConfig.Strategy
 {

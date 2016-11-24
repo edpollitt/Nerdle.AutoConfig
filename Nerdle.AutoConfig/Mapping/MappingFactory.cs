@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using Nerdle.AutoConfig.Exceptions;
 using Nerdle.AutoConfig.Extensions;
-using Nerdle.AutoConfig.Mappers;
+using Nerdle.AutoConfig.Mapping.Mappers;
 using Nerdle.AutoConfig.Strategy;
 
 namespace Nerdle.AutoConfig.Mapping
@@ -44,7 +44,7 @@ namespace Nerdle.AutoConfig.Mapping
                 }
             }
 
-            EnsureEmpty(elementList, element =>  string.Format(
+            EnsureEmpty(elementList, element => string.Format(
                 "Could not map type '{0}' from section '{1}'. No matching settable property for config element '{2}' was found.",
                 type, sectionElement.Name.LocalName, element.Name.LocalName));
 

@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Xml.Linq;
 using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.Mappers;
+using Nerdle.AutoConfig.Mapping.Mappers;
 
 namespace Nerdle.AutoConfig.Mapping
 {

@@ -4,8 +4,8 @@ using System.Xml.Linq;
 using FluentAssertions;
 using Moq;
 using Nerdle.AutoConfig.Exceptions;
-using Nerdle.AutoConfig.Mappers;
 using Nerdle.AutoConfig.Mapping;
+using Nerdle.AutoConfig.Mapping.Mappers;
 using Nerdle.AutoConfig.Strategy;
 using NUnit.Framework;
 

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Nerdle.AutoConfig.Exceptions;
 
-namespace Nerdle.AutoConfig.Mappers
+namespace Nerdle.AutoConfig.Mapping.Mappers
 {
     public static class MapperSelector
     {
