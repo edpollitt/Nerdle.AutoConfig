@@ -20,11 +20,11 @@ namespace Nerdle.AutoConfig
                 new StrategyManager());
         }
 
-        public static T Map<T>(string sectionName = null)
+        public static T Map<T>(string sectionName = null, string configFilePath = null)
         {
-            return Engine.Map<T>(sectionName);
+            return Engine.Map<T>(sectionName, configFilePath);
         }
-
+        
         internal static object Map(Type type, XElement element)
         {
            return Engine.Map(type, element);

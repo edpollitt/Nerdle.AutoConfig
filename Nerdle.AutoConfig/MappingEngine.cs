@@ -22,12 +22,13 @@ namespace Nerdle.AutoConfig
             _strategyManager = strategyManager;
         }
 
-        public T Map<T>(string sectionName = null)
+        public T Map<T>(string sectionName = null, string configFilePath = null)
         {
             var strategy = _strategyManager.GetStrategyFor<T>();
             var section = string.IsNullOrWhiteSpace(sectionName) 
-                ? _sectionProvider.GetSection<T>(strategy) : _sectionProvider.GetSection<T>(sectionName);
-            return (T)Map(typeof(T), section, strategy);
+                ? _sectionProvider.GetSection<T>(strategy, configFilePath) 
+                : _sectionProvider.GetSection<T>(sectionName, configFilePath);
+            return (T)Map(typeof(T), (XElement)section, strategy);
         }
 
         public object Map(Type type, XElement element, IMappingStrategy strategy = null)

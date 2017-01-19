@@ -50,14 +50,14 @@ namespace Nerdle.AutoConfig.TypeGeneration
 
             if (!friendAssembly)
                 throw new AutoConfigTypeGenerationException(
-                    string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible. Change your interface access modifier to 'public' or add an 'InternalsVisibleTo(\"{1}\")' assembly attribute.", type, AssemblyName));
+                    $"Cannot generate an implementation of interface '{type}' because it is not externally accessible. Change your interface access modifier to 'public' or add an 'InternalsVisibleTo(\"{AssemblyName}\")' assembly attribute.");
         }
 
         static void EnsureMethodless(Type type)
         {
             if (type.GetMethods().Any(method => !method.IsSpecialName) || type.GetInterfaces().SelectMany(i => i.GetMethods()).Any(method => !method.IsSpecialName))
                 throw new AutoConfigTypeGenerationException(
-                    string.Format("Cannot generate an implementation of interface '{0}' because it contains method definitions.", type));
+                    $"Cannot generate an implementation of interface '{type}' because it contains method definitions.");
         }
     }
 }

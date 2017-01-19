@@ -32,17 +32,17 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         [Test]
         public void The_section_name_is_provided_by_the_mapping_strategy()
         {
-            _configurationSystem.Setup(cs => cs.GetSection(SectionName)).Returns(_section);
+            _configurationSystem.Setup(cs => cs.GetSection(SectionName, null)).Returns(_section);
             
             _sut.GetSection<IFoo>(_mappingStrategy.Object);
 
-            _configurationSystem.Verify(cs => cs.GetSection(SectionName), Times.Once);
+            _configurationSystem.Verify(cs => cs.GetSection(SectionName, null), Times.Once);
         }
 
         [Test]
         public void The_section_is_returned_if_found()
         {
-            _configurationSystem.Setup(cs => cs.GetSection(SectionName)).Returns(_section);
+            _configurationSystem.Setup(cs => cs.GetSection(SectionName, null)).Returns(_section);
 
             var result = _sut.GetSection<IFoo>(_mappingStrategy.Object);
             
@@ -62,13 +62,13 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         public void Alternative_names_are_checked_if_the_section_is_not_found()
         {
             _nameConvention.Setup(nc => nc.GetAlternativeNames(SectionName)).Returns(new[] { "dog", "cat" });
-            _configurationSystem.Setup(cs => cs.GetSection("cat")).Returns(_section);
+            _configurationSystem.Setup(cs => cs.GetSection("cat", null)).Returns(_section);
 
             var result = _sut.GetSection<IFoo>(_mappingStrategy.Object);
 
-            _configurationSystem.Verify(cs => cs.GetSection(SectionName), Times.Once);
-            _configurationSystem.Verify(cs => cs.GetSection("dog"), Times.Once);
-            _configurationSystem.Verify(cs => cs.GetSection("cat"), Times.Once);
+            _configurationSystem.Verify(cs => cs.GetSection(SectionName, null), Times.Once);
+            _configurationSystem.Verify(cs => cs.GetSection("dog", null), Times.Once);
+            _configurationSystem.Verify(cs => cs.GetSection("cat", null), Times.Once);
             
             result.Should().Be(_section);
         }

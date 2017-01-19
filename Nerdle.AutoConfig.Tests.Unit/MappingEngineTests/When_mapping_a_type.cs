@@ -38,7 +38,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MappingEngineTests
             _section = new SectionStub(_xElement);
             _fooInstance = new Foo();
 
-            _sectionProvider.Setup(sp => sp.GetSection<IFoo>(_mappingStrategy.Object)).Returns(_section);
+            _sectionProvider.Setup(sp => sp.GetSection<IFoo>(_mappingStrategy.Object, null)).Returns(_section);
             _strategyManager.Setup(sm => sm.GetStrategyFor<IFoo>()).Returns(_mappingStrategy.Object);
             _typeFactory.Setup(tf => tf.InstanceOf(typeof(IFoo))).Returns(_fooInstance);
             _mappingFactory.Setup(mf => mf.CreateMapping(typeof(Foo), _xElement, _mappingStrategy.Object))
@@ -51,7 +51,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.MappingEngineTests
         public void The_section_is_located()
         {
             _sut.Map<IFoo>();
-            _sectionProvider.Verify(sp => sp.GetSection<IFoo>(_mappingStrategy.Object), Times.Once);
+            _sectionProvider.Verify(sp => sp.GetSection<IFoo>(_mappingStrategy.Object, null), Times.Once);
         }
 
         [Test]
@@ -78,9 +78,9 @@ namespace Nerdle.AutoConfig.Tests.Unit.MappingEngineTests
         [Test]
         public void The_section_can_be_located_by_a_specified_name()
         {
-            _sectionProvider.Setup(sp => sp.GetSection<IFoo>("foobar")).Returns(_section);
+            _sectionProvider.Setup(sp => sp.GetSection<IFoo>("foobar", null)).Returns(_section);
             _sut.Map<IFoo>("foobar");
-            _sectionProvider.Verify(sp => sp.GetSection<IFoo>("foobar"), Times.Once);
+            _sectionProvider.Verify(sp => sp.GetSection<IFoo>("foobar", null), Times.Once);
         }
 
         [Test]

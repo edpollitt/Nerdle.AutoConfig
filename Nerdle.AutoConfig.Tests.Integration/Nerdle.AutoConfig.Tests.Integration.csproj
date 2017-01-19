@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="MappingInternalTypes.cs" />
     <Compile Include="SectionNameConventions.cs" />
+    <Compile Include="SpecifyingTheConfigFilePath.cs" />
     <Compile Include="UsingCustomMappers.cs" />
     <Compile Include="ConfiguringTheMappingStrategy.cs" />
     <Compile Include="MappingCollections.cs" />
@@ -100,6 +101,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SectionNameConventions.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SpecifyingTheConfigFilePath.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="UsingCustomMappers.xml">

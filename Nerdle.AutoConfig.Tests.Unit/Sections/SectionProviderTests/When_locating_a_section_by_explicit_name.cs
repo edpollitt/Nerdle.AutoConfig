@@ -24,7 +24,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         public void The_section_is_returned_if_found()
         {
             var section = new Section();
-            _configurationSystem.Setup(cs => cs.GetSection("blah")).Returns(section);
+            _configurationSystem.Setup(cs => cs.GetSection("blah", null)).Returns(section);
             var result = _sut.GetSection<IFoo>("blah");
             result.Should().Be(section);
         }

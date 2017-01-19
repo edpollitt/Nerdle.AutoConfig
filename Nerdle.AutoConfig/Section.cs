@@ -1,6 +1,7 @@
 using System.Configuration;
 using System.Xml;
 using System.Xml.Linq;
+using Nerdle.AutoConfig.Exceptions;
 
 namespace Nerdle.AutoConfig
 {
@@ -13,8 +14,11 @@ namespace Nerdle.AutoConfig
             XElement = XElement.Load(reader);
         }
 
-        public static implicit operator XElement(Section section)
+        public static explicit operator XElement(Section section)
         {
+            if (section.XElement == null)
+                throw new AutoConfigMappingException($"No XML element located for config section '{section.SectionInformation.Name}'.");
+
             return section.XElement;
         }
     }

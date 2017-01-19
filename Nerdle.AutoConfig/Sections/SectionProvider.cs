@@ -6,8 +6,8 @@ namespace Nerdle.AutoConfig.Sections
 {
     interface ISectionProvider
     {
-        Section GetSection<T>(IMappingStrategy mappingStrategy);
-        Section GetSection<T>(string sectionName);
+        Section GetSection<T>(IMappingStrategy mappingStrategy, string configFilePath = null);
+        Section GetSection<T>(string sectionName, string configFilePath = null);
     }
 
     class SectionProvider : ISectionProvider
@@ -21,9 +21,9 @@ namespace Nerdle.AutoConfig.Sections
             _configurationSystem = configurationSystem;
         }
 
-        public Section GetSection<T>(string sectionName)
+        public Section GetSection<T>(string sectionName, string configFilePath = null)
         {
-            var section = _configurationSystem.GetSection(sectionName);
+            var section = _configurationSystem.GetSection(sectionName, configFilePath);
 
             if (section != null)
                 return section;
@@ -33,11 +33,11 @@ namespace Nerdle.AutoConfig.Sections
                     typeof(T), sectionName));
         }
 
-        public Section GetSection<T>(IMappingStrategy mappingStrategy)
+        public Section GetSection<T>(IMappingStrategy mappingStrategy, string configFilePath = null)
         {
             var sectionName = mappingStrategy.SectionNameFor<T>();
 
-            var section = _configurationSystem.GetSection(sectionName);
+            var section = _configurationSystem.GetSection(sectionName, configFilePath);
 
             if (section != null)
                 return section;
@@ -51,7 +51,7 @@ namespace Nerdle.AutoConfig.Sections
 
             foreach (var alternative in alternativeNames)
             {
-                section = _configurationSystem.GetSection(alternative);
+                section = _configurationSystem.GetSection(alternative, configFilePath);
 
                 if (section != null)
                     return section;
