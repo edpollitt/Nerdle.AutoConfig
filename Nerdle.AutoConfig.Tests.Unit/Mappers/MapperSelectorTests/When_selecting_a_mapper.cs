@@ -5,6 +5,7 @@ using System.Text;
 using FluentAssertions;
 using Nerdle.AutoConfig.Mapping.Mappers;
 using NUnit.Framework;
+using System.Collections.ObjectModel;
 
 namespace Nerdle.AutoConfig.Tests.Unit.Mappers.MapperSelectorTests
 {
@@ -77,13 +78,39 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.MapperSelectorTests
             MapperSelector.GetFor(type).Should().BeOfType<DictionaryMapper>();
         }
 
+        [TestCase(typeof(KeyedCollection<int, Type>))]
+        [TestCase(typeof(KeyedCollection<IDictionary<float, string>, int>))]
+        [TestCase(typeof(KeyedCollectionSubClass))]
+        [TestCase(typeof(KeyedCollectionSubClassSubClass))]
+        public void Keyed_collection_types_can_be_mapped_by_the_KeyedCollectionMapper(Type type)
+        {
+            MapperSelector.GetFor(type).Should().BeOfType<KeyedCollectionMapper>();
+        }
+
         [TestCase(typeof(int[,]))]
         [TestCase(typeof(Exception))]
         [TestCase(typeof(SortedDictionary<int, int>))]
         [TestCase(typeof(StringBuilder))]
+        [TestCase(typeof(ISomeCustomType))]
+        [TestCase(typeof(SomeCustomType))]
         public void Types_which_cannot_be_mapped_by_any_other_mapper_should_attempt_to_use_the_RecursingMapper(Type type)
         {
             MapperSelector.GetFor(type).Should().BeOfType<RecursingMapper>();
         }
+
+        #region Custom Type examples
+        interface ISomeCustomType { }
+        class SomeCustomType : ISomeCustomType { }
+
+        class KeyedCollectionSubClass : KeyedCollection<DayOfWeek, DateTime>
+        {
+            protected override DayOfWeek GetKeyForItem(DateTime item)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        class KeyedCollectionSubClassSubClass : KeyedCollectionSubClass { }
+        #endregion
     }
 }

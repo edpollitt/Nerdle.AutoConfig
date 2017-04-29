@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MappingKeyedCollections.cs" />
     <Compile Include="MappingInternalTypes.cs" />
     <Compile Include="SectionNameConventions.cs" />
     <Compile Include="SpecifyingTheConfigFilePath.cs" />
@@ -97,6 +98,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MappingKeyedCollections.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="MappingInternalTypes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

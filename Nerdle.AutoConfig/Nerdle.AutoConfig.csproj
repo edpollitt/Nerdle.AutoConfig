@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoConfig.cs" />
+    <Compile Include="Mapping\Mappers\KeyedCollectionMapper.cs" />
     <Compile Include="Strategy\Casing\CamelCaseConverter.cs" />
     <Compile Include="Strategy\Casing\MatchingCaseConverter.cs" />
     <Compile Include="ConfigurationSystem.cs" />

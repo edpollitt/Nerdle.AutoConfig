@@ -12,7 +12,8 @@ namespace Nerdle.AutoConfig.Mapping.Mappers
                 new CollectionMapper(),
                 new ArrayMapper(),
                 new KeyValuePairMapper(),
-                new DictionaryMapper()
+                new DictionaryMapper(),
+                new KeyedCollectionMapper()
             };
 
         public static IMapper GetFor(Type type)

@@ -14,7 +14,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.CollectionMapperTests
         [Test]
         public void The_collection_is_created()
         {
-            var xElement = XElement.Parse("<myList></myList>");
+            var xElement = XElement.Parse("<myCollection></myCollection>");
             var result = _sut.Map(xElement, typeof (ICollection<int>));
             result.Should().NotBeNull();
         }
@@ -30,8 +30,8 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.CollectionMapperTests
         [Test]
         public void The_collection_items_are_added()
         {
-            var xElement = XElement.Parse("<myList><item>1</item><item>2</item></myList>");
-            var result = _sut.Map(xElement, typeof(List<int>)) as List<int>;
+            var xElement = XElement.Parse("<myEnumerable><item>1</item><item>2</item></myEnumerable>");
+            var result = _sut.Map(xElement, typeof(IEnumerable<int>)) as IEnumerable<int>;
             result.Should().BeEquivalentTo(1, 2);
         }
     }
