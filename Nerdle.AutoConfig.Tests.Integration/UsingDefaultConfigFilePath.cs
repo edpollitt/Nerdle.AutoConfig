@@ -7,6 +7,9 @@ namespace Nerdle.AutoConfig.Tests.Integration
     public class UsingDefaultConfigFilePath
     {
         [Test]
+#if NETCOREAPP
+        [Ignore("Buggy interaction between the test runner and System.Configuration.ConfigurationManager, see https://github.com/nunit/nunit3-vs-adapter/issues/356")]
+#endif
         public void Mapping_from_the_default_file_path()
         {
             var foo = AutoConfig.Map<IFoo>();
