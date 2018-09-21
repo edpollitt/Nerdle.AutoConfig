@@ -4,13 +4,13 @@ using NUnit.Framework;
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
-    public class SpecifyingTheConfigFilePath
+    public class UsingDefaultConfigFilePath
     {
         [Test]
-        public void Mapping_from_a_specific_file_path()
+        public void Mapping_from_the_default_file_path()
         {
-            var foo = AutoConfig.Map<IFoo>(configFilePath: "SpecifyingTheConfigFilePath.xml");
-            var bar = AutoConfig.Map<IFoo>("bar", "SpecifyingTheConfigFilePath.xml");
+            var foo = AutoConfig.Map<IFoo>();
+            var bar = AutoConfig.Map<IFoo>("bar");
            
             foo.Should().NotBeNull();
             foo.Name.Should().Be("foo");

@@ -22,7 +22,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
                     mapper.Map(x => x.Qux).Using<CustomMapper>();
                 });
 
-            var config = AutoConfig.Map<ICustomConfiguration>();
+            var config = AutoConfig.Map<ICustomConfiguration>(configFilePath: ConfigFilePath);
 
             config.Foo.Should().Be("fooooo");
             config.Bar.Should().BeNull();
@@ -63,7 +63,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
                    mapper.UseMatchingCase();
                });
 
-            var config = AutoConfig.Map<ICustomConfiguration>();
+            var config = AutoConfig.Map<ICustomConfiguration>(configFilePath: ConfigFilePath);
 
             config.Foo.Should().Be("fooooo");
             config.Bar.Should().BeNull();

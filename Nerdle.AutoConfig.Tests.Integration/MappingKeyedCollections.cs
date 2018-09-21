@@ -10,7 +10,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_keyed_collections()
         {
-            var config = AutoConfig.Map<IThemeConfig>();
+            var config = AutoConfig.Map<IThemeConfig>(configFilePath: ConfigFilePath);
             config.Should().NotBeNull();
             config.Themes.Should().NotBeNull();
             config.Themes.Should().HaveCount(3);

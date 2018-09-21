@@ -9,10 +9,10 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_from_specified_sections()
         {
-            var foo = AutoConfig.Map<IFooBarBaz>("foo");
-            var bar = AutoConfig.Map<IFooBarBaz>("bar");
-            var baz = AutoConfig.Map<IFooBarBaz>("baz");
-            var bazUpper = AutoConfig.Map<IFooBarBaz>("BAZ");
+            var foo = AutoConfig.Map<IFooBarBaz>("foo", ConfigFilePath);
+            var bar = AutoConfig.Map<IFooBarBaz>("bar", ConfigFilePath);
+            var baz = AutoConfig.Map<IFooBarBaz>("baz", ConfigFilePath);
+            var bazUpper = AutoConfig.Map<IFooBarBaz>("BAZ", ConfigFilePath);
 
             foo.Should().NotBeNull();
             foo.Name.Should().Be("foo");

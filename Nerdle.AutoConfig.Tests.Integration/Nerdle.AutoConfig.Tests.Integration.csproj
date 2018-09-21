@@ -68,16 +68,11 @@
     <Compile Include="MappingKeyedCollections.cs" />
     <Compile Include="MappingInternalTypes.cs" />
     <Compile Include="SectionNameConventions.cs" />
-    <Compile Include="SpecifyingTheConfigFilePath.cs" />
+    <Compile Include="UsingDefaultConfigFilePath.cs" />
     <Compile Include="UsingCustomMappers.cs" />
     <Compile Include="ConfiguringTheMappingStrategy.cs" />
     <Compile Include="MappingCollections.cs" />
     <Compile Include="EndToEndTest.cs" />
-    <Compile Include="ConfigExamples.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConfigExamples.resx</DependentUpon>
-    </Compile>
     <Compile Include="MappingDictionaries.cs" />
     <Compile Include="MappingFromAttributes.cs" />
     <Compile Include="MappingNestedComplexTypes.cs" />
@@ -107,9 +102,6 @@
     <Content Include="SectionNameConventions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SpecifyingTheConfigFilePath.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="UsingCustomMappers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -134,13 +126,6 @@
     <Content Include="MappingSimpleExamples.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ConfigExamples.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ConfigExamples.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

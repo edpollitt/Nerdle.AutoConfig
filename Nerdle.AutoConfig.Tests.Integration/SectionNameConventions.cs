@@ -9,10 +9,10 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_using_section_name_conventions()
         {
-            var foo = AutoConfig.Map<IFooConfiguration>();
-            var bar = AutoConfig.Map<IBarConfig>();
-            var baz = AutoConfig.Map<IBazConfig>();
-            var qux = AutoConfig.Map<IQuxConfiguration>();
+            var foo = AutoConfig.Map<IFooConfiguration>(configFilePath: ConfigFilePath);
+            var bar = AutoConfig.Map<IBarConfig>(configFilePath: ConfigFilePath);
+            var baz = AutoConfig.Map<IBazConfig>(configFilePath: ConfigFilePath);
+            var qux = AutoConfig.Map<IQuxConfiguration>(configFilePath: ConfigFilePath);
             
             foo.Should().NotBeNull();
             foo.Name.Should().Be("foo");

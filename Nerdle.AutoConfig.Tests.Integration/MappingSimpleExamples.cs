@@ -10,7 +10,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_to_an_interface()
         {
-            var config = AutoConfig.Map<ISimpleConfiguration>();
+            var config = AutoConfig.Map<ISimpleConfiguration>(configFilePath: ConfigFilePath);
             config.Should().BeAssignableTo<ISimpleConfiguration>();
             config.Should().NotBeNull();
             config.MyString.Should().Be("hello");
@@ -25,7 +25,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_to_a_concrete_class()
         {
-            var config = AutoConfig.Map<SimpleConfiguration>();
+            var config = AutoConfig.Map<SimpleConfiguration>(configFilePath: ConfigFilePath);
             config.Should().BeOfType<SimpleConfiguration>();
             config.Should().NotBeNull();
             config.MyString.Should().Be("hello");

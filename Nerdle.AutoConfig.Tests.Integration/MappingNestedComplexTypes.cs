@@ -11,7 +11,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_nested_complex_types()
         {
-            var config = AutoConfig.Map<IComplexConfiguration>();
+            var config = AutoConfig.Map<IComplexConfiguration>(configFilePath: ConfigFilePath);
 
             config.Should().NotBeNull();
             config.Foo.Should().Be("foo");

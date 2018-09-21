@@ -11,7 +11,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_dictionaries()
         {
-            var config = AutoConfig.Map<IDictionaryConfiguration>();
+            var config = AutoConfig.Map<IDictionaryConfiguration>(configFilePath: ConfigFilePath);
             config.Should().NotBeNull();
             config.FrenchWords.Should().HaveCount(3);
             config.FrenchWords.Keys.Should().ContainInOrder("cat", "dog", "monkey");
@@ -21,7 +21,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_complex_dictionaries()
         {
-            var config = AutoConfig.Map<IComplexDictionaryConfiguration>();
+            var config = AutoConfig.Map<IComplexDictionaryConfiguration>(configFilePath: ConfigFilePath);
             config.Should().NotBeNull();
             config.Endpoints.Should().HaveCount(2);
             config.Endpoints["Primary"].Should().HaveCount(2);
