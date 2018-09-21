@@ -29,7 +29,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeFactoryTests
         {
             Action creating = () => _sut.InstanceOf(valueType);
        
-            creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
+            creating.Should().ThrowExactly<AutoConfigTypeGenerationException>()
                 .WithMessage(string.Format("Type '{0}' is a struct and is not supported. The requested configuration type should be an interface or class.", valueType));
         }
     }

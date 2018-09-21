@@ -33,7 +33,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         public void An_exception_is_thrown_if_the_section_is_not_found()
         {
             Action locating = () => _sut.GetSection<IFoo>("blah");
-            locating.ShouldThrowExactly<AutoConfigMappingException>()
+            locating.Should().ThrowExactly<AutoConfigMappingException>()
                 .Where(ex => ex.Message.Contains("looked for a config section named 'blah' but didn't find one"));
         }
 

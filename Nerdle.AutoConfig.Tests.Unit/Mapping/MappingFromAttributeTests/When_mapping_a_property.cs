@@ -30,7 +30,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromAttributeTests
             var sut = new MappingFromAttribute(xAttribute, _propertyInfo);
             var instance = new Foo();
             Action mapping = () => sut.Apply(instance);
-            mapping.ShouldThrowExactly<AutoConfigMappingException>()
+            mapping.Should().ThrowExactly<AutoConfigMappingException>()
                 .Where(m => m.Message.Contains("theAttributeName")
                             && m.Message.Contains("theInvalidValue")
                             && m.Message.Contains(_propertyInfo.Name)

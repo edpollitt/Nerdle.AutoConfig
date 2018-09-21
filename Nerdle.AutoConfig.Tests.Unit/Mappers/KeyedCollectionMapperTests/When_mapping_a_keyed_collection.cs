@@ -44,7 +44,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.DictionaryMapperTests
         {
             var xElement = XElement.Parse("<myKeyedCollection></myKeyedCollection>");
             Action mapping = () => _sut.Map(xElement, typeof(KeyedCollection<char, byte>));
-            mapping.ShouldThrow<AutoConfigMappingException>()
+            mapping.Should().Throw<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains(typeof(KeyedCollection<char, byte>).FullName)
                  && e.Message.Contains("is not instantiable"));
         }
@@ -54,7 +54,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.DictionaryMapperTests
         {
             var xElement = XElement.Parse("<myKeyedCollection></myKeyedCollection>");
             Action mapping = () => _sut.Map(xElement, typeof(KeyedCollectionWithNoParameterlessConstructorExample));
-            mapping.ShouldThrow<AutoConfigMappingException>()
+            mapping.Should().Throw<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains(typeof(KeyedCollectionWithNoParameterlessConstructorExample).FullName)
                  && e.Message.Contains("no parameterless constructor"));
         }

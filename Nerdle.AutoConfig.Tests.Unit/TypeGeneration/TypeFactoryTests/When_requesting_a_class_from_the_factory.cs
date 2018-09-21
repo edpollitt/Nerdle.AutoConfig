@@ -46,7 +46,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeFactoryTests
         public void An_exception_is_thrown_if_the_class_is_abstract(Type abstractType)
         {
             Action instantiating = () => _sut.InstanceOf(abstractType);
-            instantiating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
+            instantiating.Should().ThrowExactly<AutoConfigTypeGenerationException>()
                 .WithMessage(string.Format("Cannot instantiate abstract class '{0}'.", abstractType));
         }
 
@@ -55,7 +55,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeFactoryTests
         public void An_exception_is_thrown_if_the_class_has_no_parameterless_constructor(Type type)
         {
             Action instantiating = () => _sut.InstanceOf(type);
-            instantiating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
+            instantiating.Should().ThrowExactly<AutoConfigTypeGenerationException>()
                .WithMessage(string.Format("Cannot instantiate type '{0}' because no parameterless constructor was found.", type));
         }
     }

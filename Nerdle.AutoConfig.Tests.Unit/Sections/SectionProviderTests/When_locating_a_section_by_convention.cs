@@ -54,7 +54,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
         {
             Action locating = () => _sut.GetSection<IFoo>(_mappingStrategy.Object);
 
-            locating.ShouldThrowExactly<AutoConfigMappingException>()
+            locating.Should().ThrowExactly<AutoConfigMappingException>()
                 .Where(ex => ex.Message.Contains("looked for a config section named 'f00' but didn't find one"));
         }
 
@@ -80,7 +80,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Sections.SectionProviderTests
 
             Action locating = () => _sut.GetSection<IFoo>(_mappingStrategy.Object);
 
-            locating.ShouldThrowExactly<AutoConfigMappingException>()
+            locating.Should().ThrowExactly<AutoConfigMappingException>()
                 .Where(ex => ex.Message.Contains("looked for a config section named 'f00' or 'dog' or 'cat' but didn't find one"));
         }
 

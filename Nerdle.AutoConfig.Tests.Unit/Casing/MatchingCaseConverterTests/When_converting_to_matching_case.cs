@@ -15,7 +15,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Casing.MatchingCaseConverterTests
         [TestCase("_H3770 :) x")]
         public void Return_the_original_string_unmodified(string inputText)
         {
-            _sut.Convert(inputText).ShouldBeEquivalentTo(inputText);
+            _sut.Convert(inputText).Should().BeEquivalentTo(inputText);
         }
     }
 }
