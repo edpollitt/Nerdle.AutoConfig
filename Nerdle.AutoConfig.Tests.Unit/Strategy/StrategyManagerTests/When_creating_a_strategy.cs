@@ -26,6 +26,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Strategy.StrategyManagerTests
             theActionWasCalled.Should().BeTrue();
         }
 
+        [Test]
         public void Strategy_updates_are_applied_progressively()
         {
             var strategies = new List<IConfigureMappingStrategy<ICloneable>>();
