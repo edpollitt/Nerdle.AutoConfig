@@ -1,8 +1,12 @@
 language: csharp
+dotnet: 2.1.300
 solution: Nerdle.AutoConfig.sln
 install:
   - nuget restore Nerdle.AutoConfig.sln
-  - nuget install NUnit.Runners -Version 2.7.0 -OutputDirectory testrunner
+  - nuget install NUnit.ConsoleRunner -Version 3.9.0 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release Nerdle.AutoConfig.sln
-  - mono ./testrunner/NUnit.Runners.2.7.0/tools/nunit-console.exe ./Nerdle.AutoConfig.Tests.Integration/bin/Release/Nerdle.AutoConfig.Tests.Integration.dll ./Nerdle.AutoConfig.Tests.Unit/bin/Release/Nerdle.AutoConfig.Tests.Unit.dll
+  - msbuild /p:Configuration=Release Nerdle.AutoConfig.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./Nerdle.AutoConfig.Tests.Unit/bin/Release/net4*/Nerdle.AutoConfig.Tests.Unit.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./Nerdle.AutoConfig.Tests.Integration/bin/Release/net4*/Nerdle.AutoConfig.Tests.Integration.dll
+  - dotnet vstest ./Nerdle.AutoConfig.Tests.Unit/bin/Release/netcore*/Nerdle.AutoConfig.Tests.Unit.dll
+  - dotnet vstest ./Nerdle.AutoConfig.Tests.Integration/bin/Release/netcore*/Nerdle.AutoConfig.Tests.Integration.dll
