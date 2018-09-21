@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AutoConfig.DynamicTypes")]
+
 namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
