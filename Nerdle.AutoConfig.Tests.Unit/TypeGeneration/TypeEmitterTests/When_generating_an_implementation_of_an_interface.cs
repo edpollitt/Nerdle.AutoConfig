@@ -43,7 +43,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeEmitterTests
                     "Cannot generate an implementation of interface '{0}' because it contains method definitions.",
                     typeof(IHaveMethods));
 
-            generating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
+            generating.Should().ThrowExactly<AutoConfigTypeGenerationException>()
                 .WithMessage(expectedMessage);
         }
 
@@ -52,7 +52,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeEmitterTests
         {
             Action generating = () => _sut.GenerateInterfaceImplementation(typeof(IAmInternal));
 
-            generating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
+            generating.Should().ThrowExactly<AutoConfigTypeGenerationException>()
                 .Where(ex => ex.Message.Contains(string.Format("Cannot generate an implementation of interface '{0}' because it is not externally accessible.", typeof(IAmInternal))));
         }
 
@@ -93,7 +93,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.TypeGeneration.TypeEmitterTests
                         "Cannot generate an implementation of interface '{0}' because it contains method definitions.",
                         typeof(IInheritMethods));
 
-                creating.ShouldThrowExactly<AutoConfigTypeGenerationException>()
+                creating.Should().ThrowExactly<AutoConfigTypeGenerationException>()
                     .WithMessage(expectedMessage);
             }
         }

@@ -16,7 +16,7 @@ namespace Nerdle.AutoConfig.TypeGeneration
             EnsureTypeSuitability(interfaceType);
 
             var assemblyName = new AssemblyName(AssemblyName);
-            var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName.Name);
 
             var baseClass = typeof(object);
@@ -31,7 +31,7 @@ namespace Nerdle.AutoConfig.TypeGeneration
                 .EmitConstructor(baseClass.GetConstructor(Type.EmptyTypes))
                 .EmitProperties(interfaceType.GetProperties())
                 .EmitProperties(interfaceType.GetInterfaces().SelectMany(i => i.GetProperties()))
-                .CreateType();
+                .CreateTypeInfo();
         }
 
         static void EnsureTypeSuitability(Type type)

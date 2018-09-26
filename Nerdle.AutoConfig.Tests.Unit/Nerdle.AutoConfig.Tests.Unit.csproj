@@ -1,124 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F7D2CE16-1D73-40CB-A3AA-A02070621EDA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nerdle.AutoConfig.Tests.Unit</RootNamespace>
-    <AssemblyName>Nerdle.AutoConfig.Tests.Unit</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFrameworks>net45;net461;netcoreapp2.1</TargetFrameworks>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions.Core">
-      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="nunit.core.interfaces, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.interfaces.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.util, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.util.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NUnit.VisualStudio.TestAdapter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4cb40d35494691ac, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="FluentAssertions" Version="5.4.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="Moq" Version="4.10.0" />
+    <PackageReference Include="NUnit" Version="3.10.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Casing\CamelCaseConverterTests\When_converting_to_camel_case.cs" />
-    <Compile Include="Casing\MatchingCaseConverterTests\When_converting_to_matching_case.cs" />
-    <Compile Include="Extensions\When_deriving_a_concrete_name.cs" />
-    <Compile Include="Extensions\When_getting_public_setters_for_a_type.cs" />
-    <Compile Include="Mappers\KeyedCollectionMapperTests\When_mapping_a_keyed_collection.cs" />
-    <Compile Include="Mappers\KeyValuePairMapperTests\When_mapping_a_key_value_pair.cs" />
-    <Compile Include="Sections\DefaultSectionNameConventionTests\When_using_alternative_names_by_convention.cs" />
-    <Compile Include="Sections\SectionProviderTests\When_locating_a_section_by_convention.cs" />
-    <Compile Include="MappingEngineTests\When_mapping_a_type.cs" />
-    <Compile Include="Mapping\MappingFromElementTests\When_mapping_a_property.cs" />
-    <Compile Include="Mapping\MappingFromFixedValueTests\When_mapping_a_property.cs" />
-    <Compile Include="Sections\SectionProviderTests\When_locating_a_section_by_explicit_name.cs" />
-    <Compile Include="Strategy\ConfigureMappingStrategyTests\When_configuring_a_mapping_strategy.cs" />
-    <Compile Include="Strategy\StrategyManagerTests\When_retrieving_a_strategy.cs" />
-    <Compile Include="Strategy\StrategyManagerTests\When_creating_a_strategy.cs" />
-    <Compile Include="Strategy\ConfigurePropertyStrategyTests\When_configuring_a_property_strategy.cs" />
-    <Compile Include="TypeGeneration\TypeEmitterTests\When_generating_an_implementation_of_an_interface.cs" />
-    <Compile Include="Mappers\DictionaryMapperTests\When_mapping_a_dictionary.cs" />
-    <Compile Include="Mappers\ArrayMapperTests\When_mapping_an_array.cs" />
-    <Compile Include="Mappers\RecursingMapperTests\When_mapping_a_complex_type.cs" />
-    <Compile Include="Mappers\CollectionMapperTests\When_mapping_a_collection.cs" />
-    <Compile Include="Mappers\ValueMapperTests\When_mapping_simple_types.cs" />
-    <Compile Include="Mappers\MapperSelectorTests\When_selecting_a_mapper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Mapping\MappingFromAttributeTests\When_mapping_a_property.cs" />
-    <Compile Include="TypeGeneration\TypeFactoryTests\When_requesting_an_interface_from_the_factory.cs" />
-    <Compile Include="TypeGeneration\TypeFactoryTests\When_requesting_a_class_from_the_factory.cs" />
-    <Compile Include="TypeGeneration\TypeFactoryTests\When_requesting_a_value_type_from_the_factory.cs" />
-    <Compile Include="Mapping\MappingFactoryTests\When_creating_a_mapping.cs" />
-    <Compile Include="Mapping\TypeMappingTests\When_applying_a_type_mapping.cs" />
+    <ProjectReference Include="..\Nerdle.AutoConfig\Nerdle.AutoConfig.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Nerdle.AutoConfig\Nerdle.AutoConfig.csproj">
-      <Project>{ED242B1A-EC9E-4865-A59B-11F1498D46A5}</Project>
-      <Name>Nerdle.AutoConfig</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

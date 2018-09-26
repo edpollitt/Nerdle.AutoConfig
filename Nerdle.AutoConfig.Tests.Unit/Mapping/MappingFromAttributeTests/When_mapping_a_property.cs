@@ -30,12 +30,12 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromAttributeTests
             var sut = new MappingFromAttribute(xAttribute, _propertyInfo);
             var instance = new Foo();
             Action mapping = () => sut.Apply(instance);
-            mapping.ShouldThrowExactly<AutoConfigMappingException>()
-                .Where(m => m.Message.Contains("theAttributeName")
-                            && m.Message.Contains("theInvalidValue")
-                            && m.Message.Contains(_propertyInfo.Name)
-                            && m.Message.Contains(typeof(Foo).Name)
-                            && m.InnerException.Message == "theInvalidValue is not a valid value for Int32.");
+            var exception = mapping.Should().ThrowExactly<AutoConfigMappingException>().Which;
+            exception.Message.Should().Contain("theAttributeName")
+                .And.Subject.Should().Contain("theInvalidValue")
+                .And.Subject.Should().Contain(_propertyInfo.Name)
+                .And.Subject.Should().Contain(typeof(Foo).Name);
+            exception.InnerException.Message.Should().Contain("theInvalidValue is not a valid value for Int32.");
         }
     }
 

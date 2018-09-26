@@ -60,7 +60,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><qux>2</qux></foo>");
             Action creatingTheMapping = () => _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
-            creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
+            creatingTheMapping.Should().Throw<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains("Could not map property 'Baz'"));
         }
 
@@ -69,7 +69,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><BAZ>2</BAZ></foo>");
             Action creatingTheMapping = () => _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
-            creatingTheMapping.ShouldThrowExactly<AutoConfigMappingException>()
+            creatingTheMapping.Should().ThrowExactly<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains("Could not map property 'Baz'"));
         }
 
@@ -88,7 +88,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         {
             var xElement = XElement.Parse("<foo><bar>1</bar><baz>2</baz><qux>1</qux></foo>");
             Action creatingTheMapping = () => _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
-            creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
+            creatingTheMapping.Should().Throw<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains("No matching settable property for config element 'qux' was found."));
         }
 
@@ -97,7 +97,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFactoryTests
         {
             var xElement = XElement.Parse("<foo bar=\"1\" baz=\"1\" qux=\"1\" />");
             Action creatingTheMapping = () => _sut.CreateMapping(typeof(Foo), xElement, _strategy.Object);
-            creatingTheMapping.ShouldThrow<AutoConfigMappingException>()
+            creatingTheMapping.Should().Throw<AutoConfigMappingException>()
                 .Where(e => e.Message.Contains("No matching settable property for config attribute 'qux' was found."));
         }
 

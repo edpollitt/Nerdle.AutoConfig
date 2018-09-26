@@ -40,7 +40,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromElementTests
         {
             _mapper.Setup(m => m.Map(_xElement, _propertyInfo.PropertyType)).Throws<FormatException>();
             Action mapping = () => _sut.Apply(_instance);
-            mapping.ShouldThrowExactly<AutoConfigMappingException>()
+            mapping.Should().ThrowExactly<AutoConfigMappingException>()
                 .Where(m => m.Message.Contains("theElementName")
                             && m.Message.Contains("Bar")
                             && m.Message.Contains(typeof(Foo).Name)
