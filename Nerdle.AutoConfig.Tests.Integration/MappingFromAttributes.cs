@@ -10,7 +10,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_from_attributes()
         {
-            var config = AutoConfig.Map<EndPointConfiguration>();
+            var config = AutoConfig.Map<EndPointConfiguration>(configFilePath: ConfigFilePath);
             config.Should().NotBeNull();
             config.Url.Should().Be("http://foo");
             config.Port.Should().Be(80);
@@ -19,7 +19,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_from_a_combination_of_properties_and_attributes()
         {
-            var config = AutoConfig.Map<IPizzaConfiguration>();
+            var config = AutoConfig.Map<IPizzaConfiguration>(configFilePath: ConfigFilePath);
             config.Should().NotBeNull();
             config.Name.Should().Be("Vege Deluxe");
             config.Base.Should().Be("Stuffed Crust");

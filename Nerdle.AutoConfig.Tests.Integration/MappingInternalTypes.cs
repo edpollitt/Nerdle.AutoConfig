@@ -9,7 +9,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_an_internal_type_when_InternalsVisibleTo_is_set()
         {
-            var foo = AutoConfig.Map<IFooConfig>();
+            var foo = AutoConfig.Map<IFooConfig>(configFilePath: ConfigFilePath);
             foo.Foo.Should().Be("foo");
         }
 

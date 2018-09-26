@@ -23,7 +23,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
                     mapper.Map(x => x.Baz).Using<CommaSeparatedListMapper>();
                 });
 
-            var config = AutoConfig.Map<ICustomMapperExample>();
+            var config = AutoConfig.Map<ICustomMapperExample>(configFilePath: ConfigFilePath);
 
             config.Foo.Should().Equal(1, 2, 3, 4, 5);
             config.Bar.Should().Equal("one", "two", "three");

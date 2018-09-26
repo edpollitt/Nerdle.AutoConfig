@@ -12,7 +12,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_collections()
         {
-            var config = AutoConfig.Map<ICollectionsConfiguration>();
+            var config = AutoConfig.Map<ICollectionsConfiguration>(configFilePath: ConfigFilePath);
             config.Should().NotBeNull();
             config.Primes.Should().HaveCount(4);
             config.Primes.Should().ContainInOrder(2L, 3L, 5L, 7L);
@@ -24,7 +24,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_nested_collections()
         {
-            var config = AutoConfig.Map<INestedCollectionsConfiguration>();
+            var config = AutoConfig.Map<INestedCollectionsConfiguration>(configFilePath: ConfigFilePath);
             config.Should().NotBeNull();
             config.Numbers.Should().HaveCount(2);
             config.Numbers.First().Should().ContainInOrder(1, 3, 5);
@@ -34,7 +34,7 @@ namespace Nerdle.AutoConfig.Tests.Integration
         [Test]
         public void Mapping_arrays()
         {
-            var config = AutoConfig.Map<IArrayConfiguration>();
+            var config = AutoConfig.Map<IArrayConfiguration>(configFilePath: ConfigFilePath);
             config.Should().NotBeNull();
             config.Eggs.Should().HaveCount(3);
             config.Eggs.Should().ContainInOrder("fried", "scrambled", "poached");
