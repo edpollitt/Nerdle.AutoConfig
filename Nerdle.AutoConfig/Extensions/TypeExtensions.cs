@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -51,6 +52,18 @@ namespace Nerdle.AutoConfig.Extensions
                 sectionName = sectionName.Substring(1);
 
             return sectionName;
+        }
+
+        public static object ConvertFromInvariantString(this Type type, string value)
+        {
+            var converter = TypeDescriptor.GetConverter(type);
+            var result = converter.ConvertFromInvariantString(value);
+            if (type.IsEnum && result != null && !type.IsEnumDefined(result))
+            {
+                var definedValues = Enum.GetValues(type).Cast<object>().Select(e => e.ToString());
+                throw new ArgumentOutOfRangeException(nameof(value), result, $"Failed to convert '{value}' into '{type}' because it is not a defined value of the enum type. Defined values: '{string.Join("', '", definedValues)}'");
+            }
+            return result;
         }
     }
 }

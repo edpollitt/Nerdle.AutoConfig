@@ -1,8 +1,8 @@
 using System;
-using System.ComponentModel;
 using System.Reflection;
 using System.Xml.Linq;
 using Nerdle.AutoConfig.Exceptions;
+using Nerdle.AutoConfig.Extensions;
 
 namespace Nerdle.AutoConfig.Mapping
 {
@@ -21,7 +21,7 @@ namespace Nerdle.AutoConfig.Mapping
         {
             try
             {
-                var value = TypeDescriptor.GetConverter(_property.PropertyType).ConvertFromInvariantString(_attribute.Value);
+                var value = _property.PropertyType.ConvertFromInvariantString(_attribute.Value);
                 _property.SetValue(instance, value, null);
             }
             catch (Exception ex)
