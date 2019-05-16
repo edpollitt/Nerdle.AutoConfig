@@ -29,7 +29,8 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.ValueMapperTests
         public void Using_an_undefined_enum_value_should_throw()
         {
             var xElement = XElement.Parse("<test>1234</test>");
-            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => _sut.Map(xElement, typeof(DayOfWeek)));
+            Action mapping = () => _sut.Map(xElement, typeof(DayOfWeek));
+            var exception = mapping.Should().ThrowExactly<ArgumentOutOfRangeException>().Which;
             exception.ActualValue.Should().Be((DayOfWeek)1234);
             exception.Message.Should().Contain("'1234'");
             exception.Message.Should().Contain("'System.DayOfWeek'");

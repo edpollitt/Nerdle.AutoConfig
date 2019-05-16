@@ -50,6 +50,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mapping.MappingFromAttributeTests
                 .And.Subject.Should().Contain("1234")
                 .And.Subject.Should().Contain(propertyInfo.Name)
                 .And.Subject.Should().Contain(typeof(Foo).Name);
+            exception.InnerException.Should().BeOfType<ArgumentOutOfRangeException>();
         }
     }
 
