@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +47,8 @@ namespace Nerdle.AutoConfig.Mapping.Mappers
         {
             Type dictionaryType;
             
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IDictionary<,>))
+            var genericTypeDefinition = type.IsGenericType ? type.GetGenericTypeDefinition() : null;
+            if (genericTypeDefinition == typeof(IDictionary<,>) || genericTypeDefinition == typeof(IReadOnlyDictionary<,>))
                 dictionaryType = type;
 
             else dictionaryType = type.GetInterfaces()

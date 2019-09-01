@@ -3,7 +3,9 @@
 
   <configSections>
     <section name="dictionary" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="readOnlyDictionary" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
     <section name="complexDictionary" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="complexReadOnlyDictionary" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
 
   <dictionary>
@@ -13,6 +15,14 @@
       <word key="monkey" value="singe" />
     </frenchWords>
   </dictionary>
+
+  <readOnlyDictionary>
+    <frenchWords>
+      <word key="cat" value="chat" />
+      <word key="dog" value="chien" />
+      <word key="monkey" value="singe" />
+    </frenchWords>
+  </readOnlyDictionary>
 
   <complexDictionary>
     <endpoints>
@@ -29,5 +39,21 @@
       </add>
     </endpoints>
   </complexDictionary>
+
+  <complexReadOnlyDictionary>
+    <endpoints>
+      <add key="Primary">
+        <value>
+          <endpoint name="Foo" port="1" />
+          <endpoint name="Bar" port="2" />
+        </value>
+      </add>
+      <add key="Secondary">
+        <value>
+          <endpoint name="Baz" port="3" />
+        </value>
+      </add>
+    </endpoints>
+  </complexReadOnlyDictionary>
 
 </configuration>
