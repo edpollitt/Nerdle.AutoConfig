@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Xml.Linq;
 using FluentAssertions;
 using Nerdle.AutoConfig.Mapping.Mappers;
@@ -70,6 +71,14 @@ namespace Nerdle.AutoConfig.Tests.Integration
             config.Baz.Should().Be("baz");
             config.Qux.Should().Be("From custom mapper");
         }
+        
+        [Test]
+        public void Configuring_the_mapping_with_both_fluent_api_and_default_value_attribute()
+        {
+            AutoConfig.WhenMapping<IDefaultValueConfiguration>(mapper => mapper.Map(x => x.Foo).OptionalWithDefault("default_from_fluent_api"));
+            var config = AutoConfig.Map<IDefaultValueConfiguration>(configFilePath: ConfigFilePath);
+            config.Foo.Should().Be("default_from_fluent_api");
+        }
     }
 
     public interface ICustomConfiguration
@@ -80,6 +89,12 @@ namespace Nerdle.AutoConfig.Tests.Integration
         string Qux { get; }
     }
 
+    public interface IDefaultValueConfiguration
+    {
+        [DefaultValue("default_from_attribute")]
+        string Foo { get; }
+    }
+    
     class CustomMapper : IMapper
     {
         public object Map(XElement element, Type type)

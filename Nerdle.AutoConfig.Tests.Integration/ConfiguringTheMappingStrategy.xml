@@ -3,11 +3,14 @@
 
   <configSections>
     <section name="CustomConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
+    <section name="defaultValueConfiguration" type="Nerdle.AutoConfig.Section, Nerdle.AutoConfig" />
   </configSections>
 
   <CustomConfiguration>
     <foofoo>fooooo</foofoo>
     <Qux>qux</Qux>
   </CustomConfiguration>
+  
+  <defaultValueConfiguration/>
 
 </configuration>

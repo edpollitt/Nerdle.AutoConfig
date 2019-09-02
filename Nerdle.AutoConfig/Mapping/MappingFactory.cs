@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -37,9 +38,11 @@ namespace Nerdle.AutoConfig.Mapping
                             "Could not map property '{0}' for type '{1}' from section '{2}'. Looked for a config element or attribute with name '{3}' but didn't find one, and the property is not marked as optional.",
                             property.Name, type, sectionElement.Name.LocalName, xName));
 
-                if (propertyStrategy.DefaultValue != null)
+                var defaultValue = propertyStrategy.DefaultValue; 
+                if (defaultValue != null)
                 {
-                    var propertyMapping = new MappingFromFixedValue(property, propertyStrategy.DefaultValue);
+                    EnsureDefaultValueType(ref defaultValue, property, type, sectionElement.Name.LocalName);
+                    var propertyMapping = new MappingFromFixedValue(property, defaultValue);
                     typeMapping.Include(propertyMapping);
                 }
             }
@@ -119,6 +122,33 @@ namespace Nerdle.AutoConfig.Mapping
             if (collection.Any())
             {
                 throw new AutoConfigMappingException(exceptionMessage(collection.First()));
+            }
+        }
+
+        static void EnsureDefaultValueType(ref object defaultValue, PropertyInfo property, Type type, string sectionName)
+        {
+            var defaultValueType = defaultValue.GetType(); 
+            if (!property.PropertyType.IsAssignableFrom(defaultValueType))
+            {
+                var converter = TypeDescriptor.GetConverter(property.PropertyType);
+                if (!converter.CanConvertFrom(defaultValueType))
+                {
+                    throw new AutoConfigMappingException(
+                        string.Format(
+                            "Could not map property '{0}' for type '{1}' from section '{2}'. The default value '{3}' of type '{4}' can not be converted to '{5}'.",
+                            property.Name, type, sectionName, defaultValue, defaultValueType, property.PropertyType));
+                }
+                try
+                {
+                    defaultValue = converter.ConvertFrom(defaultValue);
+                }
+                catch (Exception ex)
+                {
+                    throw new AutoConfigMappingException(
+                        string.Format(
+                            "Could not map property '{0}' for type '{1}' from section '{2}'. The default value '{3}' failed to be converted to '{4}'.",
+                            property.Name, type, sectionName, defaultValue, property.PropertyType), ex);
+                }
             }
         }
     }
