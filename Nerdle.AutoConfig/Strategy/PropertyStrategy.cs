@@ -12,6 +12,16 @@ namespace Nerdle.AutoConfig.Strategy
 
     class PropertyStrategy : IPropertyStrategy
     {
+        public PropertyStrategy()
+        {
+        }
+
+        public PropertyStrategy(object defaultValue)
+        {
+            IsOptional = true;
+            DefaultValue = defaultValue;
+        }
+
         public string MapFrom { get; protected set; }
         public bool IsOptional { get; protected set; }
         public object DefaultValue { get; protected set; }

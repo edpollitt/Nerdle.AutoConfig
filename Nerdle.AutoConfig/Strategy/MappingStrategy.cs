@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
+using System.ComponentModel;
+using System.Linq;
 using Nerdle.AutoConfig.Casing;
 using System.Reflection;
 using Nerdle.AutoConfig.Extensions;
@@ -32,9 +33,16 @@ namespace Nerdle.AutoConfig.Strategy
 
         public IPropertyStrategy ForProperty(PropertyInfo property)
         {
-            PropertyStrategy strategy;
-            return PropertyStrategies.TryGetValue(KeyFor(property), out strategy)
-                ? strategy : DefaultPropertyStrategy;
+            if (PropertyStrategies.TryGetValue(KeyFor(property), out var strategy))
+                return strategy;
+
+            var defaultValueAttribute = property.GetCustomAttributes<DefaultValueAttribute>(true).SingleOrDefault();
+            if (defaultValueAttribute == null)
+            {
+                var interfaceProperties = property.DeclaringType?.GetInterfaces().Select(e => e.GetProperties().SingleOrDefault(p => p.Name == property.Name));
+                defaultValueAttribute = interfaceProperties?.FirstOrDefault()?.GetCustomAttributes<DefaultValueAttribute>(true).SingleOrDefault();
+            }
+            return defaultValueAttribute != null ? new PropertyStrategy(defaultValueAttribute.Value) : DefaultPropertyStrategy;
         }
 
         static string KeyFor(PropertyInfo property)
