@@ -58,12 +58,20 @@ namespace Nerdle.AutoConfig.Extensions
         {
             var converter = TypeDescriptor.GetConverter(type);
             var result = converter.ConvertFromInvariantString(value);
-            if (type.IsEnum && result != null && !type.IsEnumDefined(result))
+            if (type.IsEnum && result != null && !(type.IsEnumDefined(result) || type.IsFlagDefined(result)))
             {
+                var orCombination = type.GetCustomAttribute<FlagsAttribute>() == null ? "" : " (or combination)";
                 var definedValues = Enum.GetValues(type).Cast<object>().Select(e => e.ToString());
-                throw new ArgumentOutOfRangeException(nameof(value), result, $"Failed to convert '{value}' into '{type}' because it is not a defined value of the enum type. Defined values: '{string.Join("', '", definedValues)}'");
+                throw new ArgumentOutOfRangeException(nameof(value), result, $"Failed to convert '{value}' into '{type}' because it is not a defined value{orCombination} of the enum type. Defined values: '{string.Join("', '", definedValues)}'");
             }
             return result;
+        }
+
+        internal static bool IsFlagDefined(this Type enumType, object value)
+        {
+            var initialValue = Convert.ToInt64(value);
+            var enumValues = enumType.GetEnumValues().Cast<object>().Select(Convert.ToInt64);
+            return initialValue == 0 ? enumValues.Contains(0) : enumValues.Aggregate(initialValue, (n, bit) => n & ~bit) == 0;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Net;
 using System.Xml.Linq;
 using FluentAssertions;
 using Nerdle.AutoConfig.Mapping.Mappers;
@@ -16,6 +17,7 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.ValueMapperTests
         [TestCaseSource("BooleanExamples")]
         [TestCaseSource("TextExamples")]
         [TestCaseSource("EnumExamples")]
+        [TestCaseSource("FlagsExamples")]
         [TestCaseSource("DateAndTimeExamples")]
         public void The_correct_type_and_value_is_returned(string value, Type type, object expectedResult)
         {
@@ -35,6 +37,18 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.ValueMapperTests
             exception.Message.Should().Contain("'1234'");
             exception.Message.Should().Contain("'System.DayOfWeek'");
             exception.Message.Should().Contain("'Sunday'", "'Monday'", "'Tuesday'", "'Wednesday'", "'Thursday'", "'Friday'", "'Saturday'");
+        }
+
+        [Test]
+        public void Using_an_undefined_flag_value_should_throw()
+        {
+            var xElement = XElement.Parse("<test>1234</test>");
+            Action mapping = () => _sut.Map(xElement, typeof(AuthenticationSchemes));
+            var exception = mapping.Should().ThrowExactly<ArgumentOutOfRangeException>().Which;
+            exception.ActualValue.Should().Be((AuthenticationSchemes)1234);
+            exception.Message.Should().Contain("'1234'");
+            exception.Message.Should().Contain("'System.Net.AuthenticationSchemes'");
+            exception.Message.Should().Contain("'None'", "'Digest'", "'Negotiate'", "'Ntlm'", "'Basic'", "'Anonymous'", "'IntegratedWindowsAuthentication'");
         }
 
         static readonly object[] NumbericExamples =
@@ -70,6 +84,18 @@ namespace Nerdle.AutoConfig.Tests.Unit.Mappers.ValueMapperTests
             new object[] { "MONDAY", typeof(DayOfWeek), DayOfWeek.Monday },
             new object[] { "monday", typeof(DayOfWeek), DayOfWeek.Monday },
             new object[] { "1", typeof(DayOfWeek), DayOfWeek.Monday },
+        };
+
+        static readonly object[] FlagsExamples =
+        {
+            new object[] { "Basic,Ntlm", typeof(AuthenticationSchemes), AuthenticationSchemes.Basic | AuthenticationSchemes.Ntlm },
+            new object[] { "BASIC,NTLM", typeof(AuthenticationSchemes), AuthenticationSchemes.Basic | AuthenticationSchemes.Ntlm },
+            new object[] { "basic,ntlm", typeof(AuthenticationSchemes), AuthenticationSchemes.Basic | AuthenticationSchemes.Ntlm },
+            new object[] { "12", typeof(AuthenticationSchemes), AuthenticationSchemes.Basic | AuthenticationSchemes.Ntlm },
+            new object[] { "0", typeof(AuthenticationSchemes), AuthenticationSchemes.None },
+            new object[] { "Ntlm,Negotiate", typeof(AuthenticationSchemes), AuthenticationSchemes.IntegratedWindowsAuthentication },
+            new object[] { "6", typeof(AuthenticationSchemes), AuthenticationSchemes.IntegratedWindowsAuthentication },
+            new object[] { "IntegratedWindowsAuthentication", typeof(AuthenticationSchemes), AuthenticationSchemes.IntegratedWindowsAuthentication },
         };
 
         static readonly object[] DateAndTimeExamples =
