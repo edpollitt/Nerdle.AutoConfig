@@ -1,5 +1,7 @@
 language: csharp
 dotnet: 2.1.801
+git:
+  depth: false
 solution: Nerdle.AutoConfig.sln
 install:
   - nuget restore Nerdle.AutoConfig.sln
