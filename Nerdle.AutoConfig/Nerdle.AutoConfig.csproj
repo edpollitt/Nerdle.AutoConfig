@@ -1,7 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Authors>edpollitt</Authors>
+    <Copyright>Copyright edpollitt 2015-2019</Copyright>
+    <Description>AutoConfig is an automagical, convention-based, customisable, extensible library for mapping configuration files to POCO C# objects/interfaces with the absolute minimum of code.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/edpollitt/Nerdle.AutoConfig</PackageProjectUrl>
+    <PackageTags>configuration mapper mapping map xml config autoconfig web.config app.config</PackageTags>
+    <RepositoryUrl>https://github.com/edpollitt/Nerdle.AutoConfig</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <Reference Include="System.Configuration" Condition="'$(TargetFramework)' == 'net45'" />
@@ -10,4 +19,17 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
+    <PackageReference Include="MinVer" Version="1.2.0" PrivateAssets="All" />
+  </ItemGroup>
+  <PropertyGroup>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+  </PropertyGroup>
+  <Target Name="FixAssemblyVersion" AfterTargets="MinVer">
+    <PropertyGroup>
+      <!-- MinVer would set the assembly version to 1.0.0.0 but versions have already been published with 1.1.0.0, see https://github.com/adamralph/minver#version-numbers -->
+      <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    </PropertyGroup>
+  </Target>
 </Project>
