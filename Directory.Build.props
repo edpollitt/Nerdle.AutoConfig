@@ -2,6 +2,6 @@
   <ItemGroup>
     <!-- Required for building the .NET Framework target (net45) on Linux and macOS without mono.
          Eventually, explicitly using the reference assemblies shouldn't be needed anymore, see https://github.com/dotnet/designs/pull/33#issuecomment-528457298 -->
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0-preview.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>
