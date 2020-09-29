@@ -5,11 +5,28 @@ namespace Nerdle.AutoConfig.Tests.Integration
 {
     [TestFixture]
     public class UsingDefaultConfigFilePath
-    {
-        [Test]
 #if NETCOREAPP
-        [Ignore("Buggy interaction between the test runner and System.Configuration.ConfigurationManager, see https://github.com/nunit/nunit3-vs-adapter/issues/356")]
+        : System.IDisposable
+    {
+        private readonly string _configFilePath;
+
+        // In order to workaround flaky interaction between the test runner and System.Configuration.ConfigurationManager
+        // See https://github.com/nunit/nunit3-vs-adapter/issues/356#issuecomment-700754225
+        public UsingDefaultConfigFilePath()
+        {
+            _configFilePath = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.None).FilePath;
+            System.IO.File.Copy($"{System.Reflection.Assembly.GetExecutingAssembly().Location}.config", _configFilePath, overwrite: true);
+        }
+
+        public void Dispose()
+        {
+            System.IO.File.Delete(_configFilePath);
+        }
+#else
+    {
 #endif
+
+        [Test]
         public void Mapping_from_the_default_file_path()
         {
             var foo = AutoConfig.Map<IFoo>();
